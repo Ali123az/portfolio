@@ -22,15 +22,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.9
 .page{display:none;padding-top:60px;min-height:100vh}
 .page.active{display:block}
 .hero{min-height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.12) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 70%);pointer-events:none}
+.hero::before{display:none}
+.hero::after{display:none}
+.page-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.page-bg span{position:absolute;border-radius:50%}
+.page>.section,.hero>*,.page>footer{position:relative;z-index:1}
+.page{position:relative}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border2);border-radius:20px;font-size:12px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:2rem;width:fit-content}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;display:inline-block;flex-shrink:0}
 .hero-name{font-size:clamp(2.8rem,7vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:1rem}
 .hero-name .accent{color:var(--accent)}
 .hero-title{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text2);font-weight:300;margin-bottom:1.5rem}
-.hero-desc{font-size:15px;color:var(--text3);max-width:580px;line-height:1.7;margin-bottom:2.5rem}
+.hero-desc{font-size:15px;color:var(--text3);max-width:580px;line-height:1.7;margin-bottom:1rem}
+.hero-seek{font-size:14px;color:var(--text3);max-width:580px;line-height:1.6;margin-bottom:2.5rem;font-style:italic;opacity:0.8}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .btn-primary{padding:10px 24px;background:var(--accent);color:#000;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;border:none;font-family:'Inter',sans-serif}
 .btn-secondary{padding:10px 24px;background:transparent;color:var(--text);border-radius:8px;font-weight:500;font-size:14px;cursor:pointer;border:1px solid var(--border);font-family:'Inter',sans-serif}
@@ -156,7 +161,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.9
 .fsubmit:hover{background:#33dcff}
 .fnote{font-size:11px;color:var(--text3);text-align:center}
 footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:12px;font-family:'JetBrains Mono',monospace}
-@media(max-width:768px){.hero{padding:2rem 1.5rem}.section{padding:3rem 1.5rem}.about-grid,.cgrid{grid-template-columns:1fr}.projects-grid{grid-template-columns:1fr}.vgrid{grid-template-columns:1fr}}
+@media(max-width:768px){.hero{padding:2rem 1.5rem;grid-template-columns:1fr !important}.section{padding:3rem 1.5rem}.about-grid,.cgrid{grid-template-columns:1fr}.projects-grid{grid-template-columns:1fr}.vgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -174,30 +179,66 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;co
 </nav>
 
 <div id="page-home" class="page">
-  <div class="hero">
-    <div class="hero-tag"><span class="dot"></span><span id="hero-tag-txt">Disponible · Toulouse · Mobilité nationale & internationale</span></div>
-    <h1 class="hero-name">Ali <span class="accent">Azami</span></h1>
-    <p class="hero-title" id="hero-title">Ingénieur Systèmes Embarqués & IA embarquée</p>
-    <p class="hero-desc" id="hero-desc">Peu d'ingénieurs couvrent à la fois le firmware bas-niveau, le traitement du signal et le déploiement de modèles IA sur silicium. C'est exactement là que je me situe: de l'implémentation FFT sur DSP embarqué jusqu'à l'inférence CNN en temps réel sur ARM Cortex-M33, avec des résultats validés en conditions industrielles chez Schaeffler et NXP.</p>
-    <div class="hero-ctas">
-      <button class="btn-primary" id="cta-projects">Voir mes projets</button>
-      <button class="btn-secondary" id="cta-contact">Me contacter</button>
+  <div class="hero" style="display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:center;min-height:calc(100vh - 60px);padding:4rem 3rem">
+    <div>
+      <div class="hero-tag"><span class="dot"></span><span id="hero-tag-txt">Disponible · Toulouse · Mobilité nationale & internationale</span></div>
+      <h1 class="hero-name">Ali <span class="accent">Azami</span></h1>
+      <p class="hero-title" id="hero-title">Ingénieur Systèmes Embarqués & IA embarquée</p>
+      <p class="hero-desc" id="hero-desc">Peu d'ingénieurs couvrent à la fois le firmware bas-niveau, le traitement du signal et le déploiement de modèles IA sur silicium. C'est exactement là que je me situe: de l'implémentation FFT sur DSP embarqué jusqu'à l'inférence CNN en temps réel sur ARM Cortex-M33, avec des résultats validés en conditions industrielles chez Schaeffler et NXP.</p>
+      <p class="hero-seek" id="hero-seek">Curieux et rigoureux, je suis à la recherche d'une nouvelle opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" id="cta-projects">Voir mes projets</button>
+        <button class="btn-secondary" id="cta-contact">Me contacter</button>
+      </div>
+      <div class="hero-metrics">
+        <div><span class="metric-val" id="mv1">1.5 ans</span><span class="metric-label" id="ml1">d'expérience industrielle</span></div>
+        <div><span class="metric-val" id="mv2">3 projets</span><span class="metric-label" id="ml2">industriels livrés</span></div>
+        <div><span class="metric-val" id="mv3">Plateformes maîtrisées</span><span class="metric-label" id="ml3">MCU · NPU · DSP · FPGA · SoC</span></div>
+        <div><span class="metric-val" id="mv4">Architectures & familles</span><span class="metric-label" id="ml4">ARM · STM32 · NXP · RISC-V · Zynq</span></div>
+        <div><span class="metric-val" id="mv5">Outils IA & Deep Learning</span><span class="metric-label" id="ml5">PyTorch · TF · TFLite · DL · ML</span></div>
+        <div><span class="metric-val" id="mv6">Double diplôme</span><span class="metric-label" id="ml6">ENSEEIHT · EHTP Maroc</span></div>
+      </div>
+      <div class="hero-stack">
+        <span class="stack-pill">C/C++</span><span class="stack-pill">Rust</span><span class="stack-pill">Python</span>
+        <span class="stack-pill">ARM Cortex-M</span><span class="stack-pill">TFLite Micro</span>
+        <span class="stack-pill">DSP / FFT</span><span class="stack-pill">NPU NXP</span>
+        <span class="stack-pill">VHDL / Verilog</span><span class="stack-pill">HLS</span><span class="stack-pill">FPGA</span>
+        <span class="stack-pill">Docker</span><span class="stack-pill">GitLab CI/CD</span>
+      </div>
     </div>
-    <div class="hero-metrics">
-      <div><span class="metric-val" id="mv1">1.5 ans</span><span class="metric-label" id="ml1">d'expérience industrielle</span></div>
-      <div><span class="metric-val" id="mv2">3 projets</span><span class="metric-label" id="ml2">industriels livrés</span></div>
-      <div><span class="metric-val" id="mv3">Plateformes maîtrisées</span><span class="metric-label" id="ml3">MCU · NPU · DSP · FPGA · SoC</span></div>
-      <div><span class="metric-val" id="mv4">Architectures & familles</span><span class="metric-label" id="ml4">ARM · STM32 · NXP · RISC-V · Zynq</span></div>
-      <div><span class="metric-val" id="mv5">Outils IA & Deep Learning</span><span class="metric-label" id="ml5">PyTorch · TF · TFLite · DL · ML</span></div>
-      <div><span class="metric-val" id="mv6">Double diplôme</span><span class="metric-label" id="ml6">ENSEEIHT · EHTP Maroc</span></div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)" id="seeking-title-home">Ce que je recherche</div>
+        <p id="seeking-desc-home" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1rem">Curieux et rigoureux, je suis à la recherche d'une opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk1h">CDI · CDD</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk2h">Systèmes embarqués · IA embarquée · DSP · FPGA</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk3h">Tous secteurs (automotive, aérospatial, médical…)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk4h">Langues AR · FR · EN · ES</span></div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:1.5rem">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)" id="avail-card-title-home">Disponibilité</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;color:var(--text2)" id="av1-label-home">Statut</span>
+            <span style="font-size:12px;font-weight:600;color:var(--accent3);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace" id="av1-val-home">Disponible immédiatement</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;color:var(--text2)" id="av2-label-home">Localisation</span>
+            <span style="font-size:12px;color:var(--text);font-family:'JetBrains Mono',monospace" id="av2-val-home">Toulouse, France</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;color:var(--text2)" id="av3-label-home">Mobilité</span>
+            <span style="font-size:12px;color:var(--text);font-family:'JetBrains Mono',monospace" id="av3-val-home">Nationale & internationale</span>
+        </div>
+        <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;gap:10px">
+          <a href="French CV - AZAMI Ali - Emb Sys.pdf" download style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;text-align:center;font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-decoration:none">↓ CV FR</a>
+          <a href="English CV - AZAMI Ali - Emb Sys.pdf" download style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;text-align:center;font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-decoration:none">↓ CV EN</a>
+        </div>
+      </div>
     </div>
-    <div class="hero-stack">
-      <span class="stack-pill">C/C++</span><span class="stack-pill">Rust</span><span class="stack-pill">Python</span>
-      <span class="stack-pill">ARM Cortex-M</span><span class="stack-pill">TFLite Micro</span>
-      <span class="stack-pill">DSP / FFT</span><span class="stack-pill">NPU NXP</span>
-      <span class="stack-pill">VHDL / Verilog</span><span class="stack-pill">HLS</span><span class="stack-pill">FPGA</span>
-      <span class="stack-pill">Docker</span><span class="stack-pill">GitLab CI/CD</span>
-    </div>
+  </div>
   </div>
   <footer id="home-footer">ENSEEIHT Toulouse & EHTP Casablanca · Double Diplôme Ingénieur 2025</footer>
 </div>
@@ -297,16 +338,21 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;co
         </a>
         <a href="tel:+33745558127" class="clink">
           <div class="cicon ci-phone">☎</div>
-          <div><div class="clabel">Téléphone</div><div class="cval">+33 7 45 55 81 27</div></div>
+          <div><div class="clabel" id="phone-label">Téléphone</div><div class="cval">+33 7 45 55 81 27</div></div>
           <span style="color:var(--text3);margin-left:auto">→</span>
         </a>
       </div>
-      <div class="cform">
-        <div><label class="flabel" id="fl-name">Nom / Société</label><input class="finput" type="text" id="fi-name" placeholder="Votre nom ou entreprise"></div>
-        <div><label class="flabel" id="fl-email">Email</label><input class="finput" type="email" id="fi-email" placeholder="votre@email.com"></div>
-        <div><label class="flabel" id="fl-msg">Message</label><textarea class="finput" id="fi-msg" rows="5" placeholder="Décrivez votre projet ou opportunité..."></textarea></div>
-        <button class="fsubmit" id="form-submit">Envoyer le message</button>
-        <p class="fnote" id="form-note">Je réponds généralement sous 24h.</p>
+      <div style="display:flex;flex-direction:column;gap:1.5rem">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem">
+          <div class="asec-title" id="msg-title" style="margin-bottom:1rem">Envoyer un message</div>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <div><label class="flabel" id="fl-name">Nom / Société</label><input class="finput" type="text" id="fi-name" placeholder="Votre nom ou entreprise"></div>
+            <div><label class="flabel" id="fl-email">Email</label><input class="finput" type="email" id="fi-email" placeholder="votre@email.com"></div>
+            <div><label class="flabel" id="fl-msg">Message</label><textarea class="finput" id="fi-msg" rows="4" placeholder="Décrivez votre projet ou opportunité..."></textarea></div>
+            <button class="fsubmit" id="form-submit">Envoyer le message</button>
+            <p class="fnote" id="form-note">Je réponds généralement sous 24h.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -333,6 +379,19 @@ var TR = {
     mv4:'Architectures & familles',ml4:'ARM · STM32 · NXP · RISC-V · Zynq',
     mv5:'Outils IA & Deep Learning', ml5:'PyTorch · TF · TFLite · DL · ML',
     mv6:'Double diplôme',ml6:'ENSEEIHT · EHTP Maroc',
+    heroSeek:"Curieux et rigoureux, je suis à la recherche d'une nouvelle opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.",
+    cvBtnTxt:'Télécharger CV', cvFile:'French_CV_-_AZAMI_Ali_-_Emb_Sys.pdf',
+    phoneLabel:'Téléphone',
+    seekingTitle:'Ce que je recherche',
+    seekingDesc:"Curieux et rigoureux, je suis à la recherche d'une opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.",
+    sk1:'CDI · CDD', sk2:'Systèmes embarqués · IA embarquée · DSP · FPGA',
+    sk3:'Tous secteurs (automotive, aérospatial, médical, industrie…)', 
+    sk4:'Langues AR · FR · EN · ES',
+    availCardTitle:'Disponibilité',
+    av1Label:'Statut', av1Val:'Disponible immédiatement',
+    av2Label:'Localisation', av2Val:'France',
+    av3Label:'Mobilité', av3Val:'Nationale & internationale',
+    msgTitle:'Envoyer un message',
     homeFooter:'ENSEEIHT Toulouse & EHTP Casablanca · Double Diplôme Ingénieur 2025',
     projLabel:'Projets',projTitle:"Ce que j'ai conçu et livré",
     projFooter:'3 projets industriels · 6 projets académiques · ENSEEIHT 2023–2025',
@@ -374,6 +433,18 @@ var TR = {
     mv4:'Architectures & families', ml4:'ARM · STM32 · NXP · RISC-V · Zynq',
     mv5:'AI & Deep Learning tools', ml5:'PyTorch · TF · TFLite · DL · ML',
     mv6:'Dual degree', ml6:'ENSEEIHT · EHTP Morocco',
+    heroSeek:'Curious and rigorous, I am looking for a new opportunity in embedded engineering — passionate about technological innovation and motivated by ambitious projects combining technical expertise and creativity.',
+    cvBtnTxt:'Download CV', cvFile:'English_CV_-_AZAMI_Ali_-_Enhanced.pdf',
+    phoneLabel:'Phone',
+    seekingTitle:'What I am looking for',
+    seekingDesc:'Curious and rigorous, I am looking for an opportunity in embedded engineering — passionate about technological innovation and motivated by ambitious projects combining technical expertise and creativity.',
+    sk1:'Permanent · Fixed Term Contract', sk2:'Embedded Systems · Embedded AI · DSP · FPGA',
+    sk3:'All sectors (automotive, aerospace, medical, industrial…)', sk4:'Languages AR · FR · EN · ES',
+    availCardTitle:'Availability',
+    av1Label:'Status', av1Val:'Immediately available',
+    av2Label:'Location', av2Val:'France',
+    av3Label:'Mobility', av3Val:'National & international',
+    msgTitle:'Send a message',
     homeFooter:'ENSEEIHT Toulouse & EHTP Casablanca · Dual Engineer Degree 2025',
     projLabel:'Projects',projTitle:'What I built and shipped',
     projFooter:'3 industrial projects · 6 academic projects · ENSEEIHT 2023–2025',
@@ -755,11 +826,39 @@ var PROJECTS = [
   }
 ];
 
+var LIGHTS = [
+  {top:'-120px',left:'-120px',w:'500px',color:'rgba(124,58,237,0.16)'},
+  {top:'30%',right:'-150px',w:'450px',color:'rgba(0,212,255,0.12)'},
+  {top:'60%',left:'20%',w:'350px',color:'rgba(124,58,237,0.09)'},
+  {bottom:'-100px',right:'10%',w:'400px',color:'rgba(0,212,255,0.10)'},
+  {top:'10%',left:'40%',w:'300px',color:'rgba(124,58,237,0.07)'},
+  {bottom:'20%',left:'-80px',w:'380px',color:'rgba(0,212,255,0.08)'},
+];
+
+function injectLights(pageEl) {
+  var existing = pageEl.querySelector('.page-bg');
+  if(existing) return;
+  var bg = document.createElement('div');
+  bg.className = 'page-bg';
+  LIGHTS.forEach(function(l){
+    var s = document.createElement('span');
+    s.style.cssText = 'width:'+l.w+';height:'+l.w+';background:radial-gradient(circle,'+l.color+' 0%,transparent 70%);';
+    if(l.top) s.style.top=l.top;
+    if(l.bottom) s.style.bottom=l.bottom;
+    if(l.left) s.style.left=l.left;
+    if(l.right) s.style.right=l.right;
+    bg.appendChild(s);
+  });
+  pageEl.insertBefore(bg, pageEl.firstChild);
+}
+
 function showPage(id) {
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-link').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('page-'+id).classList.add('active');
+  var pageEl = document.getElementById('page-'+id);
+  pageEl.classList.add('active');
   document.getElementById('nav-'+id).classList.add('active');
+  injectLights(pageEl);
   if(id==='projects') renderProjects();
   if(id==='about') renderAbout();
   if(id==='vol') renderVol();
@@ -772,10 +871,12 @@ function setLang(l) {
   document.getElementById('lang-btn').textContent=lang==='fr'?'EN':'FR';
   var els = {
     'nav-home':T.home,'nav-projects':T.projects,'nav-vol':T.volNav,'nav-about':T.about,'nav-contact':T.contact,
-    'hero-tag-txt':T.heroTag,'hero-title':T.heroTitle,'hero-desc':T.heroDesc,
+    'hero-tag-txt':T.heroTag,'hero-title':T.heroTitle,'hero-desc':T.heroDesc,'hero-seek':T.heroSeek,
+    'cv-btn-txt':T.cvBtnTxt,
     'cta-projects':T.cta1,'cta-contact':T.cta2,
     'mv1':T.mv1,'ml1':T.ml1,'mv2':T.mv2,'ml2':T.ml2,
     'mv3':T.mv3,'ml3':T.ml3,'mv4':T.mv4,'ml4':T.ml4,'mv5':T.mv5,'ml5':T.ml5,
+    'mv6':T.mv6,'ml6':T.ml6,
     'home-footer':T.homeFooter,
     'proj-label':T.projLabel,'proj-title':T.projTitle,'proj-footer':T.projFooter,
     'about-tag':T.aboutTag,'about-role':T.aboutRole,'about-bio':T.aboutBio,
@@ -787,6 +888,19 @@ function setLang(l) {
     'vol-title':T.volTitle,
     'contact-label':T.contactLabel,'contact-title':T.contactTitle,
     'contact-desc':T.contactDesc,'avail-text':T.availText,
+    'phone-label':T.phoneLabel,
+    'seeking-title':T.seekingTitle,'seeking-desc':T.seekingDesc,
+    'sk1':T.sk1,'sk2':T.sk2,'sk3':T.sk3,'sk4':T.sk4,
+    'seeking-title-home':T.seekingTitle,'seeking-desc-home':T.seekingDesc,
+    'sk1h':T.sk1,'sk2h':T.sk2,'sk3h':T.sk3,'sk4h':T.sk4,
+    'avail-card-title':T.availCardTitle,'avail-card-title-home':T.availCardTitle,
+    'av1-label':T.av1Label,'av1-val':T.av1Val,
+    'av2-label':T.av2Label,'av2-val':T.av2Val,
+    'av3-label':T.av3Label,'av3-val':T.av3Val,
+    'av1-label-home':T.av1Label,'av1-val-home':T.av1Val,
+    'av2-label-home':T.av2Label,'av2-val-home':T.av2Val,
+    'av3-label-home':T.av3Label,'av3-val-home':T.av3Val,
+    'msg-title':T.msgTitle,
     'fl-name':T.flName,'fl-email':T.flEmail,'fl-msg':T.flMsg,
     'form-submit':T.fsubmit,'form-note':T.fnote,
     'about-footer':T.aboutFooter,'contact-footer':T.contactFooter
@@ -795,6 +909,8 @@ function setLang(l) {
     var el = document.getElementById(id);
     if(el) el.textContent = els[id];
   });
+  var cvDl = document.getElementById('cv-download');
+  if(cvDl) cvDl.href = T.cvFile;
   var fiName = document.getElementById('fi-name');
   var fiMsg = document.getElementById('fi-msg');
   if(fiName) fiName.placeholder = lang==='fr'?'Votre nom ou entreprise':'Your name or company';
@@ -921,13 +1037,21 @@ document.getElementById('cta-projects').addEventListener('click',function(){show
 document.getElementById('cta-contact').addEventListener('click',function(){showPage('contact');});
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 document.getElementById('form-submit').addEventListener('click',function(){
-  var n=document.getElementById('fi-name').value;
-  var e=document.getElementById('fi-email').value;
-  var m=document.getElementById('fi-msg').value;
-  var btn=this;
-  if(!n||!e||!m){btn.textContent=lang==='fr'?'Remplissez tous les champs':'Fill all fields';setTimeout(function(){btn.textContent=TR[lang].fsubmit;},2000);return;}
-  btn.textContent=lang==='fr'?'Message envoyé ✓':'Message sent ✓';
-  btn.style.background='var(--accent3)';
+  var n = document.getElementById('fi-name').value;
+  var e = document.getElementById('fi-email').value;
+  var m = document.getElementById('fi-msg').value;
+  var btn = this;
+  if(!n||!e||!m){
+    btn.textContent = lang==='fr'?'Remplissez tous les champs':'Fill all fields';
+    setTimeout(function(){btn.textContent=TR[lang].fsubmit;},2000);
+    return;
+  }
+  var subject = encodeURIComponent(lang==='fr'?'Contact depuis portfolio — '+n:'Portfolio contact — '+n);
+  var body = encodeURIComponent((lang==='fr'?'De : ':'From: ')+n+'\n'+(lang==='fr'?'Email : ':'Email: ')+e+'\n\n'+m);
+  window.location.href = 'mailto:Azamiali2706@gmail.com?subject='+subject+'&body='+body;
+  btn.textContent = lang==='fr'?'Redirection vers votre messagerie ✓':'Opening your email client ✓';
+  btn.style.background = 'var(--accent3)';
+  setTimeout(function(){btn.textContent=TR[lang].fsubmit;btn.style.background='';},3000);
 });
 
 showPage('home');
