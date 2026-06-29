@@ -161,7 +161,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.9
 .fsubmit:hover{background:#33dcff}
 .fnote{font-size:11px;color:var(--text3);text-align:center}
 footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:12px;font-family:'JetBrains Mono',monospace}
-@media(max-width:768px){.hero{padding:2rem 1.5rem;grid-template-columns:1fr !important}.section{padding:3rem 1.5rem}.about-grid,.cgrid{grid-template-columns:1fr}.projects-grid{grid-template-columns:1fr}.vgrid{grid-template-columns:1fr}}
+.mobile-nav{display:none}
+@media(max-width:768px){
+nav .nav-links{display:none}
+nav{padding:0 1rem}
+.page{padding-top:60px;padding-bottom:70px}
+.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);height:64px;align-items:center;justify-content:space-around;padding:0 4px}
+.mobile-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border:none;background:none;color:var(--text3);font-family:"Inter",sans-serif;font-size:9px;cursor:pointer;border-radius:8px;min-width:48px}
+.mobile-nav-btn.active{color:var(--accent)}
+.mobile-nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mobile-lang{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 8px;border:1px solid var(--border2);background:rgba(0,212,255,0.05);color:var(--accent);font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:600;cursor:pointer;border-radius:8px}
+.mobile-lang svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+.hero{grid-template-columns:1fr !important;padding:1.5rem 1.25rem !important;gap:1.5rem !important}
+.hero-name{font-size:2.6rem !important;letter-spacing:-1px}
+.hero-desc,.hero-seek{font-size:14px}
+.hero-metrics{gap:1rem;margin-top:1.5rem;padding-top:1.5rem}
+.metric-val{font-size:1rem}
+.hero-right-cards{display:none !important}
+.section{padding:2rem 1.25rem}
+.about-grid,.cgrid{grid-template-columns:1fr}
+.projects-grid{grid-template-columns:1fr}
+.vgrid{grid-template-columns:1fr}
+.vol-big-card{grid-template-columns:52px 1fr;gap:1rem;padding:1.25rem}
+.vol-logo-box{width:48px;height:48px}
+.btn-primary,.btn-secondary{width:100%;justify-content:center}
+.hero-stack{gap:5px}
+.stack-pill{font-size:10px;padding:3px 9px}
+.modal{padding:1.25rem}
+.pipeline{flex-wrap:wrap;gap:4px}
+.pstep{font-size:11px;padding:4px 9px}
+}
 </style>
 </head>
 <body>
@@ -206,7 +235,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;co
         <span class="stack-pill">Docker</span><span class="stack-pill">GitLab CI/CD</span>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:1.25rem">
+    <div class="hero-right-cards" style="display:flex;flex-direction:column;gap:1.25rem">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)" id="seeking-title-home">Ce que je recherche</div>
         <p id="seeking-desc-home" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1rem">Curieux et rigoureux, je suis à la recherche d'une opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.</p>
@@ -1055,6 +1084,58 @@ document.getElementById('form-submit').addEventListener('click',function(){
 });
 
 showPage('home');
+
+var mnavPages=['home','projects','vol','about','contact'];
+mnavPages.forEach(function(id){
+  var btn=document.getElementById('mnav-'+id);
+  if(btn)btn.addEventListener('click',function(){showPage(id);updateMobileNav(id);});
+});
+var mlangBtn=document.getElementById('mlang-btn');
+if(mlangBtn)mlangBtn.addEventListener('click',function(){
+  setLang(lang==='fr'?'en':'fr');
+  updateMobileLabels();
+});
+function updateMobileNav(id){
+  mnavPages.forEach(function(p){
+    var b=document.getElementById('mnav-'+p);
+    if(b)b.classList.toggle('active',p===id);
+  });
+}
+function updateMobileLabels(){
+  var labels={home:'Home',projects:lang==='fr'?'Projets':'Projects',vol:lang==='fr'?'Bénévolat':'Volunteer',about:lang==='fr'?'À propos':'About',contact:'Contact'};
+  Object.keys(labels).forEach(function(k){var el=document.getElementById('mlabel-'+k);if(el)el.textContent=labels[k];});
+  var ml=document.getElementById('mlang-txt');if(ml)ml.textContent=lang==='fr'?'EN':'FR';
+}
+var _origSP=showPage;
+showPage=function(id){_origSP(id);updateMobileNav(id);};
+
 </script>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-btn active" id="mnav-home">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span id="mlabel-home">Home</span>
+  </button>
+  <button class="mobile-nav-btn" id="mnav-projects">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <span id="mlabel-projects">Projets</span>
+  </button>
+  <button class="mobile-nav-btn" id="mnav-vol">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span id="mlabel-vol">Bénévolat</span>
+  </button>
+  <button class="mobile-nav-btn" id="mnav-about">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span id="mlabel-about">À propos</span>
+  </button>
+  <button class="mobile-nav-btn" id="mnav-contact">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <span id="mlabel-contact">Contact</span>
+  </button>
+  <button class="mobile-lang" id="mlang-btn">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span id="mlang-txt">EN</span>
+  </button>
+</nav>
 </body>
 </html>
