@@ -1085,30 +1085,6 @@ document.getElementById('form-submit').addEventListener('click',function(){
 
 showPage('home');
 
-var mnavPages=['home','projects','vol','about','contact'];
-mnavPages.forEach(function(id){
-  var btn=document.getElementById('mnav-'+id);
-  if(btn)btn.addEventListener('click',function(){showPage(id);updateMobileNav(id);});
-});
-var mlangBtn=document.getElementById('mlang-btn');
-if(mlangBtn)mlangBtn.addEventListener('click',function(){
-  setLang(lang==='fr'?'en':'fr');
-  updateMobileLabels();
-});
-function updateMobileNav(id){
-  mnavPages.forEach(function(p){
-    var b=document.getElementById('mnav-'+p);
-    if(b)b.classList.toggle('active',p===id);
-  });
-}
-function updateMobileLabels(){
-  var labels={home:'Home',projects:lang==='fr'?'Projets':'Projects',vol:lang==='fr'?'Bénévolat':'Volunteer',about:lang==='fr'?'À propos':'About',contact:'Contact'};
-  Object.keys(labels).forEach(function(k){var el=document.getElementById('mlabel-'+k);if(el)el.textContent=labels[k];});
-  var ml=document.getElementById('mlang-txt');if(ml)ml.textContent=lang==='fr'?'EN':'FR';
-}
-var _origSP=showPage;
-showPage=function(id){_origSP(id);updateMobileNav(id);};
-
 </script>
 
 <nav class="mobile-nav" id="mobile-nav">
@@ -1137,5 +1113,33 @@ showPage=function(id){_origSP(id);updateMobileNav(id);};
     <span id="mlang-txt">EN</span>
   </button>
 </nav>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var mnavPages=['home','projects','vol','about','contact'];
+  mnavPages.forEach(function(id){
+    var btn=document.getElementById('mnav-'+id);
+    if(btn)btn.addEventListener('click',function(){showPage(id);updateMobileNav(id);});
+  });
+  var mlangBtn=document.getElementById('mlang-btn');
+  if(mlangBtn)mlangBtn.addEventListener('click',function(){
+    setLang(lang==='fr'?'en':'fr');
+    updateMobileLabels();
+  });
+});
+function updateMobileNav(id){
+  var pages=['home','projects','vol','about','contact'];
+  pages.forEach(function(p){
+    var b=document.getElementById('mnav-'+p);
+    if(b)b.classList.toggle('active',p===id);
+  });
+}
+function updateMobileLabels(){
+  var labels={home:'Home',projects:lang==='fr'?'Projets':'Projects',vol:lang==='fr'?'Bénévolat':'Volunteer',about:lang==='fr'?'À propos':'About',contact:'Contact'};
+  Object.keys(labels).forEach(function(k){var el=document.getElementById('mlabel-'+k);if(el)el.textContent=labels[k];});
+  var ml=document.getElementById('mlang-txt');if(ml)ml.textContent=lang==='fr'?'EN':'FR';
+}
+var _origSP=showPage;
+showPage=function(id){_origSP(id);updateMobileNav(id);};
+</script>
 </body>
 </html>
