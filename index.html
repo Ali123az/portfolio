@@ -236,7 +236,7 @@ nav{padding:0 1rem}
         <div><span class="metric-val" id="mv6">Double diplôme</span><span class="metric-label" id="ml6">ENSEEIHT · EHTP Maroc</span></div>
       </div>
       <div class="hero-stack">
-        <span class="stack-pill">C/C++</span><span class="stack-pill">Rust</span><span class="stack-pill">Python</span>
+        <span class="stack-pill">C/C++</span><span class="stack-pill">Rust</span><span class="stack-pill">Python</span><span class="stack-pill">Embedded Linux</span>
         <span class="stack-pill">ARM Cortex-M</span><span class="stack-pill">TFLite Micro</span>
         <span class="stack-pill">DSP / FFT</span><span class="stack-pill">NPU NXP</span>
         <span class="stack-pill">VHDL / Verilog</span><span class="stack-pill">HLS</span><span class="stack-pill">FPGA</span>
@@ -521,10 +521,11 @@ var SKILLS = [
   {name:'VHDL / FPGA', pct:70, label:'Confirmé'},
   {name:'ARM Cortex-M (NXP/STM)', pct:88, label:'Avancé'},
   {name:'SPI / UART / CAN / I2C', pct:85, label:'Avancé'},
+  {name:'MATLAB / Simulink', pct:80, label:'Avancé'},
   {name:'HLS Catapult / SystemC', pct:55, label:'Intermédiaire'},
-  {name:'Rust', pct:60, label:'Intermédiaire'},
+  {name:'Rust', pct:40, label:'Débutant'},
   {name:'Docker / GitLab CI-CD', pct:40, label:'Débutant'},
-  {name:'MATLAB / Simulink', pct:80, label:'Avancé'}
+  {name:'Linux embarqué', pct:30, label:'Débutant'}
 ];
 
 var SKILLS_EN = [
@@ -535,10 +536,11 @@ var SKILLS_EN = [
   {name:'VHDL / FPGA', pct:70, label:'Proficient'},
   {name:'ARM Cortex-M (NXP/STM)', pct:88, label:'Advanced'},
   {name:'SPI / UART / CAN / I2C', pct:85, label:'Advanced'},
+  {name:'MATLAB / Simulink', pct:80, label:'Advanced'},
   {name:'HLS Catapult / SystemC', pct:55, label:'Intermediate'},
-  {name:'Rust', pct:60, label:'Intermediate'},
+  {name:'Rust', pct:40, label:'Beginner'},
   {name:'Docker / GitLab CI-CD', pct:40, label:'Beginner'},
-  {name:'MATLAB / Simulink', pct:80, label:'Advanced'}
+  {name:'Embedded Linux', pct:30, label:'Débutant'}
 ];
 
 var LANGS = [
@@ -641,7 +643,7 @@ var PROJECTS = [
         "Implémentation C embarquée du pipeline FFT (autocoder MATLAB insuffisant) : BbCopy, Hanning, FFT 32 pts, ComplexToPolar, accumulation buffer. Intégration TFLite Micro : resolver opérateurs, tensor arena statique (~60 kB/128 kB RAM), quantification int8 entrée.",
         "Tests terrain (clinic) : 3 participants, catalogue de kicks, lecture CAN via Arduino + buzzer. Pipeline end-to-end validé sur Ranger5 : 70% détection, 100% immunité faux positifs."
       ],
-      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + DSP intégré)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','Bus CAN / Arduino','Optuna (400 trials)'],
+      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + DSP intégré)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras / ONNX','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','Bus CAN / Arduino','Optuna (400 trials)'],
       metricsDetail:[{v:'99.33%',l:'Accuracy globale'},{v:'99.26%',l:'Taux détection (kicks)'},{v:'99.43%',l:'Immunité faux positifs'},{v:'11.94 kB',l:'Taille modèle INT8'},{v:'0.107 ms',l:'Latence inférence'},{v:'184→12 kB',l:'Compression ×16'}, {v:'Universel',l:'multi-véhicule, sans ré-entraînement'}],
       challenges:["Réimplémentation manuelle complète du pipeline FFT en C (MATLAB autocoder incomplet sur fonctions DSP custom)","RAM 128 kB : tensor arena 60 kB, ajustement itératif par essais/erreurs pour éviter les OOM","Pruning/clustering sans gain réel sur TFLM Cortex-M33 (absence de sparse kernels natifs)","Adaptation données legacy (différences SNR hardware) par alignement statistique tap par tap et véhicule","Mismatch Python/C embarqué : preprocessing pas encore parfaitement aligné, baisse de détection en conditions réelles"],
       context:"Le modèle précédent (CNN 1D temporel) devait être ré-entraîné pour chaque véhicule. L'objectif était de concevoir une approche universelle basée sur une représentation temps-fréquence, déployable en temps réel sur le MCU Ranger5 NXP sans compromis sur les performances."
@@ -659,7 +661,7 @@ var PROJECTS = [
         "C embedded FFT pipeline implementation (MATLAB autocoder insufficient): BbCopy, Hanning, FFT 32pts, ComplexToPolar, buffer accumulation. TFLite Micro integration: operator resolver, static tensor arena (~60 kB/128 kB RAM), int8 input quantization.",
         "Field clinic testing: 3 participants, kick catalog, CAN reading via Arduino + buzzer. End-to-end pipeline validated on Ranger5: 70% detection, 100% false positive immunity."
       ],
-      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + integrated DSP)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','CAN bus / Arduino','Optuna (400 trials)'],
+      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + integrated DSP)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras / ONNX','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','CAN bus / Arduino','Optuna (400 trials)'],
       metricsDetail:[{v:'99.33%',l:'Global accuracy'},{v:'99.26%',l:'Detection rate (kicks)'},{v:'99.43%',l:'False positive immunity'},{v:'11.94 kB',l:'INT8 model size'},{v:'0.107 ms',l:'Inference latency'},{v:'184→12 kB',l:'Compression ×16'},{v:'Universal',l:'cross-vehicle, no retraining'}],
       challenges:['Full manual FFT pipeline reimplementation in C (MATLAB autocoder incomplete on custom DSP functions)','128 kB RAM: 60 kB tensor arena, iterative trial-and-error adjustment to avoid OOM','Pruning/clustering without real gains on TFLM Cortex-M33 (no native sparse kernels)','Legacy data adaptation (hardware SNR differences) via per-tap and per-vehicle statistical alignment','Python/C mismatch: preprocessing not perfectly aligned, causing detection drop in real conditions'],
       context:'The previous model (1D temporal CNN) had to be retrained per vehicle type. The goal was to design a universal approach based on time-frequency representation, deployable in real time on the NXP Ranger5 MCU without performance trade-offs.'
@@ -680,7 +682,7 @@ var PROJECTS = [
         "Déploiement NPU : conversion via eIQ Portal (Neutron Converter), suppression couche Softmax non supportée (tflite-extractor). Intégration C++ MCU : import .tflite en .rodata, MicroMutableOpResolver, ajustement scale/zero-point.",
         "Rédaction du booklet technique complet (37 pages) — guide de référence pour les promotions suivantes."
       ],
-      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + NPU eIQ Neutron)','Accéléromètre FXLS8974CF (12-bit, 3 axes, SPI)','TensorFlow / TensorFlow Lite','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART parsing regex'],
+      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + NPU eIQ Neutron)','Accéléromètre FXLS8974CF (12-bit, 3 axes, SPI)','TensorFlow / TensorFlow Lite / ONNX','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART parsing regex'],
       metricsDetail:[{v:'99.3%',l:'Accuracy CNN'},{v:'×42',l:'Accél. NPU vs CPU'},{v:'131 kB',l:'Peak RAM estimé'},{v:'256 kB',l:'RAM allouée (marge)'},{v:'13 010',l:'Paramètres modèle'},{v:'10 classes',l:'Gestes classifiés'}],
       challenges:["Compatibilité toolchain : GNU ARM Toolchain v12.3 requise (v13.2 incompatible avec le NPU)","NPU supporte uniquement int8 PCQ : suppression obligatoire de la couche Softmax via tflite-extractor","Peak RAM difficile à prédire empiriquement (131 kB estimé → 256 kB alloués avec marge de sécurité)","Débogage MCU : erreurs JSON probe, conflits port série, synchronisation sur INT1 accéléromètre"],
       context:"Projet individuel M2 (3EA IATI TSE) en partenariat avec NXP Semiconductors, encadré par B. Mulliez. Objectif : démontrer un pipeline Edge AI complet sur un MCU avec NPU intégré, conçu pour devenir un TP académique pédagogique. Hardware cible : FRDM-MCXN947."
@@ -699,7 +701,7 @@ var PROJECTS = [
         "NPU deployment: conversion via eIQ Portal (Neutron Converter), mandatory Softmax layer removal (tflite-extractor). C++ MCU integration: .tflite as .rodata, MicroMutableOpResolver, scale/zero-point adjustment.",
         "Authored a complete 37-page technical booklet as a reference guide for future student cohorts."
       ],
-      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + eIQ Neutron NPU)','FXLS8974CF accelerometer (12-bit, 3-axis, SPI)','TensorFlow / TensorFlow Lite','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART regex parsing'],
+      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + eIQ Neutron NPU)','FXLS8974CF accelerometer (12-bit, 3-axis, SPI)','TensorFlow / TensorFlow Lite / ONNX','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART regex parsing'],
       metricsDetail:[{v:'99.3%',l:'CNN accuracy'},{v:'×42',l:'NPU vs CPU speedup'},{v:'131 kB',l:'Estimated peak RAM'},{v:'256 kB',l:'Allocated RAM (margin)'},{v:'13,010',l:'Model parameters'},{v:'10 classes',l:'Classified gestures'}],
       challenges:['Toolchain compatibility: GNU ARM v12.3 required (v13.2 NPU-incompatible)','NPU supports int8 PCQ only: mandatory Softmax removal via tflite-extractor','Peak RAM empirically unpredictable (131 kB estimated → 256 kB allocated for safety)','MCU debugging: JSON probe errors, serial port conflicts, INT1 accelerometer sync'],
       context:'Individual M2 project (3EA IATI TSE) in partnership with NXP Semiconductors, supervised by B. Mulliez. Goal: demonstrate a full Edge AI pipeline on an MCU with integrated NPU, designed to become an academic lab. Target hardware: FRDM-MCXN947.'
