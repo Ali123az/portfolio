@@ -47,7 +47,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ root }}assets/css/style.css?v={{ ver.css }}">
-<script>document.documentElement.className = "js";</script>
+<script>
+/* Avant le premier affichage : JS actif, et mode allégé si le navigateur dessine sans carte graphique. */
+(function (d) {
+  d.className = "js";
+  try {
+    var p = sessionStorage.getItem("perf");
+    if (!p) {
+      var gl = document.createElement("canvas").getContext("webgl"), r = "";
+      if (gl) {
+        var ext = gl.getExtension("WEBGL_debug_renderer_info");
+        r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+        var lose = gl.getExtension("WEBGL_lose_context");
+        if (lose) lose.loseContext();
+      }
+      p = !gl || /basic render|swiftshader|llvmpipe|softpipe|software/i.test(r) ? "lite" : "full";
+      sessionStorage.setItem("perf", p);
+    }
+    if (p === "lite") d.className += " lite";
+  } catch (e) {}
+})(document.documentElement);
+</script>
 <script type="application/ld+json">{{ page.jsonld }}</script>
 {% if site.ga_id -%}
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_id }}"></script>
@@ -62,7 +82,7 @@ gtag('config', '{{ site.ga_id }}');
 <body class="page-{{ page.kind }}">
 <a class="skip-link" href="#main">{{ c.ui.skip }}</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
-<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+<div class="bg" aria-hidden="true"><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
 
 <header class="site-header" data-header>
   <div class="container header-inner">

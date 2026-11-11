@@ -39,8 +39,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=96fb4bc6">
-<script>document.documentElement.className = "js";</script>
+<link rel="stylesheet" href="assets/css/style.css?v=022d2b21">
+<script>
+/* Avant le premier affichage : JS actif, et mode allégé si le navigateur dessine sans carte graphique. */
+(function (d) {
+  d.className = "js";
+  try {
+    var p = sessionStorage.getItem("perf");
+    if (!p) {
+      var gl = document.createElement("canvas").getContext("webgl"), r = "";
+      if (gl) {
+        var ext = gl.getExtension("WEBGL_debug_renderer_info");
+        r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+        var lose = gl.getExtension("WEBGL_lose_context");
+        if (lose) lose.loseContext();
+      }
+      p = !gl || /basic render|swiftshader|llvmpipe|softpipe|software/i.test(r) ? "lite" : "full";
+      sessionStorage.setItem("perf", p);
+    }
+    if (p === "lite") d.className += " lite";
+  } catch (e) {}
+})(document.documentElement);
+</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://ali123az.github.io/portfolio/#website","url":"https://ali123az.github.io/portfolio/","name":"Ali Azami","inLanguage":["fr","en"],"author":{"@id":"https://ali123az.github.io/portfolio/#person"}},{"@type":"ProfilePage","@id":"https://ali123az.github.io/portfolio/#profilepage","url":"https://ali123az.github.io/portfolio/","name":"Ali Azami — Ingénieur IA embarquée & systèmes embarqués","description":"Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.","inLanguage":"fr","isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"mainEntity":{"@id":"https://ali123az.github.io/portfolio/#person"},"dateModified":"2026-11-11"},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","givenName":"Ali","familyName":"Azami","jobTitle":"Ingénieur systèmes embarqués","description":"Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.","url":"https://ali123az.github.io/portfolio/","image":"https://ali123az.github.io/portfolio/assets/img/portrait-700.webp","email":"mailto:azamiali2706@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Lorient","addressRegion":"Bretagne","addressCountry":"FR"},"worksFor":{"@type":"Organization","name":"Ocean Data System","url":"https://www.oceandatasystem.com/"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ENSEEIHT (Toulouse INP)"},{"@type":"CollegeOrUniversity","name":"École Hassania des Travaux Publics (EHTP)"}],"knowsAbout":["Systèmes embarqués","Firmware temps réel","IA embarquée","Edge AI","TinyML","Traitement du signal","Radar UWB","Microcontrôleurs ARM Cortex-M","TensorFlow Lite Micro","FPGA","VHDL","Électronique marine","Bus CAN","NMEA 2000","Conception de cartes électroniques","C","C++","C#","Python"],"knowsLanguage":["fr","en","ar","es"],"sameAs":["https://www.linkedin.com/in/ali-azami-27b8681b4/"]}]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
 <script>
@@ -53,7 +73,7 @@ gtag('config', 'G-0J439TZPLC');
 <body class="page-home">
 <a class="skip-link" href="#main">Aller au contenu</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
-<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+<div class="bg" aria-hidden="true"><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
 
 <header class="site-header" data-header>
   <div class="container header-inner">
@@ -633,6 +653,6 @@ gtag('config', 'G-0J439TZPLC');
   <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
 </a>
 
-<script src="assets/js/main.js?v=0c2243e2" defer></script>
+<script src="assets/js/main.js?v=c4618fdd" defer></script>
 </body>
 </html>

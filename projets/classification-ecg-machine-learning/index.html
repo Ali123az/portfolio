@@ -37,8 +37,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=96fb4bc6">
-<script>document.documentElement.className = "js";</script>
+<link rel="stylesheet" href="../../assets/css/style.css?v=022d2b21">
+<script>
+/* Avant le premier affichage : JS actif, et mode allégé si le navigateur dessine sans carte graphique. */
+(function (d) {
+  d.className = "js";
+  try {
+    var p = sessionStorage.getItem("perf");
+    if (!p) {
+      var gl = document.createElement("canvas").getContext("webgl"), r = "";
+      if (gl) {
+        var ext = gl.getExtension("WEBGL_debug_renderer_info");
+        r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+        var lose = gl.getExtension("WEBGL_lose_context");
+        if (lose) lose.loseContext();
+      }
+      p = !gl || /basic render|swiftshader|llvmpipe|softpipe|software/i.test(r) ? "lite" : "full";
+      sessionStorage.setItem("perf", p);
+    }
+    if (p === "lite") d.className += " lite";
+  } catch (e) {}
+})(document.documentElement);
+</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://ali123az.github.io/portfolio/projets/classification-ecg-machine-learning/#article","headline":"Classification d’arythmies ECG : apprentissage supervisé et non supervisé","description":"Étude de cas : classification d’arythmies sur la base MIT-BIH, comparaison KNN, Random Forest, KMeans et clustering agglomératif, analyse SHAP, Boruta et ACP.","url":"https://ali123az.github.io/portfolio/projets/classification-ecg-machine-learning/","inLanguage":"fr","image":"https://ali123az.github.io/portfolio/assets/img/og-cover-fr.png","keywords":"Python, scikit-learn, RandomForest, SHAP, Boruta, PCA, DTW, KMeans","author":{"@id":"https://ali123az.github.io/portfolio/#person"},"isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"dateModified":"2026-11-11"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://ali123az.github.io/portfolio/"},{"@type":"ListItem","position":2,"name":"Projets","item":"https://ali123az.github.io/portfolio/#projets"},{"@type":"ListItem","position":3,"name":"Classification d’arythmies ECG : apprentissage supervisé et non supervisé","item":"https://ali123az.github.io/portfolio/projets/classification-ecg-machine-learning/"}]},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","url":"https://ali123az.github.io/portfolio/","jobTitle":"Ingénieur systèmes embarqués"}]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
 <script>
@@ -51,7 +71,7 @@ gtag('config', 'G-0J439TZPLC');
 <body class="page-project">
 <a class="skip-link" href="#main">Aller au contenu</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
-<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+<div class="bg" aria-hidden="true"><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
 
 <header class="site-header" data-header>
   <div class="container header-inner">
@@ -219,6 +239,6 @@ gtag('config', 'G-0J439TZPLC');
   <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
 </a>
 
-<script src="../../assets/js/main.js?v=0c2243e2" defer></script>
+<script src="../../assets/js/main.js?v=c4618fdd" defer></script>
 </body>
 </html>

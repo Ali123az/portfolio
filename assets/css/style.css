@@ -112,11 +112,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .js [data-reveal="clip"].is-in .about-photo-frame { opacity: 1; }
 
 /* 3. Arrière-plan ---------------------------------------------------------- */
-.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.bg-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 64px 64px; opacity: .35; -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 20%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 85% 70% at 50% 20%, #000 10%, transparent 75%); }
-.bg-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; will-change: transform; }
-.bg-orb--a { width: 46vw; height: 46vw; min-width: 420px; min-height: 420px; left: -14vw; top: -12vw; background: radial-gradient(circle, rgba(var(--accent-rgb), .30), transparent 68%); animation: drift-a 26s ease-in-out infinite alternate; }
-.bg-orb--b { width: 40vw; height: 40vw; min-width: 380px; min-height: 380px; right: -12vw; top: 38vh; background: radial-gradient(circle, rgba(var(--warm-rgb), .16), transparent 68%); animation: drift-b 32s ease-in-out infinite alternate; }
+/* Fond en une seule couche peinte : la grille et son fondu sont des dégradés empilés,
+   sans masque ni filtre (très coûteux à composer sans carte graphique). */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse 85% 70% at 50% 20%, transparent 10%, var(--bg) 75%), linear-gradient(rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, linear-gradient(90deg, rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, var(--bg); }
+/* (ancienne couche .bg-grid supprimée) */
+.bg-orb { position: absolute; border-radius: 50%; opacity: .6; will-change: transform; }
+.bg-orb--a { width: 58vw; height: 58vw; min-width: 520px; min-height: 520px; left: -20vw; top: -18vw; background: radial-gradient(circle closest-side, rgba(var(--accent-rgb), .22), rgba(var(--accent-rgb), .09) 45%, transparent); animation: drift-a 26s ease-in-out infinite alternate; }
+.bg-orb--b { width: 52vw; height: 52vw; min-width: 480px; min-height: 480px; right: -18vw; top: 32vh; background: radial-gradient(circle closest-side, rgba(var(--warm-rgb), .12), rgba(var(--warm-rgb), .05) 45%, transparent); animation: drift-b 32s ease-in-out infinite alternate; }
 @keyframes drift-a { to { transform: translate(12vw, 14vh) scale(1.15); } }
 @keyframes drift-b { to { transform: translate(-14vw, -18vh) scale(.9); } }
 .bg-glow { position: absolute; left: -300px; top: -300px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(var(--accent-rgb), .10), transparent 65%); opacity: 0; transition: opacity .6s; will-change: transform; }
@@ -157,7 +159,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 960px) {
   .nav-toggle { display: block; }
   .header-inner { padding-right: .45rem; }
-  .site-nav { position: fixed; inset: 0; z-index: 105; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2.5rem; padding: 6rem var(--gutter) 3rem; background: rgba(5, 9, 18, .97); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); clip-path: circle(0 at calc(100% - 2.6rem) 2.3rem); visibility: hidden; transition: clip-path .7s var(--ease-out), visibility 0s .7s; }
+  .site-nav { position: fixed; inset: 0; z-index: 105; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2.5rem; padding: 6rem var(--gutter) 3rem; background: rgba(5, 9, 18, .98); clip-path: circle(0 at calc(100% - 2.6rem) 2.3rem); visibility: hidden; transition: clip-path .7s var(--ease-out), visibility 0s .7s; }
   .nav-open .site-nav { clip-path: circle(150% at calc(100% - 2.6rem) 2.3rem); visibility: visible; transition: clip-path .7s var(--ease-out), visibility 0s; }
   .nav-list { flex-direction: column; align-items: flex-start; gap: .3rem; width: 100%; }
   .nav-indicator { display: none; }
@@ -171,11 +173,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* 5. Hero ------------------------------------------------------------------ */
 .hero { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 100vh; min-height: 100svh; padding: 7.5rem 0 0; }
-.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, .3) 38%, #000 72%); mask-image: linear-gradient(90deg, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, .3) 38%, #000 72%); }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-block: 2rem 3.5rem; }
 
 .js .hero-in { opacity: 0; animation: hero-in .8s var(--ease-out) forwards; animation-delay: calc(var(--i) * 55ms + 80ms); }
-@keyframes hero-in { from { opacity: 0; translate: 0 22px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+@keyframes hero-in { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
 
 .status-chip { display: inline-flex; align-items: center; gap: .65rem; padding: .4rem .95rem .4rem .8rem; margin-bottom: 1.75rem; border: 1px solid rgba(61, 220, 151, .35); border-radius: 999px; background: rgba(61, 220, 151, .07); color: #9af0c9; font: 500 .78rem/1.4 var(--font-mono); letter-spacing: .02em; }
 .hero-title { display: block; }
@@ -252,6 +254,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .now { position: relative; padding: 1px; border-radius: 30px; background: var(--line); }
 .now-border { position: absolute; inset: 0; border-radius: inherit; background: conic-gradient(from var(--angle), transparent 0 58%, var(--accent) 76%, var(--warm) 86%, transparent 96%); animation: spin 10s linear infinite; }
 @keyframes spin { to { --angle: 360deg; } }
+.now-border.is-paused { animation-play-state: paused; }
 .now-inner { position: relative; padding: clamp(1.5rem, 4.2vw, 3.25rem); border-radius: 29px; background: radial-gradient(90% 60% at 100% 0%, rgba(var(--accent-rgb), .09), transparent 60%), linear-gradient(180deg, #0b1322, #070c17); }
 .now-head { display: grid; gap: .5rem; }
 .now-role { margin-top: .7rem; font: 700 clamp(1.7rem, 3.8vw, 2.6rem)/1.1 var(--font-display); letter-spacing: -.03em; }
@@ -563,6 +566,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .skill p { min-height: 0; margin-bottom: .9rem; }
   .swipe-hint { display: flex; }
 }
+
+/* 15 ter. Mode allégé --------------------------------------------------------
+   Activé automatiquement (classe .lite sur <html>) quand le navigateur dessine sans
+   carte graphique ou n'atteint pas 30 images/seconde. On garde la mise en page et les
+   animations ponctuelles ; on retire ce qui oblige à recomposer tout l'écran en continu. */
+.lite .bg { background: radial-gradient(60vw 60vw at 6% -8%, rgba(var(--accent-rgb), .13), transparent 62%), radial-gradient(52vw 52vw at 104% 62%, rgba(var(--warm-rgb), .07), transparent 62%), radial-gradient(ellipse 85% 70% at 50% 20%, transparent 10%, var(--bg) 75%), linear-gradient(rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, linear-gradient(90deg, rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, var(--bg); }
+.lite .bg-orb, .lite .bg-glow { display: none; }
+.lite *, .lite *::before, .lite *::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+.lite .is-scrolled .header-inner::before { background: rgba(8, 13, 24, .96); }
+.lite .hero-panel { background: linear-gradient(180deg, #131c2e, #0b1220); }
+.lite .to-top { background: #0a111f; }
+.lite .marquee-track { animation-play-state: paused; }
+.lite .now-border { animation: none; }
+.lite .viz-line--hot, .lite .blip, .lite .cycle-flow, .lite .cycle-pulse { filter: none; }
+.lite .pcard:hover .pcard-visual .viz { transform: none; }
 
 /* 16. Transitions entre pages --------------------------------------------- */
 @view-transition { navigation: auto; }

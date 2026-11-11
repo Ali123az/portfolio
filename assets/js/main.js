@@ -11,6 +11,8 @@
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
   const lang = root.lang || 'fr';
   const hasIO = 'IntersectionObserver' in window;
+  // Mode allégé : posé avant le premier affichage par le script du <head>, ou plus tard par la sonde de fluidité
+  const isLite = () => root.classList.contains('lite');
 
   /* ---- Bus de défilement (une seule passe par image) ---------------------- */
   const scrollTasks = [];
@@ -238,8 +240,10 @@
     const draw = (now) => {
       const t = now / 1000;
       ctx.clearRect(0, 0, w, h);
+      // Le fondu vers la gauche est intégré au dégradé plutôt que confié à un masque CSS
       const grad = ctx.createLinearGradient(0, 0, w, 0);
-      grad.addColorStop(0, '#34d8f5'); grad.addColorStop(0.65, '#6ee7c8'); grad.addColorStop(1, '#f6b545');
+      grad.addColorStop(0, 'rgba(52, 216, 245, .12)'); grad.addColorStop(0.38, 'rgba(70, 221, 230, .32)');
+      grad.addColorStop(0.7, 'rgba(110, 231, 200, .96)'); grad.addColorStop(1, 'rgba(246, 181, 69, 1)');
       ctx.strokeStyle = grad; ctx.fillStyle = grad; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
       for (const wave of waves) {
         ctx.globalAlpha = wave.alpha; ctx.lineWidth = wave.width;
@@ -266,15 +270,16 @@
     };
     const loop = (now) => {
       raf = 0;
+      if (isLite()) { draw(4200); return; }
       influence += ((px >= 0 ? 1 : 0) - influence) * 0.06;
       draw(now);
       if (visible && !doc.hidden) raf = requestAnimationFrame(loop);
     };
-    const start = () => { if (!raf && !reduced) raf = requestAnimationFrame(loop); };
+    const start = () => { if (!raf && !reduced && !isLite()) raf = requestAnimationFrame(loop); };
 
     resize();
-    draw(reduced ? 4200 : performance.now());
-    addEventListener('resize', () => { resize(); if (reduced) draw(4200); });
+    draw(reduced || isLite() ? 4200 : performance.now());
+    addEventListener('resize', () => { resize(); if (reduced || isLite()) draw(4200); });
     if (!reduced) {
       if (hasIO) new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; if (visible) start(); }).observe(hero);
       doc.addEventListener('visibilitychange', () => { if (!doc.hidden) start(); });
@@ -291,7 +296,7 @@
   if (heroGrid && !reduced) {
     scrollTasks.push((y) => {
       // Seulement quand le bloc tient dans l'écran : sinon il s'estomperait avant d'être lu
-      if (innerWidth <= 1000 || heroGrid.offsetHeight > innerHeight * 0.9) {
+      if (isLite() || innerWidth <= 1000 || heroGrid.offsetHeight > innerHeight * 0.9) {
         if (heroGrid.style.opacity) { heroGrid.style.opacity = ''; heroGrid.style.transform = ''; }
         return;
       }
@@ -312,6 +317,7 @@
         if (Math.abs(tx - gx) + Math.abs(ty - gy) > 0.4) requestAnimationFrame(follow); else moving = false;
       };
       addEventListener('pointermove', (e) => {
+        if (isLite()) return;
         tx = e.clientX; ty = e.clientY;
         glow.classList.add('is-on');
         if (!moving) { moving = true; requestAnimationFrame(follow); }
@@ -329,6 +335,7 @@
     $$('[data-tilt]').forEach((el) => {
       const max = el.classList.contains('pcard') ? 4 : 6;
       el.addEventListener('pointermove', (e) => {
+        if (isLite()) return;
         const r = el.getBoundingClientRect();
         const nx = (e.clientX - r.left) / r.width - 0.5;
         const ny = (e.clientY - r.top) / r.height - 0.5;
@@ -339,6 +346,7 @@
 
     $$('[data-magnetic]').forEach((el) => {
       el.addEventListener('pointermove', (e) => {
+        if (isLite()) return;
         const r = el.getBoundingClientRect();
         const dx = e.clientX - (r.left + r.width / 2);
         const dy = e.clientY - (r.top + r.height / 2);
@@ -455,6 +463,14 @@
     }));
   }
 
+  /* ---- Bordure lumineuse du poste actuel : en pause hors écran ------------ */
+  const nowBorder = $('.now-border');
+  if (nowBorder && hasIO) {
+    new IntersectionObserver((entries) => {
+      nowBorder.classList.toggle('is-paused', !entries[0].isIntersecting);
+    }).observe(nowBorder);
+  }
+
   /* ---- Visuels SVG : en pause hors écran ---------------------------------- */
   const vizEls = $$('.viz');
   if (vizEls.length && hasIO) {
@@ -490,6 +506,30 @@
     const el = e.target.closest('[data-track]');
     if (el && typeof window.gtag === 'function') window.gtag('event', el.dataset.track, { link_url: el.getAttribute('href') || '' });
   });
+
+  /* ---- Sonde de fluidité --------------------------------------------------
+     Si l'affichage ne suit pas (médiane au-delà de 30 ms par image, soit moins de
+     33 images/seconde), on bascule en mode allégé et on s'en souvient pour la session. */
+  if (!isLite() && !reduced) {
+    const probe = () => {
+      const samples = [];
+      let last = 0;
+      const tick = (now) => {
+        if (doc.hidden) { last = 0; samples.length = 0; }
+        else if (last) { const d = now - last; if (d < 400) samples.push(d); }
+        last = now;
+        if (samples.length < 50) { requestAnimationFrame(tick); return; }
+        samples.sort((a, b) => a - b);
+        if (samples[25] > 30) {
+          root.classList.add('lite');
+          try { sessionStorage.setItem('perf', 'lite'); } catch (e) { /* stockage indisponible */ }
+          dispatchEvent(new Event('resize'));
+        }
+      };
+      requestAnimationFrame(tick);
+    };
+    addEventListener('load', () => setTimeout(probe, 900));
+  }
 
   requestScroll();
   addEventListener('load', requestScroll);
