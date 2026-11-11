@@ -569,18 +569,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* 15 ter. Mode allégé --------------------------------------------------------
    Activé automatiquement (classe .lite sur <html>) quand le navigateur dessine sans
-   carte graphique ou n'atteint pas 30 images/seconde. On garde la mise en page et les
-   animations ponctuelles ; on retire ce qui oblige à recomposer tout l'écran en continu. */
+   carte graphique ou n'atteint pas 30 images/seconde. Mesuré sur Chrome en rendu
+   logiciel : seuls le flou d'arrière-plan et les halos mobiles coûtent cher
+   (30 images/s avec, 65 à 85 sans). Toutes les autres animations sont conservées. */
 .lite .bg { background: radial-gradient(60vw 60vw at 6% -8%, rgba(var(--accent-rgb), .13), transparent 62%), radial-gradient(52vw 52vw at 104% 62%, rgba(var(--warm-rgb), .07), transparent 62%), radial-gradient(ellipse 85% 70% at 50% 20%, transparent 10%, var(--bg) 75%), linear-gradient(rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, linear-gradient(90deg, rgba(148, 163, 184, .056) 1px, transparent 1px) 0 0 / 64px 64px, var(--bg); }
 .lite .bg-orb, .lite .bg-glow { display: none; }
 .lite *, .lite *::before, .lite *::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 .lite .is-scrolled .header-inner::before { background: rgba(8, 13, 24, .96); }
 .lite .hero-panel { background: linear-gradient(180deg, #131c2e, #0b1220); }
 .lite .to-top { background: #0a111f; }
-.lite .marquee-track { animation-play-state: paused; }
-.lite .now-border { animation: none; }
-.lite .viz-line--hot, .lite .blip, .lite .cycle-flow, .lite .cycle-pulse { filter: none; }
-.lite .pcard:hover .pcard-visual .viz { transform: none; }
 
 /* 16. Transitions entre pages --------------------------------------------- */
 @view-transition { navigation: auto; }

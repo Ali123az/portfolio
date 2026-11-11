@@ -270,16 +270,15 @@
     };
     const loop = (now) => {
       raf = 0;
-      if (isLite()) { draw(4200); return; }
       influence += ((px >= 0 ? 1 : 0) - influence) * 0.06;
       draw(now);
       if (visible && !doc.hidden) raf = requestAnimationFrame(loop);
     };
-    const start = () => { if (!raf && !reduced && !isLite()) raf = requestAnimationFrame(loop); };
+    const start = () => { if (!raf && !reduced) raf = requestAnimationFrame(loop); };
 
     resize();
-    draw(reduced || isLite() ? 4200 : performance.now());
-    addEventListener('resize', () => { resize(); if (reduced || isLite()) draw(4200); });
+    draw(reduced ? 4200 : performance.now());
+    addEventListener('resize', () => { resize(); if (reduced) draw(4200); });
     if (!reduced) {
       if (hasIO) new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; if (visible) start(); }).observe(hero);
       doc.addEventListener('visibilitychange', () => { if (!doc.hidden) start(); });
@@ -296,7 +295,7 @@
   if (heroGrid && !reduced) {
     scrollTasks.push((y) => {
       // Seulement quand le bloc tient dans l'écran : sinon il s'estomperait avant d'être lu
-      if (isLite() || innerWidth <= 1000 || heroGrid.offsetHeight > innerHeight * 0.9) {
+      if (innerWidth <= 1000 || heroGrid.offsetHeight > innerHeight * 0.9) {
         if (heroGrid.style.opacity) { heroGrid.style.opacity = ''; heroGrid.style.transform = ''; }
         return;
       }
@@ -335,7 +334,6 @@
     $$('[data-tilt]').forEach((el) => {
       const max = el.classList.contains('pcard') ? 4 : 6;
       el.addEventListener('pointermove', (e) => {
-        if (isLite()) return;
         const r = el.getBoundingClientRect();
         const nx = (e.clientX - r.left) / r.width - 0.5;
         const ny = (e.clientY - r.top) / r.height - 0.5;
@@ -346,7 +344,6 @@
 
     $$('[data-magnetic]').forEach((el) => {
       el.addEventListener('pointermove', (e) => {
-        if (isLite()) return;
         const r = el.getBoundingClientRect();
         const dx = e.clientX - (r.left + r.width / 2);
         const dy = e.clientY - (r.top + r.height / 2);
@@ -523,7 +520,6 @@
         if (samples[25] > 30) {
           root.classList.add('lite');
           try { sessionStorage.setItem('perf', 'lite'); } catch (e) { /* stockage indisponible */ }
-          dispatchEvent(new Event('resize'));
         }
       };
       requestAnimationFrame(tick);
