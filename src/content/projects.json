@@ -1,0 +1,1116 @@
+[
+  {
+    "id": "schaeffler",
+    "kind": "industry",
+    "visual": "radar",
+    "fr": {
+      "slug": "radar-uwb-ia-embarquee-cortex-m33",
+      "title": "Radar UWB : classification par CNN en temps réel sur Cortex-M33",
+      "org": "Vitesco Technologies / Schaeffler France",
+      "place": "Toulouse",
+      "period": "Sept. 2024 – Oct. 2025",
+      "role": "Alternance · M2",
+      "seo_title": "Radar UWB et CNN temps réel sur Cortex-M33 — Ali Azami",
+      "seo_desc": "Étude de cas : chaîne radar UWB embarquée, FFT sur DSP et CNN INT8 de 11,9 kB exécuté en temps réel sur ARM Cortex-M33 avec TensorFlow Lite Micro, chez Schaeffler.",
+      "summary": "Pipeline embarqué complet pour un système automobile d'ouverture mains libres (Hands-Free Access) : acquisition radar UWB, traitement temps-fréquence par FFT sur DSP, inférence CNN temps réel sur ARM Cortex-M33 (128 kB RAM, 768 kB Flash).",
+      "context": "Le modèle précédent (CNN 1D temporel) devait être ré-entraîné pour chaque véhicule. L'objectif était de concevoir une approche universelle basée sur une représentation temps-fréquence, déployable en temps réel sur le MCU Ranger5 NXP sans compromis sur les performances.",
+      "pipeline": [
+        "Acquisition CIR UWB",
+        "FFT 32 pts + Hanning",
+        "Images temps-fréquence 20×23×6",
+        "CNN Conv2D compact",
+        "Inférence INT8 temps réel"
+      ],
+      "tasks": [
+        "Simulation MATLAB du DSP embarqué via NXP DSP Toolbox pour répliquer le comportement du Ranger5 et générer ~1100 images temps-fréquence (CSV) depuis des enregistrements CIR multi-véhicules. Mise à jour de l'algorithme de trigger (segmentation IQ, fenêtre 384 points).",
+        "Prétraitement Python : normalisation par tap, clipping CIR (6×32 → 6×20), augmentation par modulation fréquence, suppression gestes faux par similarité cosinus inter-taps, adaptation données legacy (SNR 6,7→11,2) par alignement statistique tap par tap.",
+        "Conception CNN Conv2D avec optimisation automatique Optuna (400 trials, objectif multi-critères : loss, TPR, 1-FPR, taille, latence). Contraintes dures : <25k paramètres, <80 kB float, <30 kB après quantification. AdamW + ReduceLROnPlateau.",
+        "Optimisation modèle : pruning graduel (~49 % sparsité/couche), weight clustering (ratio 95,62 %), QAT 2 phases + PTQ INT8 — réduction taille de 50,94 % (24,33→11,94 kB).",
+        "Implémentation C embarquée du pipeline FFT (autocoder MATLAB insuffisant) : BbCopy, Hanning, FFT 32 pts, ComplexToPolar, accumulation buffer. Intégration TFLite Micro : resolver opérateurs, tensor arena statique (~60 kB/128 kB RAM), quantification int8 entrée.",
+        "Tests terrain (clinic) : 3 participants, catalogue de kicks, lecture CAN via Arduino + buzzer. Pipeline end-to-end validé sur Ranger5 : 70 % détection, 100 % immunité faux positifs."
+      ],
+      "metrics": [
+        {
+          "v": "99,3 %",
+          "l": "Accuracy (validation)"
+        },
+        {
+          "v": "11,9 kB",
+          "l": "Modèle INT8"
+        },
+        {
+          "v": "0,1 ms",
+          "l": "Latence d'inférence"
+        }
+      ],
+      "results": [
+        {
+          "v": "99,33 %",
+          "l": "Accuracy globale"
+        },
+        {
+          "v": "99,26 %",
+          "l": "Taux détection (kicks)"
+        },
+        {
+          "v": "99,43 %",
+          "l": "Immunité faux positifs"
+        },
+        {
+          "v": "11,94 kB",
+          "l": "Taille modèle INT8"
+        },
+        {
+          "v": "0,107 ms",
+          "l": "Latence inférence"
+        },
+        {
+          "v": "184→12 kB",
+          "l": "Compression ×16"
+        },
+        {
+          "v": "Universel",
+          "l": "multi-véhicule, sans ré-entraînement"
+        },
+        {
+          "v": "70 % / 100 %",
+          "l": "Essais terrain : détection / immunité"
+        }
+      ],
+      "challenges": [
+        "Réimplémentation manuelle complète du pipeline FFT en C (MATLAB autocoder incomplet sur fonctions DSP custom)",
+        "RAM 128 kB : tensor arena 60 kB, ajustement itératif par essais/erreurs pour éviter les OOM",
+        "Pruning/clustering sans gain réel sur TFLM Cortex-M33 (absence de sparse kernels natifs)",
+        "Adaptation données legacy (différences SNR hardware) par alignement statistique tap par tap et véhicule",
+        "Mismatch Python/C embarqué : preprocessing pas encore parfaitement aligné, baisse de détection en conditions réelles"
+      ],
+      "tags": [
+        "ARM Cortex-M33",
+        "TFLite Micro",
+        "FFT/DSP",
+        "CNN Conv2D",
+        "C/C++",
+        "CAN",
+        "MATLAB",
+        "Optuna",
+        "Keil",
+        "Lauterbach"
+      ],
+      "stack": [
+        "NXP Ranger5 (ARM Cortex-M33 @120 MHz + DSP intégré)",
+        "UWB Radar (6 taps CIR)",
+        "TensorFlow Lite Micro",
+        "Python / TensorFlow / Keras / ONNX",
+        "MATLAB NXP DSP Toolbox",
+        "ARM Keil uVision5",
+        "Lauterbach Trace32",
+        "Bus CAN / Arduino",
+        "Optuna (400 trials)"
+      ]
+    },
+    "en": {
+      "slug": "uwb-radar-embedded-ai-cortex-m33",
+      "title": "UWB radar: real-time CNN classification on a Cortex-M33",
+      "org": "Vitesco Technologies / Schaeffler France",
+      "place": "Toulouse",
+      "period": "Sept. 2024 – Oct. 2025",
+      "role": "Apprenticeship · M2",
+      "seo_title": "UWB radar and real-time CNN on Cortex-M33 — Ali Azami",
+      "seo_desc": "Case study: embedded UWB radar chain, FFT on DSP and an 11.9 kB INT8 CNN running in real time on an ARM Cortex-M33 with TensorFlow Lite Micro, at Schaeffler.",
+      "summary": "Full embedded pipeline for an automotive Hands-Free Access system: UWB radar acquisition, time-frequency processing via FFT on DSP, real-time CNN inference on ARM Cortex-M33 (128 kB RAM, 768 kB Flash).",
+      "context": "The previous model (1D temporal CNN) had to be retrained per vehicle type. The goal was to design a universal approach based on time-frequency representation, deployable in real time on the NXP Ranger5 MCU without performance trade-offs.",
+      "pipeline": [
+        "UWB CIR Acquisition",
+        "FFT 32pts + Hanning",
+        "Time-freq images 20×23×6",
+        "Compact Conv2D CNN",
+        "Real-time INT8 Inference"
+      ],
+      "tasks": [
+        "MATLAB simulation of the embedded DSP via NXP DSP Toolbox to replicate Ranger5 behavior and generate ~1100 time-frequency images (CSV) from multi-vehicle CIR recordings. Updated trigger algorithm (IQ segmentation, 384-point window).",
+        "Python preprocessing: per-tap normalization, CIR clipping (6×32→6×20), frequency modulation augmentation, false gesture removal via inter-tap cosine similarity, legacy data adaptation (SNR 6.7→11.2) via tap-by-tap statistical alignment.",
+        "Conv2D CNN design with Optuna automatic optimization (400 trials, multi-criteria objective: loss, TPR, 1-FPR, size, latency). Hard constraints: <25k parameters, <80 kB float, <30 kB post-quantization. AdamW + ReduceLROnPlateau.",
+        "Model optimization: gradual pruning (~49% sparsity/layer), weight clustering (95.62% ratio), QAT 2 phases + PTQ INT8 — 50.94% size reduction (24.33→11.94 kB).",
+        "C embedded FFT pipeline implementation (MATLAB autocoder insufficient): BbCopy, Hanning, FFT 32pts, ComplexToPolar, buffer accumulation. TFLite Micro integration: operator resolver, static tensor arena (~60 kB/128 kB RAM), int8 input quantization.",
+        "Field clinic testing: 3 participants, kick catalog, CAN reading via Arduino + buzzer. End-to-end pipeline validated on Ranger5: 70% detection, 100% false positive immunity."
+      ],
+      "metrics": [
+        {
+          "v": "99.3%",
+          "l": "Accuracy (validation)"
+        },
+        {
+          "v": "11.9 kB",
+          "l": "INT8 model"
+        },
+        {
+          "v": "0.1 ms",
+          "l": "Inference latency"
+        }
+      ],
+      "results": [
+        {
+          "v": "99.33%",
+          "l": "Global accuracy"
+        },
+        {
+          "v": "99.26%",
+          "l": "Detection rate (kicks)"
+        },
+        {
+          "v": "99.43%",
+          "l": "False positive immunity"
+        },
+        {
+          "v": "11.94 kB",
+          "l": "INT8 model size"
+        },
+        {
+          "v": "0.107 ms",
+          "l": "Inference latency"
+        },
+        {
+          "v": "184→12 kB",
+          "l": "Compression ×16"
+        },
+        {
+          "v": "Universal",
+          "l": "cross-vehicle, no retraining"
+        },
+        {
+          "v": "70% / 100%",
+          "l": "Field trials: detection / immunity"
+        }
+      ],
+      "challenges": [
+        "Full manual FFT pipeline reimplementation in C (MATLAB autocoder incomplete on custom DSP functions)",
+        "128 kB RAM: 60 kB tensor arena, iterative trial-and-error adjustment to avoid OOM",
+        "Pruning/clustering without real gains on TFLM Cortex-M33 (no native sparse kernels)",
+        "Legacy data adaptation (hardware SNR differences) via per-tap and per-vehicle statistical alignment",
+        "Python/C mismatch: preprocessing not perfectly aligned, causing detection drop in real conditions"
+      ],
+      "tags": [
+        "ARM Cortex-M33",
+        "TFLite Micro",
+        "FFT/DSP",
+        "CNN Conv2D",
+        "C/C++",
+        "CAN",
+        "MATLAB",
+        "Optuna",
+        "Keil",
+        "Lauterbach"
+      ],
+      "stack": [
+        "NXP Ranger5 (ARM Cortex-M33 @120 MHz + integrated DSP)",
+        "UWB Radar (6 taps CIR)",
+        "TensorFlow Lite Micro",
+        "Python / TensorFlow / Keras / ONNX",
+        "MATLAB NXP DSP Toolbox",
+        "ARM Keil uVision5",
+        "Lauterbach Trace32",
+        "CAN bus / Arduino",
+        "Optuna (400 trials)"
+      ]
+    }
+  },
+  {
+    "id": "nxp",
+    "kind": "industry",
+    "visual": "npu",
+    "fr": {
+      "slug": "edge-ai-capteur-intelligent-npu-nxp",
+      "title": "Edge AI : capteur intelligent sur microcontrôleur à NPU intégré",
+      "org": "NXP Semiconductors",
+      "place": "Toulouse",
+      "period": "Mai – Sept. 2024",
+      "role": "Stage · M1",
+      "seo_title": "Edge AI sur MCU et NPU NXP (MCX N947) — Ali Azami",
+      "seo_desc": "Étude de cas : chaîne Edge AI complète sur NXP MCX N947, de l'acquisition SPI à l'inférence INT8 sur NPU eIQ Neutron, avec une accélération ×42 face au CPU.",
+      "summary": "Pipeline Edge AI complet : acquisition accéléromètre via SPI, génération dataset, entraînement CNN Conv1D, quantification INT8, déploiement sur NPU Neutron NXP — accélération ×42 sur opérations Conv1D int8.",
+      "context": "Projet réalisé dans le cadre de mon stage chez NXP Semiconductors, en lien avec l'ENSEEIHT. Objectif : démontrer une chaîne Edge AI complète sur un microcontrôleur à NPU intégré (carte FRDM-MCXN947), suffisamment documentée pour servir ensuite de support de travaux pratiques.",
+      "pipeline": [
+        "FXLS8974 via SPI",
+        "Machine à états C",
+        "Dataset CSV (UART)",
+        "CNN Conv1D GPU",
+        "PTQ INT8",
+        "NPU Neutron eIQ"
+      ],
+      "tasks": [
+        "Configuration hardware sur MCXN947 : SPI master (LPSPI non-bloquant), GPIO, timer, UART via SDK NXP.",
+        "Machine à états C (INIT→ACQUIRE→SAVE→SEND) synchronisée sur INT1 de l'accéléromètre FXLS8974. Lecture complément à 2 via SPI non-bloquant, conversion décimal. Script Python UART→CSV avec parsing regex.",
+        "Collecte manuelle du dataset : gestes (chiffres 0–9), organisation par classe pour entraînement supervisé.",
+        "Conception et entraînement CNN Conv1D (3 couches conv, BatchNorm, Dropout, AveragePooling, Dense — 13 010 paramètres). Entraînement GPU avec EarlyStopping + ReduceLROnPlateau. Accuracy 99,3 %.",
+        "Quantification PTQ int8 avec representative dataset, conversion float32→int8, évaluation post-quantification. Estimation mémoire via tflite-tools (peak : 131 440 bytes).",
+        "Déploiement NPU : conversion via eIQ Portal (Neutron Converter), suppression couche Softmax non supportée (tflite-extractor). Intégration C++ MCU : import .tflite en .rodata, MicroMutableOpResolver, ajustement scale/zero-point.",
+        "Rédaction du guide technique de déploiement (37 pages), réutilisé comme document de référence."
+      ],
+      "metrics": [
+        {
+          "v": "99,3 %",
+          "l": "Accuracy"
+        },
+        {
+          "v": "×42",
+          "l": "Accél. NPU"
+        },
+        {
+          "v": "131 kB",
+          "l": "Peak RAM"
+        }
+      ],
+      "results": [
+        {
+          "v": "99,3 %",
+          "l": "Accuracy CNN"
+        },
+        {
+          "v": "×42",
+          "l": "Accél. NPU vs CPU"
+        },
+        {
+          "v": "131 kB",
+          "l": "Peak RAM estimé"
+        },
+        {
+          "v": "256 kB",
+          "l": "RAM allouée (marge)"
+        },
+        {
+          "v": "13 010",
+          "l": "Paramètres modèle"
+        },
+        {
+          "v": "10 classes",
+          "l": "Gestes classifiés"
+        }
+      ],
+      "challenges": [
+        "Compatibilité toolchain : GNU ARM Toolchain v12.3 requise (v13.2 incompatible avec le NPU)",
+        "NPU supporte uniquement int8 PCQ : suppression obligatoire de la couche Softmax via tflite-extractor",
+        "Peak RAM difficile à prédire empiriquement (131 kB estimé → 256 kB alloués avec marge de sécurité)",
+        "Débogage MCU : erreurs JSON probe, conflits port série, synchronisation sur INT1 accéléromètre"
+      ],
+      "tags": [
+        "NXP MCXN947",
+        "NPU Neutron",
+        "TFLite",
+        "eIQ Portal",
+        "SPI",
+        "C/C++",
+        "Python",
+        "MCUXpresso"
+      ],
+      "stack": [
+        "NXP MCXN947 (dual Cortex-M33 @150 MHz + NPU eIQ Neutron)",
+        "Accéléromètre FXLS8974CF (12-bit, 3 axes, SPI)",
+        "TensorFlow / TensorFlow Lite / ONNX",
+        "eIQ Portal · Neutron Converter",
+        "tflite-tools · tflite-extractor",
+        "C/C++ MCUXpresso IDE",
+        "Python / UART parsing regex"
+      ]
+    },
+    "en": {
+      "slug": "edge-ai-smart-sensor-nxp-npu",
+      "title": "Edge AI: smart sensor on a microcontroller with integrated NPU",
+      "org": "NXP Semiconductors",
+      "place": "Toulouse",
+      "period": "May – Sept. 2024",
+      "role": "Internship · M1",
+      "seo_title": "Edge AI on NXP MCU and NPU (MCX N947) — Ali Azami",
+      "seo_desc": "Case study: end-to-end Edge AI pipeline on the NXP MCX N947, from SPI acquisition to INT8 inference on the eIQ Neutron NPU, with a ×42 speedup over the CPU.",
+      "summary": "Full Edge AI pipeline: SPI accelerometer acquisition, dataset generation, Conv1D CNN training, INT8 quantization, deployment on NXP Neutron NPU — ×42 speedup on int8 Conv1D operations.",
+      "context": "Project carried out during my internship at NXP Semiconductors, in connection with ENSEEIHT. Goal: demonstrate a complete Edge AI pipeline on a microcontroller with an integrated NPU (FRDM-MCXN947 board), documented well enough to be reused as lab material.",
+      "pipeline": [
+        "FXLS8974 via SPI",
+        "C state machine",
+        "CSV dataset (UART)",
+        "Conv1D CNN (GPU)",
+        "PTQ INT8",
+        "Neutron NPU eIQ"
+      ],
+      "tasks": [
+        "Hardware configuration on MCXN947: SPI master (non-blocking LPSPI), GPIO, timer, UART via NXP SDK.",
+        "C state machine (INIT→ACQUIRE→SAVE→SEND) synchronized on FXLS8974 INT1. Two's complement reading via non-blocking SPI, decimal conversion. Python UART→CSV script with regex parsing.",
+        "Manual dataset collection: gestures (digits 0–9), organized by class for supervised training.",
+        "Conv1D CNN design and training (3 conv layers, BatchNorm, Dropout, AveragePooling, Dense — 13,010 parameters). GPU training with EarlyStopping + ReduceLROnPlateau. Accuracy 99.3%.",
+        "PTQ int8 quantization with representative dataset, float32→int8 conversion, post-quantization evaluation. Memory estimation via tflite-tools (peak: 131,440 bytes).",
+        "NPU deployment: conversion via eIQ Portal (Neutron Converter), mandatory Softmax layer removal (tflite-extractor). C++ MCU integration: .tflite as .rodata, MicroMutableOpResolver, scale/zero-point adjustment.",
+        "Wrote the 37-page technical deployment guide, reused as the reference document."
+      ],
+      "metrics": [
+        {
+          "v": "99.3%",
+          "l": "Accuracy"
+        },
+        {
+          "v": "×42",
+          "l": "NPU speedup"
+        },
+        {
+          "v": "131 kB",
+          "l": "Peak RAM"
+        }
+      ],
+      "results": [
+        {
+          "v": "99.3%",
+          "l": "CNN accuracy"
+        },
+        {
+          "v": "×42",
+          "l": "NPU vs CPU speedup"
+        },
+        {
+          "v": "131 kB",
+          "l": "Estimated peak RAM"
+        },
+        {
+          "v": "256 kB",
+          "l": "Allocated RAM (margin)"
+        },
+        {
+          "v": "13,010",
+          "l": "Model parameters"
+        },
+        {
+          "v": "10 classes",
+          "l": "Classified gestures"
+        }
+      ],
+      "challenges": [
+        "Toolchain compatibility: GNU ARM v12.3 required (v13.2 NPU-incompatible)",
+        "NPU supports int8 PCQ only: mandatory Softmax removal via tflite-extractor",
+        "Peak RAM empirically unpredictable (131 kB estimated → 256 kB allocated for safety)",
+        "MCU debugging: JSON probe errors, serial port conflicts, INT1 accelerometer sync"
+      ],
+      "tags": [
+        "NXP MCXN947",
+        "NPU Neutron",
+        "TFLite",
+        "eIQ Portal",
+        "SPI",
+        "C/C++",
+        "Python",
+        "MCUXpresso"
+      ],
+      "stack": [
+        "NXP MCXN947 (dual Cortex-M33 @150 MHz + eIQ Neutron NPU)",
+        "FXLS8974CF accelerometer (12-bit, 3-axis, SPI)",
+        "TensorFlow / TensorFlow Lite / ONNX",
+        "eIQ Portal · Neutron Converter",
+        "tflite-tools · tflite-extractor",
+        "C/C++ MCUXpresso IDE",
+        "Python / UART regex parsing"
+      ]
+    }
+  },
+  {
+    "id": "fpga",
+    "kind": "academic",
+    "visual": "fpga",
+    "fr": {
+      "slug": "acceleration-cnn-fpga-hls",
+      "title": "Accélération matérielle d'un CNN sur FPGA par synthèse de haut niveau",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2024 – 2025",
+      "role": "Projet en trinôme · M2",
+      "seo_title": "Accélération CNN sur FPGA Zynq par HLS — Ali Azami",
+      "seo_desc": "Étude de cas : du C++ au bitstream, accélération d'une couche Conv2D sur SoC Zynq-7000 avec Catapult HLS, Vivado et Vitis. Gain ×2,6 après optimisation.",
+      "summary": "Flux complet d'accélération matérielle CNN sur SoC Zynq-7000 : C++ → SystemC → HLS Catapult → RTL VHDL → IP Vivado → Vitis. Accélération ×2,6 sur Conv2D.",
+      "context": "Projet en trinôme mené en dernière année à l'ENSEEIHT. Exploration du flot complet de conception pour l'accélération matérielle d'un CNN : de l'implémentation C++ jusqu'à la validation sur carte FPGA pilotée par le cœur ARM.",
+      "pipeline": [
+        "CNN C++ (toutes couches)",
+        "SystemC testbench",
+        "HLS Catapult (Unroll+Pipeline)",
+        "RTL VHDL généré",
+        "IP Vivado + AXI",
+        "Validation Vitis ARM"
+      ],
+      "tasks": [
+        "Implémentation C++ de toutes les couches CNN : Conv2D (zero-padding, multi-filtres, multi-channels), MaxPool (fenêtre glissante), Flatten, ReLU, Softmax. Réécriture avec buffers (copyCenteredWindow) pour réduire l'empreinte mémoire.",
+        "Modélisation SystemC de Conv2D : SC_MODULE, ports sc_in/sc_out, processus conv2D.process(), compteur outFmapCpt, chargement poids/biais JSON. Temps mesuré ≈ 200 ms.",
+        "Exploration contraintes HLS Catapult sur Adder : sans contrainte (80 ns) → Pipeline=2 (40 ns) → Pipeline=1 (20 ns, surface optimale 1048 vs 1462).",
+        "Optimisation HLS Conv2D : sans contrainte (1178 µs/filtre) → 4 Unrolls (519 µs) → Pipelines=2 boucles internes (455 µs, ×2,6 vs baseline).",
+        "Vivado : IP packaging Adder et Conv2D, block design avec FIFO AXI-Stream + AXI Interconnect + Zynq-7000, PLL 100 MHz, génération bitstream.",
+        "Vitis : validation de l'additionneur sur Zybo (initialisation FIFO, remplissage, envoi, réception, comparaison — additions correctes, UART OK). Conv2D : IP intégrée au block design, validation sur carte restée partielle (adressage mémoire côté Vitis)."
+      ],
+      "metrics": [
+        {
+          "v": "×2,6",
+          "l": "Accél. Conv2D"
+        },
+        {
+          "v": "455 µs",
+          "l": "Par filtre"
+        },
+        {
+          "v": "20 ns",
+          "l": "Additionneur pipeliné"
+        }
+      ],
+      "results": [
+        {
+          "v": "×2,6",
+          "l": "Accél. Conv2D"
+        },
+        {
+          "v": "455 µs",
+          "l": "Temps/filtre optimisé"
+        },
+        {
+          "v": "20 ns",
+          "l": "Adder Pipeline=1"
+        },
+        {
+          "v": "1048",
+          "l": "Ressources Adder opt."
+        },
+        {
+          "v": "1178→455 µs",
+          "l": "Gain HLS total"
+        }
+      ],
+      "challenges": [
+        "Optimisation HLS limitée par structure FIFO : boucles supérieures bloquées à Pipeline ≥ 10",
+        "Trade-off contre-intuitif : Pipeline=1 sur Adder est plus rapide ET plus compact (1048 vs 1462 sans contrainte)",
+        "Mémoire partagée statique sous Vitis : passage à une allocation dynamique ; la validation complète de Conv2D sur carte est restée ouverte",
+        "Flot hétérogène : VSCode, Catapult, Vivado, Vitis, formats .xsa / bitstream / IP core"
+      ],
+      "tags": [
+        "HLS Catapult",
+        "VHDL",
+        "Vivado",
+        "Vitis",
+        "SystemC",
+        "Zynq-7000",
+        "AXI-Stream",
+        "C++"
+      ],
+      "stack": [
+        "Xilinx Zynq-7000 Zybo Z7 (ARM Cortex-A9 + FPGA Artix-7)",
+        "Catapult HLS (Mentor)",
+        "Xilinx Vivado + Vitis",
+        "VHDL / SystemC / C++",
+        "AXI-Stream FIFO",
+        "Contraintes Unroll & Pipeline HLS"
+      ]
+    },
+    "en": {
+      "slug": "cnn-acceleration-fpga-hls",
+      "title": "Hardware acceleration of a CNN on FPGA with high-level synthesis",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2024 – 2025",
+      "role": "Three-person project · M2",
+      "seo_title": "CNN acceleration on Zynq FPGA with HLS — Ali Azami",
+      "seo_desc": "Case study: from C++ to bitstream, accelerating a Conv2D layer on a Zynq-7000 SoC with Catapult HLS, Vivado and Vitis. ×2.6 speedup after optimisation.",
+      "summary": "Full hardware acceleration flow for CNN on Zynq-7000 SoC: C++ → SystemC → Catapult HLS → VHDL RTL → Vivado IP → Vitis. ×2.6 speedup on Conv2D.",
+      "context": "Three-person project in my final year at ENSEEIHT. Exploration of the full design flow for hardware CNN acceleration: from the C++ implementation to validation on an FPGA board driven by the ARM core.",
+      "pipeline": [
+        "C++ CNN (all layers)",
+        "SystemC testbench",
+        "Catapult HLS (Unroll+Pipeline)",
+        "Generated VHDL RTL",
+        "Vivado IP + AXI",
+        "ARM Vitis validation"
+      ],
+      "tasks": [
+        "C++ implementation of all CNN layers: Conv2D (zero-padding, multi-filter, multi-channel), MaxPool (sliding window), Flatten, ReLU, Softmax. Rewritten with buffers (copyCenteredWindow) to reduce memory footprint.",
+        "SystemC modeling of Conv2D: SC_MODULE, sc_in/sc_out ports, conv2D.process() process, outFmapCpt counter, JSON weight/bias loading. Measured time ≈ 200 ms.",
+        "HLS Catapult constraint exploration on Adder: unconstrained (80 ns) → Pipeline=2 (40 ns) → Pipeline=1 (20 ns, optimal area 1048 vs 1462).",
+        "HLS Conv2D optimization: unconstrained (1178 µs/filter) → 4 Unrolls (519 µs) → Pipeline=2 inner loops (455 µs, ×2.6 vs baseline).",
+        "Vivado: Adder and Conv2D IP packaging, block design with AXI-Stream FIFO + AXI Interconnect + Zynq-7000, 100 MHz PLL, bitstream generation.",
+        "Vitis: adder validated on the Zybo (FIFO init, fill, send, receive, compare — correct sums, UART OK). Conv2D: IP integrated in the block design, on-board validation left partial (memory addressing on the Vitis side)."
+      ],
+      "metrics": [
+        {
+          "v": "×2.6",
+          "l": "Conv2D speedup"
+        },
+        {
+          "v": "455 µs",
+          "l": "Per filter"
+        },
+        {
+          "v": "20 ns",
+          "l": "Adder pipelined"
+        }
+      ],
+      "results": [
+        {
+          "v": "×2.6",
+          "l": "Conv2D speedup"
+        },
+        {
+          "v": "455 µs",
+          "l": "Optimized time/filter"
+        },
+        {
+          "v": "20 ns",
+          "l": "Adder Pipeline=1"
+        },
+        {
+          "v": "1048",
+          "l": "Opt. Adder resources"
+        },
+        {
+          "v": "1178→455 µs",
+          "l": "Total HLS gain"
+        }
+      ],
+      "challenges": [
+        "HLS optimization limited by FIFO structure: outer loops blocked at Pipeline ≥ 10",
+        "Counter-intuitive trade-off: Pipeline=1 on Adder is faster AND more compact (1048 vs 1462)",
+        "Static shared memory in Vitis: move to dynamic allocation; full on-board validation of Conv2D remained open",
+        "Heterogeneous flow: VSCode, Catapult, Vivado, Vitis, .xsa/bitstream/IP formats"
+      ],
+      "tags": [
+        "HLS Catapult",
+        "VHDL",
+        "Vivado",
+        "Vitis",
+        "SystemC",
+        "Zynq-7000",
+        "AXI-Stream",
+        "C++"
+      ],
+      "stack": [
+        "Xilinx Zynq-7000 Zybo Z7 (ARM Cortex-A9 + Artix-7 FPGA)",
+        "Catapult HLS (Mentor)",
+        "Xilinx Vivado + Vitis",
+        "VHDL / SystemC / C++",
+        "AXI-Stream FIFO",
+        "HLS Unroll & Pipeline constraints"
+      ]
+    }
+  },
+  {
+    "id": "vhdl",
+    "kind": "academic",
+    "visual": "wire",
+    "fr": {
+      "slug": "thermometre-vhdl-1-wire-fpga",
+      "title": "Thermomètre numérique 1-Wire en VHDL sur FPGA",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2023 – 2024",
+      "role": "Bureau d'études en binôme · M1",
+      "seo_title": "Thermomètre 1-Wire en VHDL sur FPGA Artix-7 — Ali Azami",
+      "seo_desc": "Étude de cas : système synchrone VHDL sur FPGA Nexys A7, six machines à états pilotant un capteur DS18S20 en 1-Wire, temporisations vérifiées à l'oscilloscope.",
+      "summary": "Système synchrone VHDL complet sur FPGA Nexys A7 (Artix-7). 6 FSM pour communication 1-Wire avec DS18S20. Affichage 7-segments, précision 0,5 °C, validé sur oscilloscope.",
+      "context": "Bureau d'études en binôme à l'ENSEEIHT : un protocole série bas niveau dont toutes les temporisations se jouent à la microseconde.",
+      "pipeline": [
+        "FSM Init (480 µs reset)",
+        "FSM Write0/Write1",
+        "FSM Write8b (ROM/RAM)",
+        "FSM Read (15 µs)",
+        "Master Protocol",
+        "Double Dabble → 7-seg"
+      ],
+      "tasks": [
+        "Bloc de synchronisation sur front montant d'horloge (INPUT_SYNC, RST_SYNC) et gestion centralisée des timers système (start/end vectors, impulsion clk_1s).",
+        "FSM Init : séquence reset 1-Wire (pull-down 480 µs, détection présence DS18S20).",
+        "FSM Write0/Write1 : écriture 1 bit sur bus 1-Wire avec temporisations précises (1 µs / 60 µs).",
+        "FSM Write8b : envoi des commandes 8 bits (Skip ROM 0xCC, Convert T 0x44, Read Scratchpad 0xBE).",
+        "FSM Read : lecture 1 bit depuis DS18S20 (pull-down 1 µs, échantillonnage à 15 µs).",
+        "FSM Master Protocol : orchestration complète (Init → ROM → RAM → lecture 9 bits température).",
+        "Affichage : Double Dabble (BCD), gestion négatifs (complément à 2), multiplexage 7-segments.",
+        "Validation des temporisations et séquences 1-Wire sur oscilloscope Keysight."
+      ],
+      "metrics": [
+        {
+          "v": "6",
+          "l": "FSM conçues"
+        },
+        {
+          "v": "0,5 °C",
+          "l": "Précision"
+        },
+        {
+          "v": "480 µs",
+          "l": "Reset 1-Wire"
+        }
+      ],
+      "results": [
+        {
+          "v": "6",
+          "l": "FSM implémentées"
+        },
+        {
+          "v": "0,5 °C",
+          "l": "Précision affichage"
+        },
+        {
+          "v": "480 µs",
+          "l": "Reset 1-Wire"
+        },
+        {
+          "v": "1 µs",
+          "l": "Timing write bit"
+        },
+        {
+          "v": "15 µs",
+          "l": "Échantillonnage lecture"
+        }
+      ],
+      "challenges": [
+        "Temporisations critiques 1-Wire (précision µs) sur FPGA Artix-7",
+        "Bug d'indexation dans la FSM Write8b (index incrémenté avant l'envoi du bit), identifié lors de la validation du protocole maître",
+        "Synchronisation reset asynchrone/synchrone : arrêt asynchrone, redémarrage sur front d'horloge"
+      ],
+      "tags": [
+        "VHDL",
+        "Xilinx Artix-7",
+        "Vivado",
+        "1-Wire",
+        "FSM",
+        "Oscilloscope"
+      ],
+      "stack": [
+        "FPGA Nexys A7 (Xilinx Artix-7)",
+        "Vivado (simulation + synthèse)",
+        "VHDL synchrone",
+        "DS18S20 (1-Wire)",
+        "Oscilloscope Keysight"
+      ]
+    },
+    "en": {
+      "slug": "vhdl-1-wire-thermometer-fpga",
+      "title": "1-Wire digital thermometer in VHDL on FPGA",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2023 – 2024",
+      "role": "Two-person lab project · M1",
+      "seo_title": "1-Wire thermometer in VHDL on Artix-7 FPGA — Ali Azami",
+      "seo_desc": "Case study: synchronous VHDL design on a Nexys A7, six state machines driving a DS18S20 over 1-Wire, microsecond timings validated on the oscilloscope.",
+      "summary": "Complete VHDL synchronous system on Nexys A7 FPGA (Artix-7). 6 FSMs for 1-Wire communication with DS18S20. 7-segment display, 0.5°C precision, validated on oscilloscope.",
+      "context": "Two-person lab project at ENSEEIHT: a low-level serial protocol where every timing is a matter of microseconds.",
+      "pipeline": [
+        "FSM Init (480 µs reset)",
+        "FSM Write0/Write1",
+        "FSM Write8b (ROM/RAM)",
+        "FSM Read (15 µs)",
+        "Master Protocol",
+        "Double Dabble → 7-seg"
+      ],
+      "tasks": [
+        "Clock edge synchronization buffer (INPUT_SYNC, RST_SYNC) and centralized system timer management (start/end vectors, clk_1s pulse).",
+        "FSM Init: 1-Wire reset sequence (480 µs pull-down, DS18S20 presence detection).",
+        "FSM Write0/Write1: 1-bit write on 1-Wire bus with precise timings (1 µs / 60 µs).",
+        "FSM Write8b: 8-bit command transmission (Skip ROM 0xCC, Convert T 0x44, Read Scratchpad 0xBE).",
+        "FSM Read: 1-bit read from DS18S20 (1 µs pull-down, sampling at 15 µs).",
+        "FSM Master Protocol: full orchestration (Init → ROM → RAM → 9-bit temperature reading).",
+        "Display: Double Dabble (BCD), negative handling (two's complement), 7-segment multiplexing.",
+        "Timing and 1-Wire sequence validation on Keysight oscilloscope."
+      ],
+      "metrics": [
+        {
+          "v": "6",
+          "l": "FSMs designed"
+        },
+        {
+          "v": "0.5°C",
+          "l": "Precision"
+        },
+        {
+          "v": "480 µs",
+          "l": "1-Wire reset"
+        }
+      ],
+      "results": [
+        {
+          "v": "6",
+          "l": "FSMs implemented"
+        },
+        {
+          "v": "0.5°C",
+          "l": "Display precision"
+        },
+        {
+          "v": "480 µs",
+          "l": "1-Wire reset"
+        },
+        {
+          "v": "1 µs",
+          "l": "Write bit timing"
+        },
+        {
+          "v": "15 µs",
+          "l": "Read sampling"
+        }
+      ],
+      "challenges": [
+        "Critical 1-Wire timings (µs precision) on Artix-7 FPGA",
+        "Indexing bug in the Write8b FSM (index incremented before the bit is sent), identified while validating the master protocol",
+        "Async/sync reset synchronization: async stop, restart on clock edge"
+      ],
+      "tags": [
+        "VHDL",
+        "Xilinx Artix-7",
+        "Vivado",
+        "1-Wire",
+        "FSM",
+        "Oscilloscope"
+      ],
+      "stack": [
+        "FPGA Nexys A7 (Xilinx Artix-7)",
+        "Vivado (simulation + synthesis)",
+        "Synchronous VHDL",
+        "DS18S20 (1-Wire)",
+        "Keysight oscilloscope"
+      ]
+    }
+  },
+  {
+    "id": "iot",
+    "kind": "research",
+    "visual": "vision",
+    "fr": {
+      "slug": "robot-mobile-vision-yolo-iot",
+      "title": "Robot mobile autonome et station de recharge connectée",
+      "org": "EHTP",
+      "place": "Casablanca",
+      "period": "Avr. – Oct. 2022",
+      "role": "Stage de recherche",
+      "seo_title": "Robot mobile, vision YOLOv5 et IoT (MQTT) — Ali Azami",
+      "seo_desc": "Étude de cas : architecture embarquée distribuée Raspberry Pi 4 et Arduino Mega pour un robot sur chenilles à bras 6 axes, vision YOLOv5 et supervision MQTT.",
+      "summary": "Architecture embarquée distribuée (Raspberry Pi 4 + Arduino Mega) pour robot mobile sur chenilles avec bras 6 axes. Vision YOLOv5, supervision MQTT, station de recharge autonome.",
+      "context": "Stage de recherche à l'EHTP (Casablanca). Conception d'un système autonome combinant robotique mobile et station de recharge connectée, pensé pour des véhicules agricoles intelligents. Prototype complet validé expérimentalement.",
+      "pipeline": [
+        "Caméra + YOLOv5",
+        "Décision embarquée",
+        "Contrôle moteurs (Arduino)",
+        "Station recharge",
+        "Supervision MQTT"
+      ],
+      "tasks": [
+        "Conception de l'architecture embarquée distribuée : Raspberry Pi 4 (vision + décision) + Arduino Mega (contrôle moteurs + actionneurs).",
+        "Développement du système de vision par ordinateur avec YOLOv5 pour détection et reconnaissance d'objets en temps réel.",
+        "Implémentation de la logique de contrôle du bras 6 axes et du robot sur chenilles.",
+        "Conception de la station de recharge autonome avec gestion énergétique (production, stockage, régulation).",
+        "Développement du système de supervision IoT et communication inter-composants via MQTT.",
+        "Tests, intégration et validation du prototype complet en conditions expérimentales."
+      ],
+      "metrics": [
+        {
+          "v": "YOLOv5",
+          "l": "Vision temps réel"
+        },
+        {
+          "v": "MQTT",
+          "l": "Supervision IoT"
+        },
+        {
+          "v": "6 axes",
+          "l": "Bras robot"
+        }
+      ],
+      "results": [
+        {
+          "v": "YOLOv5",
+          "l": "Détection temps réel"
+        },
+        {
+          "v": "MQTT",
+          "l": "Supervision distante"
+        },
+        {
+          "v": "6",
+          "l": "Axes bras robot"
+        },
+        {
+          "v": "2",
+          "l": "Plateformes embarquées"
+        }
+      ],
+      "challenges": [
+        "Intégration perception + décision + action en temps réel sur architecture distribuée",
+        "Gestion énergie sur système mobile autonome",
+        "Synchronisation des deux plateformes embarquées (RPi + Arduino)"
+      ],
+      "tags": [
+        "YOLOv5",
+        "MQTT",
+        "Raspberry Pi 4",
+        "Arduino Mega",
+        "IoT",
+        "Python",
+        "OpenCV"
+      ],
+      "stack": [
+        "Raspberry Pi 4 + Arduino Mega",
+        "YOLOv5 (détection objets)",
+        "MQTT (supervision distante)",
+        "Python / OpenCV",
+        "Station recharge autonome"
+      ]
+    },
+    "en": {
+      "slug": "mobile-robot-yolo-vision-iot",
+      "title": "Autonomous mobile robot and connected charging station",
+      "org": "EHTP",
+      "place": "Casablanca",
+      "period": "Apr. – Oct. 2022",
+      "role": "Research internship",
+      "seo_title": "Mobile robot, YOLOv5 vision and IoT (MQTT) — Ali Azami",
+      "seo_desc": "Case study: distributed embedded architecture with Raspberry Pi 4 and Arduino Mega for a tracked robot with a 6-axis arm, YOLOv5 vision and MQTT supervision.",
+      "summary": "Distributed embedded architecture (Raspberry Pi 4 + Arduino Mega) for tracked mobile robot with 6-axis arm. YOLOv5 vision, MQTT supervision, autonomous charging station.",
+      "context": "Research internship at EHTP (Casablanca). Design of an autonomous system combining mobile robotics and a connected charging station, aimed at smart agricultural vehicles. Complete prototype validated experimentally.",
+      "pipeline": [
+        "Camera + YOLOv5",
+        "Embedded decision",
+        "Motor control (Arduino)",
+        "Charging station",
+        "MQTT supervision"
+      ],
+      "tasks": [
+        "Distributed embedded architecture design: Raspberry Pi 4 (vision + decision) + Arduino Mega (motor + actuator control).",
+        "Computer vision system with YOLOv5 for real-time object detection and recognition.",
+        "6-axis arm control logic and tracked robot locomotion implementation.",
+        "Autonomous charging station with energy management (production, storage, regulation).",
+        "IoT supervision system and inter-component communication via MQTT.",
+        "Testing, integration and validation of the complete prototype under experimental conditions."
+      ],
+      "metrics": [
+        {
+          "v": "YOLOv5",
+          "l": "Real-time vision"
+        },
+        {
+          "v": "MQTT",
+          "l": "IoT supervision"
+        },
+        {
+          "v": "6 axes",
+          "l": "Robot arm"
+        }
+      ],
+      "results": [
+        {
+          "v": "YOLOv5",
+          "l": "Real-time detection"
+        },
+        {
+          "v": "MQTT",
+          "l": "Remote supervision"
+        },
+        {
+          "v": "6",
+          "l": "Robot arm axes"
+        },
+        {
+          "v": "2",
+          "l": "Embedded platforms"
+        }
+      ],
+      "challenges": [
+        "Real-time perception + decision + action integration on distributed architecture",
+        "Energy management on autonomous mobile system",
+        "Synchronization between two embedded platforms (RPi + Arduino)"
+      ],
+      "tags": [
+        "YOLOv5",
+        "MQTT",
+        "Raspberry Pi 4",
+        "Arduino Mega",
+        "IoT",
+        "Python",
+        "OpenCV"
+      ],
+      "stack": [
+        "Raspberry Pi 4 + Arduino Mega",
+        "YOLOv5 (object detection)",
+        "MQTT (remote supervision)",
+        "Python / OpenCV",
+        "Autonomous charging station"
+      ]
+    }
+  },
+  {
+    "id": "ecg",
+    "kind": "academic",
+    "visual": "ecg",
+    "fr": {
+      "slug": "classification-ecg-machine-learning",
+      "title": "Classification d'arythmies ECG : apprentissage supervisé et non supervisé",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2024 – 2025",
+      "role": "Projet en binôme · M2",
+      "seo_title": "Classification ECG MIT-BIH par machine learning — Ali Azami",
+      "seo_desc": "Étude de cas : classification d'arythmies sur la base MIT-BIH, comparaison KNN, Random Forest, KMeans et clustering agglomératif, analyse SHAP, Boruta et ACP.",
+      "summary": "Classification arythmies MIT-BIH (5 classes, 156 features/signal). Comparaison KNN, RandomForest, KMeans, clustering agglomératif. Analyse SHAP, Boruta, ACP.",
+      "context": "Projet en binôme à l'ENSEEIHT : comparaison de méthodes supervisées et non supervisées sur des données biomédicales réelles (base MIT-BIH Arrhythmia).",
+      "pipeline": [
+        "MIT-BIH dataset",
+        "ACP 23 composantes (90 %)",
+        "GridSearchCV",
+        "RandomForest 200 est.",
+        "SHAP + Boruta"
+      ],
+      "tasks": [
+        "DTW (Dynamic Time Warping) : calcul du signal médian par classe (6 min vs >30 min brute), baseline 0.575.",
+        "KNN : GridSearch → metric Manhattan, k=1, accuracy 0.924.",
+        "RandomForest : 200 estimateurs, GridSearch → accuracy 0,925 (meilleur résultat).",
+        "KMeans : optimisation par analyse de silhouette → 39 clusters → accuracy 0.790.",
+        "Clustering agglomératif : 75 clusters → accuracy 0.823.",
+        "ACP + Boruta : 23 composantes (90 % variance). Boruta : réduction 156→135 features, accuracy maintenue à 0.922."
+      ],
+      "metrics": [
+        {
+          "v": "92,5 %",
+          "l": "Accuracy RF"
+        },
+        {
+          "v": "135",
+          "l": "Features Boruta"
+        },
+        {
+          "v": "5",
+          "l": "Classes"
+        }
+      ],
+      "results": [
+        {
+          "v": "92,5 %",
+          "l": "RandomForest"
+        },
+        {
+          "v": "92,4 %",
+          "l": "KNN Manhattan"
+        },
+        {
+          "v": "82,3 %",
+          "l": "Agglomératif"
+        },
+        {
+          "v": "79 %",
+          "l": "KMeans"
+        },
+        {
+          "v": "92,2 %",
+          "l": "Boruta (135 feat.)"
+        },
+        {
+          "v": "57,5 %",
+          "l": "DTW baseline"
+        }
+      ],
+      "challenges": [
+        "DTW très lent : réduction par médiane par classe nécessaire (6 min vs >30 min)",
+        "Confusion persistante classes 0/1 (battements normaux vs inconnus) sur toutes les méthodes",
+        "KMeans : clusters vides pour n_clusters > 39"
+      ],
+      "tags": [
+        "Python",
+        "scikit-learn",
+        "RandomForest",
+        "SHAP",
+        "Boruta",
+        "PCA",
+        "DTW",
+        "KMeans"
+      ],
+      "stack": [
+        "Python / scikit-learn",
+        "Dynamic Time Warping (DTW)",
+        "KNN / RandomForest / KMeans",
+        "ACP / PCA",
+        "SHAP · Boruta · GridSearchCV"
+      ]
+    },
+    "en": {
+      "slug": "ecg-classification-machine-learning",
+      "title": "ECG arrhythmia classification: supervised and unsupervised learning",
+      "org": "ENSEEIHT",
+      "place": "Toulouse",
+      "period": "2024 – 2025",
+      "role": "Two-person project · M2",
+      "seo_title": "MIT-BIH ECG classification with machine learning — Ali Azami",
+      "seo_desc": "Case study: arrhythmia classification on the MIT-BIH dataset, comparing KNN, Random Forest, KMeans and agglomerative clustering, with SHAP, Boruta and PCA analysis.",
+      "summary": "MIT-BIH Arrhythmia classification (5 classes, 156 features/signal). KNN, RandomForest, KMeans, agglomerative clustering. SHAP, Boruta, PCA analysis.",
+      "context": "Two-person project at ENSEEIHT: comparison of supervised and unsupervised methods on real biomedical data (MIT-BIH Arrhythmia dataset).",
+      "pipeline": [
+        "MIT-BIH dataset",
+        "PCA 23 components (90%)",
+        "GridSearchCV",
+        "RandomForest 200 est.",
+        "SHAP + Boruta"
+      ],
+      "tasks": [
+        "DTW (Dynamic Time Warping): per-class median signal computation (6 min vs >30 min brute), baseline 0.575.",
+        "KNN: GridSearch → Manhattan metric, k=1, accuracy 0.924.",
+        "RandomForest: 200 estimators, GridSearch → accuracy 0.925 (best result).",
+        "KMeans: silhouette analysis optimization → 39 clusters → accuracy 0.790.",
+        "Agglomerative clustering: 75 clusters → accuracy 0.823.",
+        "PCA + Boruta: 23 components (90% variance). Boruta: 156→135 feature reduction, accuracy maintained at 0.922."
+      ],
+      "metrics": [
+        {
+          "v": "92.5%",
+          "l": "RF Accuracy"
+        },
+        {
+          "v": "135",
+          "l": "Boruta features"
+        },
+        {
+          "v": "5",
+          "l": "Classes"
+        }
+      ],
+      "results": [
+        {
+          "v": "92.5%",
+          "l": "RandomForest"
+        },
+        {
+          "v": "92.4%",
+          "l": "KNN Manhattan"
+        },
+        {
+          "v": "82.3%",
+          "l": "Agglomerative"
+        },
+        {
+          "v": "79%",
+          "l": "KMeans"
+        },
+        {
+          "v": "92.2%",
+          "l": "Boruta (135 feat.)"
+        },
+        {
+          "v": "57.5%",
+          "l": "DTW baseline"
+        }
+      ],
+      "challenges": [
+        "DTW very slow: per-class median reduction required (6 min vs >30 min)",
+        "Persistent class 0/1 confusion (normal vs unknown beats) across all methods",
+        "KMeans: empty clusters beyond n_clusters > 39"
+      ],
+      "tags": [
+        "Python",
+        "scikit-learn",
+        "RandomForest",
+        "SHAP",
+        "Boruta",
+        "PCA",
+        "DTW",
+        "KMeans"
+      ],
+      "stack": [
+        "Python / scikit-learn",
+        "Dynamic Time Warping (DTW)",
+        "KNN / RandomForest / KMeans",
+        "PCA",
+        "SHAP · Boruta · GridSearchCV"
+      ]
+    }
+  }
+]

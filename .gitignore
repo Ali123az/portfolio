@@ -1,0 +1,9 @@
+# Documents de travail internes : ne jamais publier (missions ODS, CV source, etc.)
+temp/
+# Ancienne version du site, remplacée par index.html
+ali_azami_portfolio.html
+# CV déposés à la racine : les versions publiées sont dans assets/cv/
+/French CV*.pdf
+/English CV*.pdf
+.claude/
+__pycache__/

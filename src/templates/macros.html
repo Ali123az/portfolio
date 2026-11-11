@@ -1,0 +1,67 @@
+{%- macro icon(name) -%}
+{%- if name == "arrow" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+{%- elif name == "arrow-ur" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg>
+{%- elif name == "download" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>
+{%- elif name == "mail" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+{%- elif name == "linkedin" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M12 17v-3.6a2.1 2.1 0 0 1 4.2 0V17M12 10.5V17"/></svg>
+{%- elif name == "phone" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 4h3.2l1.6 4-2 1.3a12 12 0 0 0 6.4 6.4l1.3-2 4 1.6v3.2a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 4 5.6 1.5 1.5 0 0 1 5.5 4z"/></svg>
+{%- elif name == "pin" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+{%- elif name == "copy" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+{%- elif name == "up" -%}<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro section_head(num, label, title, intro="") -%}
+<header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">{{ num }}</span><span data-scramble>{{ label }}</span></p>
+  <h2 class="section-title">{{ title }}</h2>
+  {% if intro %}<p class="section-intro">{{ intro }}</p>{% endif %}
+</header>
+{%- endmacro -%}
+
+{%- macro visual(name) -%}
+{%- if name == "radar" -%}
+<svg class="viz viz-radar" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="viz-rg" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+  <g class="viz-line"><path d="M40 140A120 120 0 0 1 280 140"/><path d="M80 140A80 80 0 0 1 240 140"/><path d="M120 140A40 40 0 0 1 200 140"/><path d="M20 140h280M160 140V14"/></g>
+  <g class="radar-sweep"><path d="M160 140V18A122 122 0 0 0 99 34.3Z" fill="url(#viz-rg)"/><path class="viz-line viz-line--hot" d="M160 140V18"/></g>
+  <circle class="blip" style="--d:.65s" cx="112" cy="78" r="3.5"/><circle class="blip" style="--d:1.48s" cx="205" cy="58" r="3"/><circle class="blip" style="--d:1.96s" cx="236" cy="108" r="2.6"/>
+</svg>
+{%- elif name == "npu" -%}
+<svg class="viz viz-npu" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line">
+    <rect x="118" y="33" width="84" height="84" rx="10"/>
+    {% for i in range(5) %}<path d="M106 {{ 45 + i * 15 }}h12M202 {{ 45 + i * 15 }}h12M{{ 130 + i * 15 }} 21v12M{{ 130 + i * 15 }} 117v12"/>{% endfor %}
+  </g>
+  <path class="trace" style="--d:0s" d="M10 60h60l16 15h20"/><path class="trace" style="--d:.7s" d="M10 105h46l20-15h30"/>
+  <path class="trace" style="--d:.35s" d="M214 60h24l18-18h54"/><path class="trace" style="--d:1.05s" d="M214 90h40l16 16h40"/>
+  {% for r in range(3) %}{% for col in range(3) %}<circle class="neuron" style="--d:{{ ((r * 3 + col) * 0.27) | round(2) }}s" cx="{{ 138 + col * 22 }}" cy="{{ 53 + r * 22 }}" r="5"/>{% endfor %}{% endfor %}
+</svg>
+{%- elif name == "fpga" -%}
+<svg class="viz viz-fpga" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  {% for r in range(5) %}{% for col in range(12) %}<rect class="cell{% if (r * 5 + col * 3) % 11 == 0 %} cell--hot{% endif %}" style="--d:{{ (((r * 7 + col * 13) % 17) / 4) | round(2) }}s" x="{{ 43 + col * 20 }}" y="{{ 28 + r * 20 }}" width="14" height="14" rx="3"/>{% endfor %}{% endfor %}
+</svg>
+{%- elif name == "wire" -%}
+<svg class="viz viz-wire" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M20 28h280M20 68h280M20 122h280" stroke-dasharray="2 6"/></g>
+  <path class="viz-line" d="M20 52{% for i in range(10) %}h14v-20h14v20{% endfor %}"/>
+  <path class="viz-line viz-line--hot wire-data" pathLength="1" d="M20 84h26v34h84v-34h22v34h10v-34h30v34h34v-34h22v34h10v-34h42"/>
+  <path class="wire-scan" d="M20 20v110"/>
+</svg>
+{%- elif name == "ecg" -%}
+<svg class="viz viz-ecg" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M0 40h320M0 75h320M0 110h320M53 10v130M107 10v130M160 10v130M213 10v130M267 10v130" stroke-dasharray="2 6"/></g>
+  <path class="viz-line viz-line--hot ecg-trace" pathLength="1" d="M0 82h34l7-9 7 9h12l5 9 8-62 8 72 6-19h16l9-13 10 13h38l7-9 7 9h12l5 9 8-62 8 72 6-19h16l9-13 10 13h36"/>
+</svg>
+{%- elif name == "vision" -%}
+<svg class="viz viz-vision" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M0 132h320M30 112h260M60 96h200M0 150 110 84M320 150 210 84M160 150V84M80 150l55-66M240 150l-55-66"/></g>
+  <g class="bbox" style="--d:0s"><path class="viz-line viz-line--hot" d="M52 34v-10h10M118 24h10v10M128 74v10h-10M62 84H52V74"/><rect x="52" y="24" width="76" height="60" rx="2"/><text x="54" y="18">obj 0.94</text></g>
+  <g class="bbox" style="--d:1.2s"><path class="viz-line viz-line--hot" d="M196 62v-10h10M258 52h10v10M268 108v10h-10M206 118h-10v-10"/><rect x="196" y="52" width="72" height="66" rx="2"/><text x="198" y="46">obj 0.88</text></g>
+</svg>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro tags(items, cls="") -%}
+<ul class="tags {{ cls }}">{% for t in items %}<li>{{ t }}</li>{% endfor %}</ul>
+{%- endmacro -%}

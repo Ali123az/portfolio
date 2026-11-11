@@ -1,0 +1,343 @@
+{
+  "lang": "en",
+  "locale": "en_GB",
+  "home_dir": "en",
+  "projects_dir": "en/projects",
+  "meta": {
+    "title": "Ali Azami — Embedded AI & Embedded Systems Engineer",
+    "description": "Ali Azami, embedded AI and embedded systems engineer. Edge AI on microcontrollers, radar, real-time firmware, FPGA. Currently at Ocean Data System, Lorient, France.",
+    "og_alt": "Ali Azami — Embedded AI and embedded systems engineer",
+    "job_title": "Embedded Systems Engineer",
+    "knows_about": [
+      "Embedded systems", "Real-time firmware", "Embedded AI", "Edge AI", "TinyML",
+      "Signal processing", "UWB radar", "ARM Cortex-M microcontrollers", "TensorFlow Lite Micro",
+      "FPGA", "VHDL", "Marine electronics", "CAN bus", "NMEA 2000", "PCB design",
+      "C", "C++", "C#", "Python"
+    ]
+  },
+  "ui": {
+    "swipe": "Swipe",
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "close": "Close",
+    "lang_switch": "FR",
+    "lang_switch_label": "Lire cette page en français",
+    "home": "Home",
+    "back_top": "Back to top",
+    "scroll": "Scroll",
+    "read_case": "Read the case study",
+    "all_projects": "All projects",
+    "copy": "Copy",
+    "copied": "Copied",
+    "cv_fr": "CV in French",
+    "cv_en": "CV in English",
+    "cv_title": "Download my CV",
+    "cv_note": "PDF · 1 page",
+    "cv_short": "CV",
+    "download_cv": "Download CV",
+    "kinds": {"industry": "Industry", "research": "Research", "academic": "Academic"},
+    "case": {
+      "context": "Context",
+      "pipeline": "Technical pipeline",
+      "tasks": "What I did",
+      "results": "Measured results",
+      "challenges": "Challenges",
+      "stack": "Technical environment",
+      "facts": "Project sheet",
+      "org": "Setting",
+      "period": "Period",
+      "role": "Format",
+      "place": "Location",
+      "next": "Next project",
+      "prev": "Previous project",
+      "cta_title": "Want to talk it through?",
+      "cta_text": "Happy to go into the technical choices, the measurements and what I would do differently.",
+      "cta_button": "Get in touch"
+    },
+    "notfound": {
+      "title": "Signal lost",
+      "text": "The page you are looking for does not exist or has moved.",
+      "button": "Back to home"
+    }
+  },
+  "nav": [
+    {"id": "experience", "label": "Experience"},
+    {"id": "projects", "label": "Projects"},
+    {"id": "skills", "label": "Skills"},
+    {"id": "about", "label": "About"},
+    {"id": "volunteering", "label": "Volunteering"},
+    {"id": "contact", "label": "Contact"}
+  ],
+  "hero": {
+    "status": "Currently at Ocean Data System, Lorient",
+    "role": "Embedded AI & Embedded Systems Engineer",
+    "typed": [
+      "embedded AI on microcontrollers",
+      "Edge AI and TinyML",
+      "radar signal processing",
+      "real-time firmware",
+      "marine electronics",
+      "PCB design",
+      "FPGA and VHDL"
+    ],
+    "lead": "My speciality is embedded AI. I train, quantize and deploy neural networks that run in real time on a microcontroller, and I handle the whole chain around them, from the board schematic to the firmware. Today at Ocean Data System, I develop the onboard electronics and safety systems used in offshore racing.",
+    "cta_primary": "See my experience",
+    "cta_secondary": "Case studies",
+    "stats": [
+      {"value": 99.3, "decimals": 1, "prefix": "", "suffix": "%", "label": "accuracy for an INT8-quantized radar CNN deployed on an ARM Cortex-M33"},
+      {"value": 11.9, "decimals": 1, "prefix": "", "suffix": " kB", "label": "the complete embedded model, sixteen times smaller than its predecessor"},
+      {"value": 42, "decimals": 0, "prefix": "×", "suffix": "", "label": "inference speedup on the NPU compared with the CPU core"},
+      {"value": 2, "decimals": 0, "prefix": "", "suffix": "", "label": "engineering degrees: ENSEEIHT Toulouse and EHTP Casablanca"}
+    ],
+    "panel": {
+      "title": "Current position",
+      "rows": [
+        {"k": "Role", "v": "Embedded systems engineer"},
+        {"k": "Company", "v": "Ocean Data System"},
+        {"k": "Field", "v": "Marine electronics, offshore racing"},
+        {"k": "Location", "v": "Lorient, Brittany"},
+        {"k": "Since", "v": "September 2026"}
+      ],
+      "stack": ["C#", "C / C++", "Python", "ARM9", "CAN / J1939", "NMEA 2000", "KiCad"]
+    },
+    "availability": "Available from January 2027 · Goal: an embedded AI role",
+    "marquee": [
+      "C", "C++", "C#", "Python", "ARM Cortex-M", "ARM9", "TinyCLR", "TensorFlow Lite Micro", "NPU",
+      "FFT / DSP", "UWB radar", "CAN / J1939", "NMEA 2000", "BLE", "VHDL", "FPGA", "HLS", "KiCad", "Git", "Docker"
+    ]
+  },
+  "experience": {
+    "label": "Experience",
+    "title": "Professional experience",
+    "intro": "Three industrial environments, one common thread: making electronics and software work where the constraints are real — counted memory, real time, the field.",
+    "current": {
+      "badge": "Current position",
+      "role": "Embedded Systems Engineer",
+      "org": "Ocean Data System (ODS)",
+      "meta": ["Permanent contract", "Lorient, Brittany", "Since September 2026"],
+      "lead": "Since 1991, ODS has designed marine electronics and software born from offshore racing: anti-capsize systems, keel management controllers, onboard data loggers, wireless load measurement, embedded HMIs. Equipment found on racing yachts, maxis and superyachts.",
+      "constraints_title": "What the open sea demands",
+      "constraints": [
+        "Humidity, salt, vibration",
+        "Noisy 12/24 V supply",
+        "No servicing possible at sea",
+        "Reliability and degraded modes before performance"
+      ],
+      "cycle": {
+        "title": "One product, from first schematic to field feedback",
+        "text": "In a small team, the role covers the whole product life cycle, with no hand-off between design office, production and support. I see the failure at the customer's, and I am the one who fixes the board or the firmware.",
+        "steps": [
+          {"name": "Design", "text": "Architecture, component selection, power budget, bus interfaces."},
+          {"name": "Schematic", "text": "Schematic capture in KiCad and Eagle."},
+          {"name": "PCB layout", "text": "Board place-and-route and manufacturing files."},
+          {"name": "Firmware", "text": "C# on .NET Micro Framework and TinyCLR, on an ARM9 target."},
+          {"name": "Commissioning", "text": "Onboard integration, configuration and validation in real conditions."},
+          {"name": "Production", "text": "Assembly, hand soldering, testing before shipping."},
+          {"name": "Support", "text": "Remote diagnosis with crews, skippers and shipyards."},
+          {"name": "Field feedback", "text": "Every incident is logged, then fed back into the design."}
+        ]
+      },
+      "missions_title": "What I do",
+      "missions": [
+        {
+          "title": "Embedded firmware",
+          "text": "Development and maintenance of the onboard systems firmware, in C# on .NET Micro Framework and TinyCLR (400 MHz ARM9 target). A tightly constrained managed runtime: concurrency through threads, timers and locks, non-deterministic garbage collection. Hence producer/consumer ring buffers and allocations kept to a minimum in acquisition loops."
+        },
+        {
+          "title": "Safety systems",
+          "text": "Heel monitoring and anti-capsize detection, alarms, man overboard, watchdog. Every change is assessed from the degraded-mode angle: an optimisation that weakens an alarm or a fault detection is a defect."
+        },
+        {
+          "title": "Multi-sensor acquisition",
+          "text": "Inertial attitude unit (AHRS), wireless sensors, CAN keypads: integration on CAN/J1939, NMEA 0183 and NMEA 2000 buses, RS-232/422/485 serial links, Modbus and BLE. Drivers, timestamping, logging and monitoring."
+        },
+        {
+          "title": "Electronics design",
+          "text": "Schematic and layout in KiCad and Eagle: revisions of production boards and a full redesign of a control board (12/24/48 V supply, second independent CAN port). One product owned from board to firmware: embedded HTTP and FTP servers, Wi-Fi access point, configuration dashboard."
+        },
+        {
+          "title": "Hardware and software debugging",
+          "text": "The most expensive defects hide at the boundary between the two. Oscilloscope and logic analyser, bus integrity, noisy supply, datasheets checked against real conditions (switching time versus bit time) — then the fix, in the firmware or on the board."
+        },
+        {
+          "title": "Production, commissioning, support",
+          "text": "Assembly, soldering and testing before shipping; onboard integration and validation; remote diagnosis with crews, skippers and shipyards. The same rigour on the phone as in the lab."
+        }
+      ],
+      "side": "On the side: internal local-AI tooling — a document indexing and search agent built on a local LLM (Ollama), and a feasibility study for on-premise generative AI.",
+      "stack": ["C#", "C", "C++", "Python", ".NET Micro Framework", "TinyCLR", "ARM9", "CAN / J1939", "NMEA 0183 / 2000", "RS-232 / 422 / 485", "Modbus", "BLE", "KiCad", "Eagle", "Oscilloscope", "Logic analyser", "Local LLM"]
+    },
+    "past_title": "Before ODS",
+    "past": [
+      {
+        "period": "Sept. 2024 – Oct. 2025",
+        "role": "Embedded AI and Radar Engineer",
+        "org": "Vitesco Technologies / Schaeffler France",
+        "meta": "Apprenticeship (M2) · Toulouse",
+        "points": [
+          "Designed a complete embedded UWB radar chain, from raw signal acquisition to decision: preprocessing, FFT, feature extraction and real-time CNN classification on an ARM Cortex-M33.",
+          "Reimplemented in C the processing chain first prototyped in Python, to fit the real-time and memory constraints of the target and remove the dependency on a host PC.",
+          "Training, INT8 quantization and on-target deployment of the models, trading off inference latency, memory footprint and detection quality.",
+          "Field measurement campaigns, analysis of the gap between laboratory and real conditions, technical documentation in English with international teams."
+        ],
+        "tags": ["ARM Cortex-M33", "TensorFlow Lite Micro", "FFT / DSP", "C", "Python", "CAN"],
+        "project": "schaeffler"
+      },
+      {
+        "period": "May – Sept. 2024",
+        "role": "Embedded AI Engineer",
+        "org": "NXP Semiconductors",
+        "meta": "Internship (M1) · Toulouse",
+        "points": [
+          "End-to-end Edge AI workflow: sensor acquisition, model training, quantization and deployment on the eIQ Neutron NPU.",
+          "Inference optimisation on constrained targets, comparison of NPU against CPU execution, and writing of the deployment guide used internally."
+        ],
+        "tags": ["NXP MCX N947", "eIQ Neutron NPU", "TensorFlow Lite", "SPI", "C / C++"],
+        "project": "nxp"
+      },
+      {
+        "period": "Apr. – Oct. 2022",
+        "role": "Electronics and IoT Engineer",
+        "org": "EHTP",
+        "meta": "Research internship · Casablanca",
+        "points": [
+          "Distributed embedded architecture (Arduino Mega and Raspberry Pi 4) for a tracked mobile robot with a 6-axis arm, YOLOv5 computer vision for object detection and MQTT-monitored autonomous charging."
+        ],
+        "tags": ["Raspberry Pi 4", "Arduino Mega", "YOLOv5", "MQTT", "Python"],
+        "project": "iot"
+      }
+    ]
+  },
+  "projects": {
+    "label": "Projects",
+    "title": "Case studies",
+    "intro": "Six projects in detail: the context, the technical pipeline, what I did, the measured results and the difficulties along the way.",
+    "filter_label": "Filter projects",
+    "filters": [
+      {"key": "all", "label": "All"},
+      {"key": "industry", "label": "Industry"},
+      {"key": "research", "label": "Research"},
+      {"key": "academic", "label": "Academic"}
+    ]
+  },
+  "skills": {
+    "label": "Skills",
+    "title": "Technical skills",
+    "intro": "No gauges, no percentages: what I have actually used, and in which context.",
+    "groups": [
+      {
+        "title": "Embedded AI",
+        "context": "From training to deployment on MCU, NPU and DSP, trading off latency and memory.",
+        "items": ["CNN on MCU, NPU, DSP", "INT8 quantization (QAT, PTQ)", "TensorFlow Lite Micro", "PyTorch", "TensorFlow", "Vision (YOLO, OpenCV)"]
+      },
+      {
+        "title": "Signal processing",
+        "context": "A complete radar chain ported from Python to embedded C.",
+        "items": ["UWB radar", "FFT", "Digital filtering", "Feature extraction", "Fixed point", "MATLAB"]
+      },
+      {
+        "title": "Embedded systems",
+        "context": "In production at ODS, on an automotive target at Schaeffler, on evaluation boards at NXP.",
+        "items": ["Real time", "ARM Cortex-M", "ARM9", "Bare-metal", "RTOS", "Sensor drivers", "SPI", "I²C", "UART", "CAN / J1939", "NMEA 0183 / 2000", "BLE"]
+      },
+      {
+        "title": "Programming",
+        "context": "C and C++ on microcontrollers, C# on an embedded runtime, Python for tooling and machine learning. Used at ODS, Schaeffler and NXP.",
+        "items": ["C", "C++", "Python", "C#"]
+      },
+      {
+        "title": "Digital design",
+        "context": "Full flow from C++ to bitstream, state machines and protocols in VHDL.",
+        "items": ["VHDL", "Verilog", "FPGA / SoC", "HLS", "SystemC", "Simulink"]
+      },
+      {
+        "title": "Electronics design",
+        "context": "Production boards at ODS, from schematic to manufacturing files.",
+        "items": ["KiCad", "Eagle", "Schematic and PCB layout", "PSPICE", "Oscilloscope", "Logic analyser"]
+      },
+      {
+        "title": "Tools",
+        "context": "The everyday working environment.",
+        "items": ["Git", "GitLab CI/CD", "Docker", "Linux", "CMake", "Keil", "MCUXpresso", "Lauterbach Trace32"]
+      }
+    ]
+  },
+  "about": {
+    "label": "About",
+    "title": "From signal to decision, from schematic to the field",
+    "photo_alt": "Portrait of Ali Azami holding an ENSEEIHT envelope",
+    "bio": [
+      "An engineer with two degrees — ENSEEIHT in Toulouse (electronics and AI for embedded systems) and EHTP in Casablanca (electrical engineering) — I work where software meets physics: a signal to acquire, memory counted in kilobytes, a real-time deadline to meet.",
+      "At Schaeffler and NXP, I carried complete embedded AI chains, from radar acquisition to inference on a microcontroller. At Ocean Data System, the scope widened to the whole product: the board, the firmware, commissioning and support, for equipment that has to hold at sea with no possible intervention.",
+      "What drives me: taking a hard problem, understanding what the measurement really says, and building the whole chain until it works in the field. Where I am heading: embedded AI, specifically — designing, optimising and deploying models on constrained targets."
+    ],
+    "method_title": "How I work",
+    "method": [
+      {"title": "Facts before interpretation", "text": "I restate the symptom before looking for a solution, and I only conclude on a demonstrated cause."},
+      {"title": "Measure rather than estimate", "text": "Latency, memory, detection rate: every result is measured on the target, not assumed."},
+      {"title": "Think degraded mode", "text": "What goes to sea cannot be patched remotely. Every change comes with the list of what must be retested."},
+      {"title": "From the lab to the field", "text": "A model at 99% in validation is only a start: I go and measure the gap in real conditions, and I look for its cause."}
+    ],
+    "education_title": "Education",
+    "education": [
+      {"period": "2023 – 2025", "title": "Engineering degree — Electronics and AI for embedded systems", "org": "ENSEEIHT (Toulouse INP), Toulouse", "note": "Double degree"},
+      {"period": "2021 – 2025", "title": "Engineering degree — Electrical engineering and electronics", "org": "Hassania School of Public Works (EHTP), Casablanca", "note": ""},
+      {"period": "2018 – 2020", "title": "Preparatory classes MPSI / MP", "org": "CPGE Ibn Ghazi, Rabat", "note": ""}
+    ],
+    "languages_title": "Languages",
+    "languages": [
+      {"name": "Arabic", "level": "Native"},
+      {"name": "French", "level": "Bilingual"},
+      {"name": "English", "level": "Advanced, professional use"},
+      {"name": "Spanish", "level": "Intermediate"}
+    ],
+    "interests_title": "Interests",
+    "interests": ["Mobile robotics and computer vision", "DIY electronics", "Travel and intercultural exchange"]
+  },
+  "volunteering": {
+    "label": "Volunteering",
+    "title": "Community involvement",
+    "intro": "Alongside my studies, I have always been involved in associations — to pass things on, coordinate and move collective projects forward.",
+    "items": [
+      {
+        "id": "esn", "logo": "assets/img/logo-esn.png", "logo_bg": "light",
+        "title": "Erasmus Student Network", "role": "Active member", "meta": "Toulouse · since 2023",
+        "points": [
+          "Organised and supervised evenings, trips and cultural events for international students.",
+          "Supported students in settling in and discovering French culture."
+        ]
+      },
+      {
+        "id": "ep", "logo": "assets/img/logo-electro-power.png", "logo_bg": "dark",
+        "title": "EHTP Electro-Power", "role": "Vice-president", "meta": "Casablanca · 2021 – 2023",
+        "points": [
+          "Feasibility review and follow-up of the electronics projects proposed by club members, coordination of the project teams.",
+          "Managed the treasury and industrial partnerships, organised technical training for engineering students."
+        ]
+      },
+      {
+        "id": "enactus", "logo": "assets/img/logo-enactus.png", "logo_bg": "light",
+        "title": "Enactus EHTP", "role": "Team leader", "meta": "Casablanca · 2022 – 2023",
+        "points": [
+          "Led a student team on social entrepreneurship projects aligned with the Sustainable Development Goals.",
+          "Ran the team, tracked progress and presented the projects to external partners."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's talk engineering",
+    "text": "I want to pursue my career in embedded AI: Edge AI, TinyML, deploying models on microcontrollers, NPUs or DSPs. An opportunity in that field, a question about a case study? Write to me: I usually reply within 24 hours.",
+    "email_label": "Email",
+    "linkedin_label": "LinkedIn",
+    "phone_label": "Phone",
+    "location_label": "Location",
+    "location": "Lorient, France — open to relocation in France and abroad",
+    "write": "Email me"
+  },
+  "footer": {
+    "tagline": "Embedded systems engineer · Lorient, France",
+    "built": "Static site built without a framework: HTML, CSS and JavaScript."
+  }
+}

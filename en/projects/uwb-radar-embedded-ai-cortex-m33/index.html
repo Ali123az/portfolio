@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UWB radar and real-time CNN on Cortex-M33 — Ali Azami</title>
+<meta name="description" content="Case study: embedded UWB radar chain, FFT on DSP and an 11.9 kB INT8 CNN running in real time on an ARM Cortex-M33 with TensorFlow Lite Micro, at Schaeffler.">
+<meta name="author" content="Ali Azami">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/">
+<link rel="alternate" hreflang="fr" href="https://ali123az.github.io/portfolio/projets/radar-uwb-ia-embarquee-cortex-m33/">
+<link rel="alternate" hreflang="en" href="https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/">
+<link rel="alternate" hreflang="x-default" href="https://ali123az.github.io/portfolio/projets/radar-uwb-ia-embarquee-cortex-m33/">
+<meta name="theme-color" content="#050912">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Ali Azami">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UWB radar and real-time CNN on Cortex-M33 — Ali Azami">
+<meta property="og:description" content="Case study: embedded UWB radar chain, FFT on DSP and an 11.9 kB INT8 CNN running in real time on an ARM Cortex-M33 with TensorFlow Lite Micro, at Schaeffler.">
+<meta property="og:url" content="https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Azami — Embedded AI and embedded systems engineer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UWB radar and real-time CNN on Cortex-M33 — Ali Azami">
+<meta name="twitter:description" content="Case study: embedded UWB radar chain, FFT on DSP and an 11.9 kB INT8 CNN running in real time on an ARM Cortex-M33 with TensorFlow Lite Micro, at Schaeffler.">
+<meta name="twitter:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=96fb4bc6">
+<script>document.documentElement.className = "js";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/#article","headline":"UWB radar: real-time CNN classification on a Cortex-M33","description":"Case study: embedded UWB radar chain, FFT on DSP and an 11.9 kB INT8 CNN running in real time on an ARM Cortex-M33 with TensorFlow Lite Micro, at Schaeffler.","url":"https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/","inLanguage":"en","image":"https://ali123az.github.io/portfolio/assets/img/og-cover-en.png","keywords":"ARM Cortex-M33, TFLite Micro, FFT/DSP, CNN Conv2D, C/C++, CAN, MATLAB, Optuna, Keil, Lauterbach","author":{"@id":"https://ali123az.github.io/portfolio/#person"},"isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"dateModified":"2026-11-11"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ali123az.github.io/portfolio/en/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://ali123az.github.io/portfolio/en/#projects"},{"@type":"ListItem","position":3,"name":"UWB radar: real-time CNN classification on a Cortex-M33","item":"https://ali123az.github.io/portfolio/en/projects/uwb-radar-embedded-ai-cortex-m33/"}]},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","url":"https://ali123az.github.io/portfolio/","jobTitle":"Embedded Systems Engineer"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0J439TZPLC');
+</script>
+</head>
+<body class="page-project">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="../../../en/" aria-label="Ali Azami — Home">
+      <span class="brand-mark" aria-hidden="true">AA</span>
+      <span class="brand-name">Ali Azami</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Menu" data-nav>
+      <ul class="nav-list">
+        <li class="nav-indicator" aria-hidden="true" data-nav-indicator></li>
+<li style="--i:0"><a class="nav-link" href="../../../en/#experience" data-section="experience"><span class="nav-num" aria-hidden="true">01</span>Experience</a></li>
+<li style="--i:1"><a class="nav-link" href="../../../en/#projects" data-section="projects"><span class="nav-num" aria-hidden="true">02</span>Projects</a></li>
+<li style="--i:2"><a class="nav-link" href="../../../en/#skills" data-section="skills"><span class="nav-num" aria-hidden="true">03</span>Skills</a></li>
+<li style="--i:3"><a class="nav-link" href="../../../en/#about" data-section="about"><span class="nav-num" aria-hidden="true">04</span>About</a></li>
+<li style="--i:4"><a class="nav-link" href="../../../en/#volunteering" data-section="volunteering"><span class="nav-num" aria-hidden="true">05</span>Volunteering</a></li>
+<li style="--i:5"><a class="nav-link" href="../../../en/#contact" data-section="contact"><span class="nav-num" aria-hidden="true">06</span>Contact</a></li>
+</ul>
+      <div class="nav-actions">
+<a class="nav-cv" href="../../../assets/cv/CV-Ali-Azami-EN.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>CV</span></a>
+<a class="nav-lang" href="../../../projets/radar-uwb-ia-embarquee-cortex-m33/" hreflang="fr" lang="fr" aria-label="Lire cette page en français">FR</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="case">
+  <header class="case-hero">
+    <div class="container case-hero-grid">
+      <div>
+        <nav class="crumbs hero-in" style="--i:0" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../../../en/">Home</a></li>
+            <li><a href="../../../en/#projects">Projects</a></li>
+            <li aria-current="page">Vitesco Technologies / Schaeffler France</li>
+          </ol>
+        </nav>
+        <p class="badge badge--industry hero-in" style="--i:1">Industry</p>
+        <h1 class="case-title hero-in" style="--i:2">UWB radar: real-time CNN classification on a Cortex-M33</h1>
+        <p class="case-meta hero-in" style="--i:3">Vitesco Technologies / Schaeffler France · Apprenticeship · M2 · Sept. 2024 – Oct. 2025</p>
+        <p class="case-summary hero-in" style="--i:4">Full embedded pipeline for an automotive Hands-Free Access system: UWB radar acquisition, time-frequency processing via FFT on DSP, real-time CNN inference on ARM Cortex-M33 (128 kB RAM, 768 kB Flash).</p>
+      </div>
+      <div class="case-visual hero-in" style="--i:5" data-tilt><svg class="viz viz-radar" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="viz-rg" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+  <g class="viz-line"><path d="M40 140A120 120 0 0 1 280 140"/><path d="M80 140A80 80 0 0 1 240 140"/><path d="M120 140A40 40 0 0 1 200 140"/><path d="M20 140h280M160 140V14"/></g>
+  <g class="radar-sweep"><path d="M160 140V18A122 122 0 0 0 99 34.3Z" fill="url(#viz-rg)"/><path class="viz-line viz-line--hot" d="M160 140V18"/></g>
+  <circle class="blip" style="--d:.65s" cx="112" cy="78" r="3.5"/><circle class="blip" style="--d:1.48s" cx="205" cy="58" r="3"/><circle class="blip" style="--d:1.96s" cx="236" cy="108" r="2.6"/>
+</svg></div>
+    </div>
+    <div class="container">
+      <dl class="case-metrics" data-reveal-group>
+<div class="stat" data-reveal style="--i:0"><dt class="stat-value">99.3%</dt><dd class="stat-label">Accuracy (validation)</dd></div>
+<div class="stat" data-reveal style="--i:1"><dt class="stat-value">11.9 kB</dt><dd class="stat-label">INT8 model</dd></div>
+<div class="stat" data-reveal style="--i:2"><dt class="stat-value">0.1 ms</dt><dd class="stat-label">Inference latency</dd></div>
+</dl>
+    </div>
+  </header>
+
+  <div class="container case-layout">
+    <div class="case-body">
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">01</span>Context</h2>
+        <p class="case-lead">The previous model (1D temporal CNN) had to be retrained per vehicle type. The goal was to design a universal approach based on time-frequency representation, deployable in real time on the NXP Ranger5 MCU without performance trade-offs.</p>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">02</span>Technical pipeline</h2>
+        <ol class="flow" style="--n:5">
+<li style="--i:0"><span class="flow-num" aria-hidden="true">1</span>UWB CIR Acquisition</li>
+<li style="--i:1"><span class="flow-num" aria-hidden="true">2</span>FFT 32pts + Hanning</li>
+<li style="--i:2"><span class="flow-num" aria-hidden="true">3</span>Time-freq images 20×23×6</li>
+<li style="--i:3"><span class="flow-num" aria-hidden="true">4</span>Compact Conv2D CNN</li>
+<li style="--i:4"><span class="flow-num" aria-hidden="true">5</span>Real-time INT8 Inference</li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">03</span>What I did</h2>
+        <ol class="steps" data-reveal-group>
+<li data-reveal style="--i:0"><span class="steps-num" aria-hidden="true">01</span><p>MATLAB simulation of the embedded DSP via NXP DSP Toolbox to replicate Ranger5 behavior and generate ~1100 time-frequency images (CSV) from multi-vehicle CIR recordings. Updated trigger algorithm (IQ segmentation, 384-point window).</p></li>
+<li data-reveal style="--i:1"><span class="steps-num" aria-hidden="true">02</span><p>Python preprocessing: per-tap normalization, CIR clipping (6×32→6×20), frequency modulation augmentation, false gesture removal via inter-tap cosine similarity, legacy data adaptation (SNR 6.7→11.2) via tap-by-tap statistical alignment.</p></li>
+<li data-reveal style="--i:2"><span class="steps-num" aria-hidden="true">03</span><p>Conv2D CNN design with Optuna automatic optimization (400 trials, multi-criteria objective: loss, TPR, 1-FPR, size, latency). Hard constraints: &lt;25k parameters, &lt;80 kB float, &lt;30 kB post-quantization. AdamW + ReduceLROnPlateau.</p></li>
+<li data-reveal style="--i:3"><span class="steps-num" aria-hidden="true">04</span><p>Model optimization: gradual pruning (~49% sparsity/layer), weight clustering (95.62% ratio), QAT 2 phases + PTQ INT8 — 50.94% size reduction (24.33→11.94 kB).</p></li>
+<li data-reveal style="--i:4"><span class="steps-num" aria-hidden="true">05</span><p>C embedded FFT pipeline implementation (MATLAB autocoder insufficient): BbCopy, Hanning, FFT 32pts, ComplexToPolar, buffer accumulation. TFLite Micro integration: operator resolver, static tensor arena (~60 kB/128 kB RAM), int8 input quantization.</p></li>
+<li data-reveal style="--i:5"><span class="steps-num" aria-hidden="true">06</span><p>Field clinic testing: 3 participants, kick catalog, CAN reading via Arduino + buzzer. End-to-end pipeline validated on Ranger5: 70% detection, 100% false positive immunity.</p></li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">04</span>Measured results</h2>
+        <dl class="results" data-reveal-group>
+<div class="card" data-reveal data-spot style="--i:0"><dt>99.33%</dt><dd>Global accuracy</dd></div>
+<div class="card" data-reveal data-spot style="--i:1"><dt>99.26%</dt><dd>Detection rate (kicks)</dd></div>
+<div class="card" data-reveal data-spot style="--i:2"><dt>99.43%</dt><dd>False positive immunity</dd></div>
+<div class="card" data-reveal data-spot style="--i:3"><dt>11.94 kB</dt><dd>INT8 model size</dd></div>
+<div class="card" data-reveal data-spot style="--i:4"><dt>0.107 ms</dt><dd>Inference latency</dd></div>
+<div class="card" data-reveal data-spot style="--i:5"><dt>184→12 kB</dt><dd>Compression ×16</dd></div>
+<div class="card" data-reveal data-spot style="--i:6"><dt>Universal</dt><dd>cross-vehicle, no retraining</dd></div>
+<div class="card" data-reveal data-spot style="--i:7"><dt>70% / 100%</dt><dd>Field trials: detection / immunity</dd></div>
+</dl>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">05</span>Challenges</h2>
+        <ul class="challenges">
+<li>Full manual FFT pipeline reimplementation in C (MATLAB autocoder incomplete on custom DSP functions)</li><li>128 kB RAM: 60 kB tensor arena, iterative trial-and-error adjustment to avoid OOM</li><li>Pruning/clustering without real gains on TFLM Cortex-M33 (no native sparse kernels)</li><li>Legacy data adaptation (hardware SNR differences) via per-tap and per-vehicle statistical alignment</li><li>Python/C mismatch: preprocessing not perfectly aligned, causing detection drop in real conditions</li>        </ul>
+      </section>
+    </div>
+
+    <aside class="case-aside" data-reveal>
+      <div class="card facts">
+        <h2 class="eyebrow">Project sheet</h2>
+        <dl>
+          <div><dt>Setting</dt><dd>Vitesco Technologies / Schaeffler France</dd></div>
+          <div><dt>Format</dt><dd>Apprenticeship · M2</dd></div>
+          <div><dt>Period</dt><dd>Sept. 2024 – Oct. 2025</dd></div>
+          <div><dt>Location</dt><dd>Toulouse</dd></div>
+        </dl>
+        <h2 class="eyebrow">Technical environment</h2>
+        <ul class="tags tags--mono tags--stack"><li>NXP Ranger5 (ARM Cortex-M33 @120 MHz + integrated DSP)</li><li>UWB Radar (6 taps CIR)</li><li>TensorFlow Lite Micro</li><li>Python / TensorFlow / Keras / ONNX</li><li>MATLAB NXP DSP Toolbox</li><li>ARM Keil uVision5</li><li>Lauterbach Trace32</li><li>CAN bus / Arduino</li><li>Optuna (400 trials)</li></ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div class="case-cta card" data-reveal data-spot>
+      <div>
+        <h2>Want to talk it through?</h2>
+        <p>Happy to go into the technical choices, the measurements and what I would do differently.</p>
+      </div>
+      <a class="btn btn--primary" href="../../../en/#contact" data-magnetic><span>Get in touch</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <nav class="case-nav" aria-label="All projects">
+      <a class="case-nav-link card" href="../../../en/projects/ecg-classification-machine-learning/" rel="prev" data-spot>
+        <span class="eyebrow"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Previous project</span>
+        <strong>ECG arrhythmia classification: supervised and unsupervised learning</strong>
+      </a>
+      <a class="case-nav-link case-nav-link--next card" href="../../../en/projects/edge-ai-smart-sensor-nxp-npu/" rel="next" data-spot>
+        <span class="eyebrow">Next project<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <strong>Edge AI: smart sensor on a microcontroller with integrated NPU</strong>
+      </a>
+    </nav>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">Ali Azami</p>
+      <p class="footer-tag">Embedded systems engineer · Lorient, France</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="mailto:azamiali2706@gmail.com" data-track="contact_email">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/ali-azami-27b8681b4/" target="_blank" rel="noopener me" data-track="contact_linkedin">LinkedIn</a></li>
+      <li><a href="../../../projets/radar-uwb-ia-embarquee-cortex-m33/" hreflang="fr" lang="fr">Français</a></li>
+    </ul>
+    <p class="footer-note">© 2026 Ali Azami · Static site built without a framework: HTML, CSS and JavaScript.</p>
+  </div>
+</footer>
+
+<a class="to-top" href="#main" aria-label="Back to top" data-to-top>
+  <svg viewBox="0 0 48 48" aria-hidden="true"><circle class="to-top-track" cx="24" cy="24" r="21"/><circle class="to-top-ring" cx="24" cy="24" r="21" pathLength="1"/></svg>
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</a>
+
+<script src="../../../assets/js/main.js?v=0c2243e2" defer></script>
+</body>
+</html>

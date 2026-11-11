@@ -1,1155 +1,638 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="fr" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Azami — Embedded Systems Engineer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ali Azami — Ingénieur IA embarquée &amp; systèmes embarqués</title>
+<meta name="description" content="Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.">
+<meta name="author" content="Ali Azami">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://ali123az.github.io/portfolio/">
+<link rel="alternate" hreflang="fr" href="https://ali123az.github.io/portfolio/">
+<link rel="alternate" hreflang="en" href="https://ali123az.github.io/portfolio/en/">
+<link rel="alternate" hreflang="x-default" href="https://ali123az.github.io/portfolio/">
+<meta name="theme-color" content="#050912">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Ali Azami">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ali Azami — Ingénieur IA embarquée &amp; systèmes embarqués">
+<meta property="og:description" content="Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.">
+<meta property="og:url" content="https://ali123az.github.io/portfolio/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-fr.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Azami — Ingénieur IA embarquée et systèmes embarqués">
+<meta property="profile:first_name" content="Ali">
+<meta property="profile:last_name" content="Azami">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ali Azami — Ingénieur IA embarquée &amp; systèmes embarqués">
+<meta name="twitter:description" content="Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.">
+<meta name="twitter:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-fr.png">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;--bg4:#22223a;--text:#f0f0ff;--text2:#a0a0c0;--text3:#606080;--accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--border:rgba(255,255,255,0.08);--border2:rgba(0,212,255,0.3);--card:rgba(255,255,255,0.04);--card-hover:rgba(255,255,255,0.07)}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent)}
-.nav-logo span{color:var(--text2)}
-.nav-links{display:flex;align-items:center;gap:8px}
-.nav-link{padding:6px 14px;border-radius:6px;font-size:13px;color:var(--text2);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all 0.2s}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--card)}
-.nav-lang{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;color:var(--accent);cursor:pointer;border:1px solid var(--border2);background:rgba(0,212,255,0.05);font-family:'JetBrains Mono',monospace;transition:all 0.2s}
-.nav-lang:hover{background:rgba(0,212,255,0.12)}
-.page{display:none;padding-top:60px;min-height:100vh}
-.page.active{display:block}
-.hero{min-height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;position:relative;overflow:hidden}
-.hero::before{display:none}
-.hero::after{display:none}
-.page-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.page-bg span{position:absolute;border-radius:50%}
-.page>.section,.hero>*,.page>footer{position:relative;z-index:1}
-.page{position:relative}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border2);border-radius:20px;font-size:12px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:2rem;width:fit-content}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;display:inline-block;flex-shrink:0}
-.hero-name{font-size:clamp(2.8rem,7vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:1rem}
-.hero-name .accent{color:var(--accent)}
-.hero-title{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text2);font-weight:300;margin-bottom:1.5rem}
-.hero-desc{font-size:15px;color:var(--text3);max-width:580px;line-height:1.7;margin-bottom:1rem}
-.hero-seek{font-size:14px;color:var(--text3);max-width:580px;line-height:1.6;margin-bottom:2.5rem;font-style:italic;opacity:0.8}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{padding:10px 24px;background:var(--accent);color:#000;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;border:none;font-family:'Inter',sans-serif}
-.btn-secondary{padding:10px 24px;background:transparent;color:var(--text);border-radius:8px;font-weight:500;font-size:14px;cursor:pointer;border:1px solid var(--border);font-family:'Inter',sans-serif}
-.btn-secondary:hover{border-color:var(--border2);color:var(--accent)}
-.hero-metrics{display:flex;gap:2rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
-.metric-val{font-size:1.3rem;font-weight:700;color:var(--accent);font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px}
-.metric-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block}
-.hero-stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:2rem}
-.stack-pill{padding:4px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace}
-.section{padding:4rem 3rem;max-width:1100px;margin:0 auto}
-.section-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.5rem}
-.section-title{font-size:2rem;font-weight:700;letter-spacing:-1px;margin-bottom:2.5rem}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.pcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
-.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.25s}
-.pcard:hover{background:var(--card-hover);border-color:rgba(0,212,255,0.2);transform:translateY(-3px)}
-.pcard:hover::before{opacity:1}
-.pcard.featured{border-color:rgba(0,212,255,0.15)}
-.pbadge{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:1rem;text-transform:uppercase}
-.bi{background:rgba(0,212,255,0.1);color:var(--accent);border:1px solid rgba(0,212,255,0.2)}
-.ba{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2)}
-.ptitle{font-size:1.05rem;font-weight:600;margin-bottom:0.5rem;line-height:1.3}
-.psub{font-size:12px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.75rem}
-.pdesc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1rem}
-.ptags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
-.ptag{padding:2px 8px;background:var(--bg3);border-radius:4px;font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;border:1px solid var(--border)}
-.pmetrics{display:flex;gap:1rem;padding-top:1rem;border-top:1px solid var(--border)}
-.pm-val{font-size:14px;font-weight:700;color:var(--accent3);font-family:'JetBrains Mono',monospace;display:block}
-.pm-label{font-size:10px;color:var(--text3)}
-.parrow{position:absolute;bottom:1.5rem;right:1.5rem;color:var(--text3);font-size:18px}
-.pcard:hover .parrow{color:var(--accent)}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;overflow-y:auto;padding:2rem;backdrop-filter:blur(4px)}
-.modal-overlay.open{display:flex;justify-content:center;align-items:flex-start}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2.5rem;max-width:800px;width:100%;position:relative;margin:auto}
-.modal-close{position:absolute;top:1.25rem;right:1.25rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 12px;cursor:pointer;color:var(--text2);font-size:16px;line-height:1}
-.modal-close:hover{color:var(--text);border-color:var(--accent)}
-.modal-title{font-size:1.5rem;font-weight:700;margin-bottom:0.25rem;letter-spacing:-0.5px}
-.modal-ctx{font-size:13px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:1.5rem}
-.msec{margin-bottom:1.5rem}
-.msec-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:0.75rem;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.pipeline{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.pstep{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace}
-.parr{color:var(--text3);font-size:12px}
-.mmetrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-top:0.5rem}
-.mmcard{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1rem}
-.mmval{font-size:1.2rem;font-weight:700;color:var(--accent);font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px}
-.mmlabel{font-size:11px;color:var(--text3)}
-.mtech{display:flex;flex-wrap:wrap;gap:6px}
-.mtag{padding:4px 10px;background:var(--bg4);border:1px solid var(--border);border-radius:4px;font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace}
-.mul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.mul li{font-size:13px;color:var(--text2);padding-left:1.2rem;position:relative;line-height:1.6}
-.mul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:11px;top:2px}
-.about-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:start}
-.aphoto{width:100%;aspect-ratio:3/4;background:var(--bg3);border-radius:12px;border:1px solid var(--border);overflow:hidden}
-.aphoto img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.atag{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:0.5rem}
-.aname{font-size:2rem;font-weight:700;letter-spacing:-1px;margin-bottom:0.5rem}
-.arole{font-size:14px;color:var(--text2);margin-bottom:1.5rem}
-.abio{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:2rem}
-.asec{margin-bottom:2rem}
-.asec-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.vcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem}
-.vtitle{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
-.vdesc{font-size:11px;color:var(--text3);line-height:1.5}
-.srow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.sname{font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace;width:180px;min-width:180px;flex-shrink:0}
-.sbg{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.sbar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px}
-.slevel{font-size:11px;color:var(--text3);width:140px;min-width:140px;text-align:right;flex-shrink:0}
-.lang-badges{display:flex;flex-wrap:wrap;gap:8px}
-.lang-badge{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px}
-.lang-badge .lang-name{color:var(--text);font-weight:500}
-.lang-badge .lang-level{font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace}
-.titem{display:flex;gap:1rem;margin-bottom:1rem}
-.tdot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0}
-.tcontent{padding-bottom:1rem;border-bottom:1px solid var(--border);flex:1}
-.tdate{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:3px}
-.ttitle{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.tsub{font-size:12px;color:var(--text2)}
-.vol-grid{display:flex;flex-direction:column;gap:10px}
-.vol-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;display:flex;gap:12px;align-items:flex-start}
-.vol-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:4px}
-.vol-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.vol-page-intro{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:2.5rem;max-width:680px}
-.vol-big-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;display:grid;grid-template-columns:80px 1fr;gap:1.5rem;align-items:start;transition:border-color 0.2s}
-.vol-big-card:hover{border-color:rgba(0,212,255,0.2)}
-.vol-logo-box{width:72px;height:72px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.vol-logo-box img{width:100%;height:100%;object-fit:contain}
-.vol-logo-esn{background:#004b9b;font-size:22px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;letter-spacing:-1px}
-.vol-logo-ep{background:#1a1a1a;border:1px solid #ffd700}
-.vol-logo-enactus{background:#fff;padding:8px}
-.vol-big-title{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:4px}
-.vol-big-role{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:0.75rem;background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2)}
-.vol-big-sub{font-size:12px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:1rem}
-.vol-big-desc{font-size:13px;color:var(--text2);line-height:1.7}
-.vol-big-points{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:0.75rem}
-.vol-big-points li{font-size:13px;color:var(--text2);padding-left:1.2rem;position:relative;line-height:1.6}
-.vol-big-points li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:11px;top:2px}
-.vol-sub{font-size:12px;color:var(--text2);margin-bottom:4px}
-.vol-desc{font-size:11px;color:var(--text3);line-height:1.5}
-.interests{display:flex;flex-wrap:wrap;gap:8px}
-.interest{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2)}
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-.cdesc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:1.5rem}
-.cavail{padding:1rem 1.25rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
-.adot{width:8px;height:8px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
-.atext{font-size:13px;color:var(--accent3)}
-.clink{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;transition:all 0.2s}
-.clink:hover{border-color:var(--border2);transform:translateX(4px)}
-.cicon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.ci-email{background:rgba(0,212,255,0.1);color:var(--accent)}
-.ci-li{background:rgba(16,185,129,0.1);color:var(--accent3);font-weight:700;font-size:13px}
-.ci-phone{background:rgba(124,58,237,0.1);color:#a78bfa}
-.clabel{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.cval{font-size:13px;color:var(--text);font-family:'JetBrains Mono',monospace}
-.cform{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
-.flabel{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:6px}
-.finput{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color 0.2s;resize:none}
-.finput:focus{border-color:var(--border2)}
-.finput::placeholder{color:var(--text3)}
-.fsubmit{padding:12px 24px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;width:100%}
-.fsubmit:hover{background:#33dcff}
-.fnote{font-size:11px;color:var(--text3);text-align:center}
-footer{padding:2rem 3rem;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:12px;font-family:'JetBrains Mono',monospace}
-.mobile-nav{display:none}
-@media(max-width:768px){
-nav .nav-links{display:none}
-nav{padding:0 1rem}
-.page{padding-top:60px;padding-bottom:70px}
-.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);height:64px;align-items:center;justify-content:space-around;padding:0 4px}
-.mobile-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border:none;background:none;color:var(--text3);font-family:"Inter",sans-serif;font-size:9px;cursor:pointer;border-radius:8px;min-width:48px}
-.mobile-nav-btn.active{color:var(--accent)}
-.mobile-nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.mobile-lang{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 8px;border:1px solid var(--border2);background:rgba(0,212,255,0.05);color:var(--accent);font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:600;cursor:pointer;border-radius:8px}
-.mobile-lang svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
-.hero{grid-template-columns:1fr !important;padding:1.5rem 1.25rem !important;gap:1.5rem !important}
-.hero-name{font-size:2.6rem !important;letter-spacing:-1px}
-.hero-desc,.hero-seek{font-size:14px}
-.hero-metrics{gap:1rem;margin-top:1.5rem;padding-top:1.5rem}
-.metric-val{font-size:1rem}
-.hero-right-cards{display:none !important}
-.section{padding:2rem 1.25rem}
-.about-grid,.cgrid{grid-template-columns:1fr}
-.projects-grid{grid-template-columns:1fr}
-.vgrid{grid-template-columns:1fr}
-.vol-big-card{grid-template-columns:52px 1fr;gap:1rem;padding:1.25rem}
-.vol-logo-box{width:48px;height:48px}
-.btn-primary,.btn-secondary{width:100%;justify-content:center}
-.hero-stack{gap:5px}
-.stack-pill{font-size:10px;padding:3px 9px}
-.modal{padding:1.25rem}
-.pipeline{flex-wrap:wrap;gap:4px}
-.pstep{font-size:11px;padding:4px 9px}
-}
-</style>
-<!-- Google Analytics -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=96fb4bc6">
+<script>document.documentElement.className = "js";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://ali123az.github.io/portfolio/#website","url":"https://ali123az.github.io/portfolio/","name":"Ali Azami","inLanguage":["fr","en"],"author":{"@id":"https://ali123az.github.io/portfolio/#person"}},{"@type":"ProfilePage","@id":"https://ali123az.github.io/portfolio/#profilepage","url":"https://ali123az.github.io/portfolio/","name":"Ali Azami — Ingénieur IA embarquée & systèmes embarqués","description":"Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.","inLanguage":"fr","isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"mainEntity":{"@id":"https://ali123az.github.io/portfolio/#person"},"dateModified":"2026-11-11"},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","givenName":"Ali","familyName":"Azami","jobTitle":"Ingénieur systèmes embarqués","description":"Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.","url":"https://ali123az.github.io/portfolio/","image":"https://ali123az.github.io/portfolio/assets/img/portrait-700.webp","email":"mailto:azamiali2706@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Lorient","addressRegion":"Bretagne","addressCountry":"FR"},"worksFor":{"@type":"Organization","name":"Ocean Data System","url":"https://www.oceandatasystem.com/"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"ENSEEIHT (Toulouse INP)"},{"@type":"CollegeOrUniversity","name":"École Hassania des Travaux Publics (EHTP)"}],"knowsAbout":["Systèmes embarqués","Firmware temps réel","IA embarquée","Edge AI","TinyML","Traitement du signal","Radar UWB","Microcontrôleurs ARM Cortex-M","TensorFlow Lite Micro","FPGA","VHDL","Électronique marine","Bus CAN","NMEA 2000","Conception de cartes électroniques","C","C++","C#","Python"],"knowsLanguage":["fr","en","ar","es"],"sameAs":["https://www.linkedin.com/in/ali-azami-27b8681b4/"]}]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0J439TZPLC');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0J439TZPLC');
 </script>
 </head>
-<body>
+<body class="page-home">
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
 
-<nav>
-  <div class="nav-logo">ali<span>_azami</span>.dev</div>
-  <div class="nav-links">
-    <button class="nav-link" id="nav-home">Home</button>
-    <button class="nav-link" id="nav-projects">Projets</button>
-    <button class="nav-link" id="nav-vol">Bénévolat</button>
-    <button class="nav-link" id="nav-about">À propos</button>
-    <button class="nav-link" id="nav-contact">Contact</button>
-    <button class="nav-lang" id="lang-btn">EN</button>
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="./" aria-label="Ali Azami — Accueil">
+      <span class="brand-mark" aria-hidden="true">AA</span>
+      <span class="brand-name">Ali Azami</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Menu" data-nav>
+      <ul class="nav-list">
+        <li class="nav-indicator" aria-hidden="true" data-nav-indicator></li>
+<li style="--i:0"><a class="nav-link" href="#experience" data-section="experience"><span class="nav-num" aria-hidden="true">01</span>Expérience</a></li>
+<li style="--i:1"><a class="nav-link" href="#projets" data-section="projets"><span class="nav-num" aria-hidden="true">02</span>Projets</a></li>
+<li style="--i:2"><a class="nav-link" href="#competences" data-section="competences"><span class="nav-num" aria-hidden="true">03</span>Compétences</a></li>
+<li style="--i:3"><a class="nav-link" href="#a-propos" data-section="a-propos"><span class="nav-num" aria-hidden="true">04</span>À propos</a></li>
+<li style="--i:4"><a class="nav-link" href="#engagement" data-section="engagement"><span class="nav-num" aria-hidden="true">05</span>Engagement</a></li>
+<li style="--i:5"><a class="nav-link" href="#contact" data-section="contact"><span class="nav-num" aria-hidden="true">06</span>Contact</a></li>
+</ul>
+      <div class="nav-actions">
+<a class="nav-cv" href="assets/cv/CV-Ali-Azami-FR.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>CV</span></a>
+<a class="nav-lang" href="en/" hreflang="en" lang="en" aria-label="Read this page in English">EN</a>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>
 
-<div id="page-home" class="page">
-  <div class="hero" style="display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:center;min-height:calc(100vh - 60px);padding:4rem 3rem">
-    <div>
-      <div class="hero-tag"><span class="dot"></span><span id="hero-tag-txt">Disponible · Toulouse · Mobilité nationale & internationale</span></div>
-      <h1 class="hero-name">Ali <span class="accent">Azami</span></h1>
-      <p class="hero-title" id="hero-title">Ingénieur Systèmes Embarqués & IA embarquée</p>
-      <p class="hero-desc" id="hero-desc">Peu d'ingénieurs couvrent à la fois le firmware bas-niveau, le traitement du signal et le déploiement de modèles IA sur silicium. C'est exactement là que je me situe: de l'implémentation FFT sur DSP embarqué jusqu'à l'inférence CNN en temps réel sur ARM Cortex-M33, avec des résultats validés en conditions industrielles chez Schaeffler et NXP.</p>
-      <p class="hero-seek" id="hero-seek">Curieux et rigoureux, je suis à la recherche d'une nouvelle opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary" id="cta-projects">Voir mes projets</button>
-        <button class="btn-secondary" id="cta-contact">Me contacter</button>
-      </div>
-      <div class="hero-metrics">
-        <div><span class="metric-val" id="mv1">1.5 ans</span><span class="metric-label" id="ml1">d'expérience industrielle</span></div>
-        <div><span class="metric-val" id="mv2">3 projets</span><span class="metric-label" id="ml2">industriels livrés</span></div>
-        <div><span class="metric-val" id="mv3">Plateformes maîtrisées</span><span class="metric-label" id="ml3">MCU · NPU · DSP · FPGA · SoC</span></div>
-        <div><span class="metric-val" id="mv4">Architectures & familles</span><span class="metric-label" id="ml4">ARM · STM32 · NXP · RISC-V · Zynq</span></div>
-        <div><span class="metric-val" id="mv5">Outils IA & Deep Learning</span><span class="metric-label" id="ml5">PyTorch · TF · TFLite · DL · ML</span></div>
-        <div><span class="metric-val" id="mv6">Double diplôme</span><span class="metric-label" id="ml6">ENSEEIHT · EHTP Maroc</span></div>
-      </div>
-      <div class="hero-stack">
-        <span class="stack-pill">C/C++</span><span class="stack-pill">Rust</span><span class="stack-pill">Python</span><span class="stack-pill">Embedded Linux</span>
-        <span class="stack-pill">ARM Cortex-M</span><span class="stack-pill">TFLite Micro</span>
-        <span class="stack-pill">DSP / FFT</span><span class="stack-pill">NPU NXP</span>
-        <span class="stack-pill">VHDL / Verilog</span><span class="stack-pill">HLS</span><span class="stack-pill">FPGA</span>
-        <span class="stack-pill">Docker</span><span class="stack-pill">GitLab CI/CD</span>
-      </div>
+<main id="main">
+
+<section class="hero" id="top" data-hero>
+  <canvas class="hero-canvas" aria-hidden="true" data-signal></canvas>
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <p class="status-chip hero-in" style="--i:0"><span class="pulse" aria-hidden="true"></span>En poste · Ocean Data System, Lorient</p>
+      <h1 class="hero-title">
+        <span class="hero-name" data-split>Ali Azami</span>
+        <span class="hero-role hero-in" style="--i:5">Ingénieur IA embarquée &amp; systèmes embarqués</span>
+      </h1>
+      <p class="hero-typed hero-in" style="--i:6" aria-hidden="true"><span class="prompt">&gt;</span><span class="typed" data-typed='["IA embarqu\u00e9e sur microcontr\u00f4leur", "Edge AI et TinyML", "traitement du signal radar", "firmware temps r\u00e9el", "\u00e9lectronique marine", "conception de cartes", "FPGA et VHDL"]'>IA embarquée sur microcontrôleur</span><span class="caret"></span></p>
+      <p class="hero-lead hero-in" style="--i:7">Ma spécialité : l’IA embarquée. J’entraîne, je quantifie et je déploie des réseaux de neurones qui tournent en temps réel sur microcontrôleur, et je maîtrise toute la chaîne autour, du schéma de la carte au firmware. Aujourd’hui chez Ocean Data System, je développe l’électronique et les systèmes de sécurité de bord utilisés en course au large.</p>
+      <div class="hero-cta hero-in" style="--i:8">
+        <a class="btn btn--primary" href="#experience" data-magnetic><span>Voir mon expérience</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn--ghost" href="#projets" data-magnetic><span>Études de cas</span></a>
+<a class="btn btn--link" href="assets/cv/CV-Ali-Azami-FR.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>Télécharger le CV</span></a>      </div>
     </div>
-    <div class="hero-right-cards" style="display:flex;flex-direction:column;gap:1.25rem">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)" id="seeking-title-home">Ce que je recherche</div>
-        <p id="seeking-desc-home" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1rem">Curieux et rigoureux, je suis à la recherche d'une opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk1h">CDI · CDD</span></div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk2h">Systèmes embarqués · IA embarquée · DSP · FPGA</span></div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk3h">Tous secteurs (automotive, aérospatial, médical…)</span></div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-size:11px">▸</span><span id="sk4h">Langues AR · FR · EN · ES</span></div>
-        </div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:1.5rem">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:1rem;padding-bottom:6px;border-bottom:1px solid var(--border)" id="avail-card-title-home">Disponibilité</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:13px;color:var(--text2)" id="av1-label-home">Statut</span>
-            <span style="font-size:12px;font-weight:600;color:var(--accent3);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace" id="av1-val-home">Disponible immédiatement</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:13px;color:var(--text2)" id="av2-label-home">Localisation</span>
-            <span style="font-size:12px;color:var(--text);font-family:'JetBrains Mono',monospace" id="av2-val-home">Toulouse, France</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:13px;color:var(--text2)" id="av3-label-home">Mobilité</span>
-            <span style="font-size:12px;color:var(--text);font-family:'JetBrains Mono',monospace" id="av3-val-home">Nationale & internationale</span>
-        </div>
-        <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;gap:10px">
-          <a href="French CV - AZAMI Ali - Emb Sys.pdf" download style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;text-align:center;font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-decoration:none">↓ CV FR</a>
-          <a href="English CV - AZAMI Ali - Emb Sys.pdf" download style="flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;text-align:center;font-size:12px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-decoration:none">↓ CV EN</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <footer id="home-footer">ENSEEIHT Toulouse & EHTP Casablanca · Double Diplôme Ingénieur 2025</footer>
-</div>
 
-<div id="page-projects" class="page">
-  <div class="section">
-    <div class="section-label" id="proj-label">Projets</div>
-    <h2 class="section-title" id="proj-title">Ce que j'ai conçu et livré</h2>
-    <div class="projects-grid" id="projects-grid"></div>
+    <aside class="hero-panel hero-in" style="--i:9" aria-label="Poste actuel" data-tilt>
+      <div class="panel-head">
+        <span class="panel-title">Poste actuel</span>
+        <span class="panel-scope" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <dl class="panel-rows">
+<div><dt>Fonction</dt><dd>Ingénieur systèmes embarqués</dd></div>
+<div><dt>Société</dt><dd>Ocean Data System</dd></div>
+<div><dt>Domaine</dt><dd>Électronique marine, course au large</dd></div>
+<div><dt>Lieu</dt><dd>Lorient, Bretagne</dd></div>
+<div><dt>Depuis</dt><dd>Septembre 2026</dd></div>
+</dl>
+      <ul class="tags tags--mono"><li>C#</li><li>C / C++</li><li>Python</li><li>ARM9</li><li>CAN / J1939</li><li>NMEA 2000</li><li>KiCad</li></ul>
+<p class="panel-avail"><span class="pulse pulse--warm" aria-hidden="true"></span>Disponible à partir de janvier 2027 · Objectif : un poste en IA embarquée</p>    </aside>
   </div>
-  <footer id="proj-footer">3 projets industriels · 6 projets académiques · ENSEEIHT 2023–2025</footer>
-</div>
 
-<div id="page-about" class="page">
-  <div class="section">
-    <div class="about-grid">
-      <div>
-        <div class="aphoto"><img src="ali_photo.jpg" alt="Ali Azami" onerror="this.style.display='none'"></div>
-        <div style="margin-top:1.5rem">
-          <div class="asec">
-            <div class="asec-title" id="interests-title">Centres d'intérêt</div>
-            <div class="interests">
-              <span class="interest">⚡ Électronique DIY</span>
-              <span class="interest">🧠 Edge AI & TinyML</span>
-              <span class="interest">✈️ Travel</span>
-              <span class="interest">🤝 Erasmus & multiculturel</span>
-              <span class="interest">🔬 R&D & innovation</span>
-              <span class="interest">🎯 Problem solving</span>
+  <div class="container">
+    <dl class="hero-stats" data-reveal-group>
+<div class="stat" data-reveal style="--i:0">
+        <dt class="stat-value"><span data-count="99.3" data-decimals="1">99,3</span> %</dt>
+        <dd class="stat-label">d’accuracy pour un CNN radar quantifié INT8, déployé sur ARM Cortex-M33</dd>
+      </div>
+<div class="stat" data-reveal style="--i:1">
+        <dt class="stat-value"><span data-count="11.9" data-decimals="1">11,9</span> kB</dt>
+        <dd class="stat-label">le modèle embarqué complet, seize fois plus compact que son prédécesseur</dd>
+      </div>
+<div class="stat" data-reveal style="--i:2">
+        <dt class="stat-value">×<span data-count="42" data-decimals="0">42</span></dt>
+        <dd class="stat-label">d’accélération de l’inférence sur NPU face au cœur CPU</dd>
+      </div>
+<div class="stat" data-reveal style="--i:3">
+        <dt class="stat-value"><span data-count="2" data-decimals="0">2</span></dt>
+        <dd class="stat-label">diplômes d’ingénieur : ENSEEIHT Toulouse et EHTP Casablanca</dd>
+      </div>
+</dl>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+<ul><li>C</li><li>C++</li><li>C#</li><li>Python</li><li>ARM Cortex-M</li><li>ARM9</li><li>TinyCLR</li><li>TensorFlow Lite Micro</li><li>NPU</li><li>FFT / DSP</li><li>Radar UWB</li><li>CAN / J1939</li><li>NMEA 2000</li><li>BLE</li><li>VHDL</li><li>FPGA</li><li>HLS</li><li>KiCad</li><li>Git</li><li>Docker</li></ul><ul><li>C</li><li>C++</li><li>C#</li><li>Python</li><li>ARM Cortex-M</li><li>ARM9</li><li>TinyCLR</li><li>TensorFlow Lite Micro</li><li>NPU</li><li>FFT / DSP</li><li>Radar UWB</li><li>CAN / J1939</li><li>NMEA 2000</li><li>BLE</li><li>VHDL</li><li>FPGA</li><li>HLS</li><li>KiCad</li><li>Git</li><li>Docker</li></ul>    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="container">
+    <header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">01</span><span data-scramble>Expérience</span></p>
+  <h2 class="section-title">Expérience professionnelle</h2>
+<p class="section-intro">Trois environnements industriels, un même fil conducteur : faire fonctionner de l’électronique et du logiciel là où les contraintes sont bien réelles — mémoire comptée, temps réel, terrain.</p></header>
+
+    <article class="now" data-reveal>
+      <div class="now-border" aria-hidden="true"></div>
+      <div class="now-inner">
+        <header class="now-head">
+          <p class="badge badge--live"><span class="pulse" aria-hidden="true"></span>Poste actuel</p>
+          <h3 class="now-role">Ingénieur systèmes embarqués</h3>
+          <p class="now-org"><a href="https://www.oceandatasystem.com/" target="_blank" rel="noopener">Ocean Data System (ODS)</a></p>
+          <ul class="now-meta"><li>CDI</li><li>Lorient, Bretagne</li><li>Depuis septembre 2026</li></ul>
+        </header>
+        <div class="now-intro">
+          <p class="now-lead">ODS conçoit depuis 1991 l’électronique et l’informatique marines issues de la course au large : systèmes anti-chavirage, automates de gestion de quille, enregistreurs de données de bord, mesure d’effort sans fil, IHM embarquées. Des équipements que l’on retrouve sur des bateaux de course, des maxis et des superyachts.</p>
+          <div class="constraints">
+            <p class="eyebrow">Le cahier des charges du large</p>
+            <ul><li>Humidité, sel, vibrations</li><li>Alimentation 12/24 V perturbée</li><li>Aucune intervention possible en mer</li><li>Fiabilité et modes dégradés avant la performance</li></ul>
+          </div>
+        </div>
+
+        <div class="cycle" data-cycle>
+          <div class="cycle-copy">
+            <h4 class="now-h4">Un produit, du premier schéma au retour terrain</h4>
+            <p>Dans une structure à taille humaine, le poste couvre tout le cycle de vie du produit, sans relais entre bureau d’études, production et support. Je vois la panne chez le client, et c’est moi qui corrige la carte ou le firmware.</p>
+          </div>
+          <div class="cycle-body">
+            <div class="cycle-figure" aria-hidden="true">
+              <svg class="cycle-svg" viewBox="0 0 520 300" focusable="false">
+                <path class="cycle-track" d="M150 30H370A120 120 0 0 1 370 270H150A120 120 0 0 1 150 30Z"/>
+                <path class="cycle-flow" pathLength="1" d="M150 30H370A120 120 0 0 1 370 270H150A120 120 0 0 1 150 30Z" data-cycle-path/>
+                <g data-cycle-nodes></g>
+                <circle class="cycle-pulse" r="7" cx="150" cy="30" data-cycle-pulse/>
+              </svg>
+              <div class="cycle-center">
+                <span class="cycle-num" data-cycle-num>01</span>
+                <strong data-cycle-name>Conception</strong>
+              </div>
+              <p class="cycle-caption" data-cycle-text>Architecture, choix des composants, budget d’alimentation, interfaces de bus.</p>
             </div>
+            <ol class="cycle-steps">
+<li class="cycle-step is-active" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">01</span>
+                <span class="cycle-step-body"><strong>Conception</strong><span>Architecture, choix des composants, budget d’alimentation, interfaces de bus.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">02</span>
+                <span class="cycle-step-body"><strong>Schéma</strong><span>Saisie de schéma sous KiCad et Eagle.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">03</span>
+                <span class="cycle-step-body"><strong>Routage PCB</strong><span>Placement-routage des cartes et fichiers de fabrication.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">04</span>
+                <span class="cycle-step-body"><strong>Firmware</strong><span>C# sous .NET Micro Framework et TinyCLR, sur cible ARM9.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">05</span>
+                <span class="cycle-step-body"><strong>Mise en service</strong><span>Intégration à bord, configuration et validation en conditions réelles.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">06</span>
+                <span class="cycle-step-body"><strong>Production</strong><span>Assemblage, soudure manuelle, tests avant expédition.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">07</span>
+                <span class="cycle-step-body"><strong>Support</strong><span>Diagnostic à distance avec les équipages, skippers et chantiers.</span></span>
+              </li>
+<li class="cycle-step" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">08</span>
+                <span class="cycle-step-body"><strong>Retour terrain</strong><span>Chaque incident est tracé, puis réinjecté dans la conception.</span></span>
+              </li>
+</ol>
           </div>
         </div>
+
+        <h4 class="now-h4">Mes missions</h4>
+        <ul class="missions" data-reveal-group>
+<li class="mission card" data-reveal data-spot style="--i:0">
+            <span class="mission-num" aria-hidden="true">01</span>
+            <h5>Firmware embarqué</h5>
+            <p>Développement et maintenance du firmware des systèmes de bord, en C# sur .NET Micro Framework et TinyCLR (cible ARM9 à 400 MHz). Un runtime managé très contraint : concurrence par threads, timers et verrous, ramasse-miettes non déterministe. D’où des tampons circulaires producteur/consommateur et des allocations réduites au minimum dans les boucles d’acquisition.</p>
+          </li>
+<li class="mission card" data-reveal data-spot style="--i:1">
+            <span class="mission-num" aria-hidden="true">02</span>
+            <h5>Systèmes de sécurité</h5>
+            <p>Détection d’assiette et anti-chavirage, alarmes, homme à la mer, chien de garde. Chaque modification est évaluée sous l’angle du mode dégradé : une optimisation qui affaiblit une alarme ou une détection de panne est un défaut.</p>
+          </li>
+<li class="mission card" data-reveal data-spot style="--i:2">
+            <span class="mission-num" aria-hidden="true">03</span>
+            <h5>Acquisition multicapteurs</h5>
+            <p>Centrale d’attitude inertielle (AHRS), capteurs sans fil, claviers CAN : intégration sur bus CAN/J1939, NMEA 0183 et NMEA 2000, liaisons série RS-232/422/485, Modbus et BLE. Drivers, horodatage, enregistrement et supervision.</p>
+          </li>
+<li class="mission card" data-reveal data-spot style="--i:3">
+            <span class="mission-num" aria-hidden="true">04</span>
+            <h5>Conception électronique</h5>
+            <p>Schéma et routage sous KiCad et Eagle : évolution de cartes de production et refonte complète d’une carte de commande (alimentation 12/24/48 V, second port CAN indépendant). Un produit pris en charge de la carte au firmware : serveurs HTTP et FTP embarqués, point d’accès Wi-Fi, tableau de bord de configuration.</p>
+          </li>
+<li class="mission card" data-reveal data-spot style="--i:4">
+            <span class="mission-num" aria-hidden="true">05</span>
+            <h5>Débogage matériel et logiciel</h5>
+            <p>Les défauts les plus coûteux se cachent à l’interface des deux. Oscilloscope et analyseur logique, intégrité des bus, alimentation perturbée, confrontation des datasheets aux conditions réelles (temps de commutation contre temps bit) — puis correction du firmware ou de la carte.</p>
+          </li>
+<li class="mission card" data-reveal data-spot style="--i:5">
+            <span class="mission-num" aria-hidden="true">06</span>
+            <h5>Production, mise en service, support</h5>
+            <p>Assemblage, soudure et tests avant expédition ; intégration et validation à bord ; diagnostic à distance avec les équipages, les skippers et les chantiers. La même rigueur au téléphone qu’au laboratoire.</p>
+          </li>
+</ul>
+        <p class="swipe-hint" aria-hidden="true">Faire défiler</p>
+        <p class="now-side">En parallèle : outils internes d’IA locale — un agent d’indexation et de recherche documentaire appuyé sur un LLM local (Ollama), et une étude de faisabilité pour une IA générative hébergée sur site.</p>
+        <ul class="tags tags--mono"><li>C#</li><li>C</li><li>C++</li><li>Python</li><li>.NET Micro Framework</li><li>TinyCLR</li><li>ARM9</li><li>CAN / J1939</li><li>NMEA 0183 / 2000</li><li>RS-232 / 422 / 485</li><li>Modbus</li><li>BLE</li><li>KiCad</li><li>Eagle</li><li>Oscilloscope</li><li>Analyseur logique</li><li>LLM local</li></ul>
       </div>
-      <div>
-        <div class="atag" id="about-tag">À propos</div>
-        <h2 class="aname">Ali Azami</h2>
-        <p class="arole" id="about-role">Ingénieur Systèmes Embarqués & IA embarquée · ENSEEIHT Toulouse · EHTP Casablanca</p>
-        <p class="abio" id="about-bio">Doublement diplômé ingénieur — ENSEEIHT Toulouse (systèmes embarqués & IA) et EHTP Casablanca (génie électrique). Passionné par le challenge de faire tourner de l'intelligence artificielle dans des environnements ultra-contraints, j'ai travaillé sur des systèmes réels en conditions industrielles pendant plus d'un an et demi. Ce qui me motive : prendre un problème dur, comprendre la physique du signal, et construire la chaîne complète jusqu'à ce que ça tourne en temps réel sur silicium. En parallèle de mes formations, j'ai développé des compétences en Rust et en DevOps (Docker, GitLab CI/CD) en autodidacte, par curiosité et par conviction que l'ingénierie embarquée moderne ne s'arrête pas au firmware.</p>
+    </article>
 
-        <div class="asec">
-          <div class="asec-title" id="values-title">Valeurs & façon de travailler</div>
-          <div class="vgrid">
-            <div class="vcard"><div class="vtitle" id="v1t">Rigueur technique</div><div class="vdesc" id="v1d">Je valide avec des métriques réelles. Chaque résultat est benchmarké, pas estimé.</div></div>
-            <div class="vcard"><div class="vtitle" id="v2t">Curiosité permanente</div><div class="vdesc" id="v2d">Des specs hardware aux papiers de recherche, j'explore en profondeur.</div></div>
-            <div class="vcard"><div class="vtitle" id="v3t">Communication claire</div><div class="vdesc" id="v3d">Expérience avec équipes France/Allemagne. Multilinguisme comme atout professionnel.</div></div>
-            <div class="vcard"><div class="vtitle" id="v4t">Polyvalence assumée</div><div class="vdesc" id="v4d">Firmware C, Python ML, VHDL, Rust, CI/CD : je m'adapte à la stack du projet.</div></div>
+    <h3 class="sub-title" data-reveal>Avant ODS</h3>
+    <ol class="timeline" data-timeline>
+      <li class="tl-item" data-reveal>
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period">Sept. 2024 – Oct. 2025</p>
+        <div class="tl-card card" data-spot>
+          <h4 class="tl-role">Ingénieur IA embarquée et radar</h4>
+          <p class="tl-org">Vitesco Technologies / Schaeffler France<span>Alternance (M2) · Toulouse</span></p>
+          <ul class="tl-points"><li>Conception d’une chaîne radar UWB embarquée complète, de l’acquisition du signal brut à la décision : prétraitement, FFT, extraction de caractéristiques et classification par CNN en temps réel sur ARM Cortex-M33.</li><li>Portage en C de la chaîne de traitement prototypée sous Python, pour tenir les contraintes temps réel et mémoire de la cible et supprimer la dépendance à un PC hôte.</li><li>Entraînement, quantification INT8 et déploiement des modèles sur cible, avec arbitrage entre latence d’inférence, empreinte mémoire et qualité de détection.</li><li>Campagnes de mesure sur le terrain, analyse de l’écart entre laboratoire et conditions réelles, documentation technique en anglais avec des équipes internationales.</li></ul>
+          <ul class="tags "><li>ARM Cortex-M33</li><li>TensorFlow Lite Micro</li><li>FFT / DSP</li><li>C</li><li>Python</li><li>CAN</li></ul>
+          <a class="more" href="projets/radar-uwb-ia-embarquee-cortex-m33/">Lire l’étude de cas<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </li>
+      <li class="tl-item" data-reveal>
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period">Mai – Sept. 2024</p>
+        <div class="tl-card card" data-spot>
+          <h4 class="tl-role">Ingénieur IA embarquée</h4>
+          <p class="tl-org">NXP Semiconductors<span>Stage (M1) · Toulouse</span></p>
+          <ul class="tl-points"><li>Chaîne Edge AI de bout en bout : acquisition capteurs, entraînement du modèle, quantification et déploiement sur NPU eIQ Neutron.</li><li>Optimisation de l’inférence sur cible contrainte, comparaison de l’exécution sur NPU et sur cœur CPU, rédaction du guide technique de déploiement utilisé en interne.</li></ul>
+          <ul class="tags "><li>NXP MCX N947</li><li>NPU eIQ Neutron</li><li>TensorFlow Lite</li><li>SPI</li><li>C / C++</li></ul>
+          <a class="more" href="projets/edge-ai-capteur-intelligent-npu-nxp/">Lire l’étude de cas<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </li>
+      <li class="tl-item" data-reveal>
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period">Avr. – Oct. 2022</p>
+        <div class="tl-card card" data-spot>
+          <h4 class="tl-role">Ingénieur électronique et IoT</h4>
+          <p class="tl-org">EHTP<span>Stage de recherche · Casablanca</span></p>
+          <ul class="tl-points"><li>Architecture embarquée distribuée (Arduino Mega et Raspberry Pi 4) pour un robot mobile sur chenilles à bras 6 axes, vision YOLOv5 pour la détection d’objets et recharge autonome supervisée via MQTT.</li></ul>
+          <ul class="tags "><li>Raspberry Pi 4</li><li>Arduino Mega</li><li>YOLOv5</li><li>MQTT</li><li>Python</li></ul>
+          <a class="more" href="projets/robot-mobile-vision-yolo-iot/">Lire l’étude de cas<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </li>
+</ol>
+  </div>
+</section>
+
+<section class="section" id="projets">
+  <div class="container">
+    <header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">02</span><span data-scramble>Projets</span></p>
+  <h2 class="section-title">Études de cas</h2>
+<p class="section-intro">Six projets détaillés : le contexte, la chaîne technique, ce que j’ai réalisé, les résultats mesurés et les difficultés rencontrées.</p></header>
+    <div class="filters" role="group" aria-label="Filtrer les projets" data-reveal>
+<button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Tous</button>
+<button class="filter" type="button" data-filter="industry" aria-pressed="false">Industrie</button>
+<button class="filter" type="button" data-filter="research" aria-pressed="false">Recherche</button>
+<button class="filter" type="button" data-filter="academic" aria-pressed="false">Académique</button>
+</div>
+    <ul class="pgrid" data-reveal-group data-pgrid>
+      <li class="pcard card" data-kind="industry" data-reveal data-spot data-tilt style="--i:0">
+        <div class="pcard-visual"><svg class="viz viz-radar" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="viz-rg" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+  <g class="viz-line"><path d="M40 140A120 120 0 0 1 280 140"/><path d="M80 140A80 80 0 0 1 240 140"/><path d="M120 140A40 40 0 0 1 200 140"/><path d="M20 140h280M160 140V14"/></g>
+  <g class="radar-sweep"><path d="M160 140V18A122 122 0 0 0 99 34.3Z" fill="url(#viz-rg)"/><path class="viz-line viz-line--hot" d="M160 140V18"/></g>
+  <circle class="blip" style="--d:.65s" cx="112" cy="78" r="3.5"/><circle class="blip" style="--d:1.48s" cx="205" cy="58" r="3"/><circle class="blip" style="--d:1.96s" cx="236" cy="108" r="2.6"/>
+</svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--industry">Industrie</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/radar-uwb-ia-embarquee-cortex-m33/">Radar UWB : classification par CNN en temps réel sur Cortex-M33</a></h3>
+          <p class="pcard-org">Vitesco Technologies / Schaeffler France · Sept. 2024 – Oct. 2025</p>
+          <p class="pcard-desc">Pipeline embarqué complet pour un système automobile d’ouverture mains libres (Hands-Free Access) : acquisition radar UWB, traitement temps-fréquence par FFT sur DSP, inférence CNN temps réel sur ARM Cortex-M33 (128 kB RAM, 768 kB Flash).</p>
+          <dl class="pcard-metrics">
+<div><dt>99,3 %</dt><dd>Accuracy (validation)</dd></div><div><dt>11,9 kB</dt><dd>Modèle INT8</dd></div><div><dt>0,1 ms</dt><dd>Latence d’inférence</dd></div>          </dl>
+          <ul class="tags "><li>ARM Cortex-M33</li><li>TFLite Micro</li><li>FFT/DSP</li><li>CNN Conv2D</li><li>C/C++</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+      <li class="pcard card" data-kind="industry" data-reveal data-spot data-tilt style="--i:1">
+        <div class="pcard-visual"><svg class="viz viz-npu" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line">
+    <rect x="118" y="33" width="84" height="84" rx="10"/>
+<path d="M106 45h12M202 45h12M130 21v12M130 117v12"/><path d="M106 60h12M202 60h12M145 21v12M145 117v12"/><path d="M106 75h12M202 75h12M160 21v12M160 117v12"/><path d="M106 90h12M202 90h12M175 21v12M175 117v12"/><path d="M106 105h12M202 105h12M190 21v12M190 117v12"/>  </g>
+  <path class="trace" style="--d:0s" d="M10 60h60l16 15h20"/><path class="trace" style="--d:.7s" d="M10 105h46l20-15h30"/>
+  <path class="trace" style="--d:.35s" d="M214 60h24l18-18h54"/><path class="trace" style="--d:1.05s" d="M214 90h40l16 16h40"/>
+<circle class="neuron" style="--d:0.0s" cx="138" cy="53" r="5"/><circle class="neuron" style="--d:0.27s" cx="160" cy="53" r="5"/><circle class="neuron" style="--d:0.54s" cx="182" cy="53" r="5"/><circle class="neuron" style="--d:0.81s" cx="138" cy="75" r="5"/><circle class="neuron" style="--d:1.08s" cx="160" cy="75" r="5"/><circle class="neuron" style="--d:1.35s" cx="182" cy="75" r="5"/><circle class="neuron" style="--d:1.62s" cx="138" cy="97" r="5"/><circle class="neuron" style="--d:1.89s" cx="160" cy="97" r="5"/><circle class="neuron" style="--d:2.16s" cx="182" cy="97" r="5"/></svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--industry">Industrie</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/edge-ai-capteur-intelligent-npu-nxp/">Edge AI : capteur intelligent sur microcontrôleur à NPU intégré</a></h3>
+          <p class="pcard-org">NXP Semiconductors · Mai – Sept. 2024</p>
+          <p class="pcard-desc">Pipeline Edge AI complet : acquisition accéléromètre via SPI, génération dataset, entraînement CNN Conv1D, quantification INT8, déploiement sur NPU Neutron NXP — accélération ×42 sur opérations Conv1D int8.</p>
+          <dl class="pcard-metrics">
+<div><dt>99,3 %</dt><dd>Accuracy</dd></div><div><dt>×42</dt><dd>Accél. NPU</dd></div><div><dt>131 kB</dt><dd>Peak RAM</dd></div>          </dl>
+          <ul class="tags "><li>NXP MCXN947</li><li>NPU Neutron</li><li>TFLite</li><li>eIQ Portal</li><li>SPI</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+      <li class="pcard card" data-kind="academic" data-reveal data-spot data-tilt style="--i:2">
+        <div class="pcard-visual"><svg class="viz viz-fpga" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+<rect class="cell cell--hot" style="--d:0.0s" x="43" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="63" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="83" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="103" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="123" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="143" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="163" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="183" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="203" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.75s" x="223" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="243" y="28" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:1.75s" x="263" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="43" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="63" y="48" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:4.0s" x="83" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="103" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="123" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="143" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="163" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="183" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="203" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="223" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="243" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="263" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="43" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="63" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="83" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="103" y="68" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.75s" x="123" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="143" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="163" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="183" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:4.0s" x="203" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="223" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="243" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="263" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="43" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="63" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="83" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="103" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="123" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="143" y="88" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.5s" x="163" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="183" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="203" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="223" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.75s" x="243" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="263" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="43" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="63" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="83" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:4.0s" x="103" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="123" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="143" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="163" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="183" y="108" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.25s" x="203" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="223" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="243" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="263" y="108" width="14" height="14" rx="3"/></svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--academic">Académique</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/acceleration-cnn-fpga-hls/">Accélération matérielle d’un CNN sur FPGA par synthèse de haut niveau</a></h3>
+          <p class="pcard-org">ENSEEIHT · 2024 – 2025</p>
+          <p class="pcard-desc">Flux complet d’accélération matérielle CNN sur SoC Zynq-7000 : C++ → SystemC → HLS Catapult → RTL VHDL → IP Vivado → Vitis. Accélération ×2,6 sur Conv2D.</p>
+          <dl class="pcard-metrics">
+<div><dt>×2,6</dt><dd>Accél. Conv2D</dd></div><div><dt>455 µs</dt><dd>Par filtre</dd></div><div><dt>20 ns</dt><dd>Additionneur pipeliné</dd></div>          </dl>
+          <ul class="tags "><li>HLS Catapult</li><li>VHDL</li><li>Vivado</li><li>Vitis</li><li>SystemC</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+      <li class="pcard card" data-kind="academic" data-reveal data-spot data-tilt style="--i:3">
+        <div class="pcard-visual"><svg class="viz viz-wire" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M20 28h280M20 68h280M20 122h280" stroke-dasharray="2 6"/></g>
+  <path class="viz-line" d="M20 52h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20"/>
+  <path class="viz-line viz-line--hot wire-data" pathLength="1" d="M20 84h26v34h84v-34h22v34h10v-34h30v34h34v-34h22v34h10v-34h42"/>
+  <path class="wire-scan" d="M20 20v110"/>
+</svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--academic">Académique</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/thermometre-vhdl-1-wire-fpga/">Thermomètre numérique 1-Wire en VHDL sur FPGA</a></h3>
+          <p class="pcard-org">ENSEEIHT · 2023 – 2024</p>
+          <p class="pcard-desc">Système synchrone VHDL complet sur FPGA Nexys A7 (Artix-7). 6 FSM pour communication 1-Wire avec DS18S20. Affichage 7-segments, précision 0,5 °C, validé sur oscilloscope.</p>
+          <dl class="pcard-metrics">
+<div><dt>6</dt><dd>FSM conçues</dd></div><div><dt>0,5 °C</dt><dd>Précision</dd></div><div><dt>480 µs</dt><dd>Reset 1-Wire</dd></div>          </dl>
+          <ul class="tags "><li>VHDL</li><li>Xilinx Artix-7</li><li>Vivado</li><li>1-Wire</li><li>FSM</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+      <li class="pcard card" data-kind="research" data-reveal data-spot data-tilt style="--i:4">
+        <div class="pcard-visual"><svg class="viz viz-vision" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M0 132h320M30 112h260M60 96h200M0 150 110 84M320 150 210 84M160 150V84M80 150l55-66M240 150l-55-66"/></g>
+  <g class="bbox" style="--d:0s"><path class="viz-line viz-line--hot" d="M52 34v-10h10M118 24h10v10M128 74v10h-10M62 84H52V74"/><rect x="52" y="24" width="76" height="60" rx="2"/><text x="54" y="18">obj 0.94</text></g>
+  <g class="bbox" style="--d:1.2s"><path class="viz-line viz-line--hot" d="M196 62v-10h10M258 52h10v10M268 108v10h-10M206 118h-10v-10"/><rect x="196" y="52" width="72" height="66" rx="2"/><text x="198" y="46">obj 0.88</text></g>
+</svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--research">Recherche</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/robot-mobile-vision-yolo-iot/">Robot mobile autonome et station de recharge connectée</a></h3>
+          <p class="pcard-org">EHTP · Avr. – Oct. 2022</p>
+          <p class="pcard-desc">Architecture embarquée distribuée (Raspberry Pi 4 + Arduino Mega) pour robot mobile sur chenilles avec bras 6 axes. Vision YOLOv5, supervision MQTT, station de recharge autonome.</p>
+          <dl class="pcard-metrics">
+<div><dt>YOLOv5</dt><dd>Vision temps réel</dd></div><div><dt>MQTT</dt><dd>Supervision IoT</dd></div><div><dt>6 axes</dt><dd>Bras robot</dd></div>          </dl>
+          <ul class="tags "><li>YOLOv5</li><li>MQTT</li><li>Raspberry Pi 4</li><li>Arduino Mega</li><li>IoT</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+      <li class="pcard card" data-kind="academic" data-reveal data-spot data-tilt style="--i:5">
+        <div class="pcard-visual"><svg class="viz viz-ecg" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M0 40h320M0 75h320M0 110h320M53 10v130M107 10v130M160 10v130M213 10v130M267 10v130" stroke-dasharray="2 6"/></g>
+  <path class="viz-line viz-line--hot ecg-trace" pathLength="1" d="M0 82h34l7-9 7 9h12l5 9 8-62 8 72 6-19h16l9-13 10 13h38l7-9 7 9h12l5 9 8-62 8 72 6-19h16l9-13 10 13h36"/>
+</svg></div>
+        <div class="pcard-body">
+          <p class="badge badge--academic">Académique</p>
+          <h3 class="pcard-title"><a class="stretched" href="projets/classification-ecg-machine-learning/">Classification d’arythmies ECG : apprentissage supervisé et non supervisé</a></h3>
+          <p class="pcard-org">ENSEEIHT · 2024 – 2025</p>
+          <p class="pcard-desc">Classification arythmies MIT-BIH (5 classes, 156 features/signal). Comparaison KNN, RandomForest, KMeans, clustering agglomératif. Analyse SHAP, Boruta, ACP.</p>
+          <dl class="pcard-metrics">
+<div><dt>92,5 %</dt><dd>Accuracy RF</dd></div><div><dt>135</dt><dd>Features Boruta</dd></div><div><dt>5</dt><dd>Classes</dd></div>          </dl>
+          <ul class="tags "><li>Python</li><li>scikit-learn</li><li>RandomForest</li><li>SHAP</li><li>Boruta</li></ul>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </li>
+</ul>
+    <p class="swipe-hint" aria-hidden="true">Faire défiler</p>
+  </div>
+</section>
+
+<section class="section" id="competences">
+  <div class="container">
+    <header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">03</span><span data-scramble>Compétences</span></p>
+  <h2 class="section-title">Compétences techniques</h2>
+<p class="section-intro">Pas de jauges ni de pourcentages : ce que j’ai réellement mis en œuvre, et dans quel contexte.</p></header>
+    <ul class="skills" data-reveal-group>
+<li class="skill card" data-reveal data-spot style="--i:0">
+        <h3>IA embarquée</h3>
+        <p>De l’entraînement au déploiement sur MCU, NPU et DSP, avec arbitrage latence / mémoire.</p>
+        <ul class="tags tags--mono"><li>CNN sur MCU, NPU, DSP</li><li>Quantification INT8 (QAT, PTQ)</li><li>TensorFlow Lite Micro</li><li>PyTorch</li><li>TensorFlow</li><li>Vision (YOLO, OpenCV)</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:1">
+        <h3>Traitement du signal</h3>
+        <p>Chaîne radar complète portée de Python vers le C embarqué.</p>
+        <ul class="tags tags--mono"><li>Radar UWB</li><li>FFT</li><li>Filtrage numérique</li><li>Extraction de caractéristiques</li><li>Virgule fixe</li><li>MATLAB</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:2">
+        <h3>Systèmes embarqués</h3>
+        <p>En production chez ODS, sur cible automobile chez Schaeffler, sur cartes d’évaluation chez NXP.</p>
+        <ul class="tags tags--mono"><li>Temps réel</li><li>ARM Cortex-M</li><li>ARM9</li><li>Bare-metal</li><li>RTOS</li><li>Drivers capteurs</li><li>SPI</li><li>I²C</li><li>UART</li><li>CAN / J1939</li><li>NMEA 0183 / 2000</li><li>BLE</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:3">
+        <h3>Programmation</h3>
+        <p>C et C++ sur microcontrôleur, C# sur runtime embarqué, Python pour l’outillage et l’apprentissage automatique. Pratiqués chez ODS, Schaeffler et NXP.</p>
+        <ul class="tags tags--mono"><li>C</li><li>C++</li><li>Python</li><li>C#</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:4">
+        <h3>Design numérique</h3>
+        <p>Flot complet du C++ au bitstream, machines à états et protocoles en VHDL.</p>
+        <ul class="tags tags--mono"><li>VHDL</li><li>Verilog</li><li>FPGA / SoC</li><li>HLS</li><li>SystemC</li><li>Simulink</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:5">
+        <h3>Conception électronique</h3>
+        <p>Cartes de production chez ODS, du schéma aux fichiers de fabrication.</p>
+        <ul class="tags tags--mono"><li>KiCad</li><li>Eagle</li><li>Schéma et routage PCB</li><li>PSPICE</li><li>Oscilloscope</li><li>Analyseur logique</li></ul>
+      </li>
+<li class="skill card" data-reveal data-spot style="--i:6">
+        <h3>Outils</h3>
+        <p>L’environnement de travail au quotidien.</p>
+        <ul class="tags tags--mono"><li>Git</li><li>GitLab CI/CD</li><li>Docker</li><li>Linux</li><li>CMake</li><li>Keil</li><li>MCUXpresso</li><li>Lauterbach Trace32</li></ul>
+      </li>
+</ul>
+  </div>
+</section>
+
+<section class="section" id="a-propos">
+  <div class="container">
+    <header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">04</span><span data-scramble>À propos</span></p>
+  <h2 class="section-title">Du signal à la décision, du schéma au terrain</h2>
+</header>
+    <div class="about">
+      <figure class="about-photo" data-reveal="clip" data-tilt>
+        <img src="assets/img/portrait-700.webp" srcset="assets/img/portrait-420.webp 420w, assets/img/portrait-700.webp 700w" sizes="(max-width: 860px) 70vw, 380px" width="700" height="875" alt="Portrait d’Ali Azami, enveloppe de l’ENSEEIHT à la main" loading="lazy" decoding="async">
+        <span class="about-photo-frame" aria-hidden="true"></span>
+      </figure>
+      <div class="about-text">
+<p data-reveal style="--i:0">Ingénieur doublement diplômé — ENSEEIHT à Toulouse (électronique et IA pour systèmes embarqués) et EHTP à Casablanca (génie électrique) — je travaille là où le logiciel rencontre la physique : un signal à acquérir, une mémoire comptée en kilo-octets, une échéance temps réel à tenir.</p><p data-reveal style="--i:1">Chez Schaeffler et NXP, j’ai mené des chaînes complètes d’IA embarquée, de l’acquisition radar à l’inférence sur microcontrôleur. Chez Ocean Data System, j’ai élargi le périmètre à l’ensemble du produit : la carte, le firmware, la mise en service et le support, pour des équipements qui doivent tenir en mer sans intervention possible.</p><p data-reveal style="--i:2">Ce qui me motive : prendre un problème difficile, comprendre ce que dit vraiment la mesure, et construire la chaîne complète jusqu’à ce qu’elle fonctionne sur le terrain. La suite que je vise : l’IA embarquée, précisément — concevoir, optimiser et déployer des modèles sur cible contrainte.</p>        <div class="about-facts" data-reveal>
+          <div>
+            <h3 class="eyebrow">Langues</h3>
+            <ul class="langs"><li><strong>Arabe</strong><span>Langue maternelle</span></li><li><strong>Français</strong><span>Bilingue</span></li><li><strong>Anglais</strong><span>Avancé, usage professionnel</span></li><li><strong>Espagnol</strong><span>Intermédiaire</span></li></ul>
+          </div>
+          <div>
+            <h3 class="eyebrow">Centres d’intérêt</h3>
+            <ul class="tags"><li>Robotique mobile et vision par ordinateur</li><li>Électronique DIY</li><li>Voyages et rencontres interculturelles</li></ul>
           </div>
         </div>
-
-        <div class="asec">
-          <div class="asec-title" id="skills-title">Compétences techniques</div>
-          <div id="skills-grid"></div>
-        </div>
-
-        <div class="asec">
-          <div class="asec-title" id="langs-title">Langues</div>
-          <div id="langs-grid"></div>
-        </div>
-
-        <div class="asec">
-          <div class="asec-title" id="timeline-title">Parcours</div>
-          <div id="timeline"></div>
-        </div>
-
       </div>
     </div>
-  </div>
-  <footer id="about-footer">Disponible immédiatement · Mobilité nationale & internationale</footer>
-</div>
 
-<div id="page-vol" class="page">
-  <div class="section">
-    <div class="section-label" id="vol-page-label">Bénévolat</div>
-    <h2 class="section-title" id="vol-page-title">Engagement & communauté</h2>
-    <p class="vol-page-intro" id="vol-page-intro">Parallèlement à mes études et expériences professionnelles, j'ai toujours cherché à m'engager activement dans des structures associatives — pour transmettre, coordonner, ou créer de l'impact.</p>
-    <div id="vol-cards-big"></div>
-  </div>
-  <footer id="vol-footer">3 engagements associatifs · Toulouse & Casablanca · 2021 – aujourd'hui</footer>
-</div>
+    <h3 class="sub-title" data-reveal>Ma façon de travailler</h3>
+    <ol class="method" data-reveal-group>
+<li class="card" data-reveal data-spot style="--i:0">
+        <span class="method-num" aria-hidden="true">01</span>
+        <h4>Le fait avant l’interprétation</h4>
+        <p>Je reformule le symptôme avant de chercher une solution, et je ne conclus que sur une cause démontrée.</p>
+      </li>
+<li class="card" data-reveal data-spot style="--i:1">
+        <span class="method-num" aria-hidden="true">02</span>
+        <h4>Mesurer plutôt qu’estimer</h4>
+        <p>Latence, mémoire, taux de détection : chaque résultat est mesuré sur la cible, pas supposé.</p>
+      </li>
+<li class="card" data-reveal data-spot style="--i:2">
+        <span class="method-num" aria-hidden="true">03</span>
+        <h4>Penser mode dégradé</h4>
+        <p>Ce qui part en mer ne se corrige pas à distance. Chaque modification s’accompagne de ce qu’il faut retester.</p>
+      </li>
+<li class="card" data-reveal data-spot style="--i:3">
+        <span class="method-num" aria-hidden="true">04</span>
+        <h4>Du laboratoire au terrain</h4>
+        <p>Un modèle à 99 % en validation n’est qu’un début : je vais mesurer l’écart en conditions réelles et j’en cherche la cause.</p>
+      </li>
+</ol>
 
-<div id="page-contact" class="page">
-  <div class="section">
-    <div class="section-label" id="contact-label">Contact</div>
-    <h2 class="section-title" id="contact-title">Travaillons ensemble</h2>
-    <div class="cgrid">
-      <div>
-        <p class="cdesc" id="contact-desc">Je suis disponible immédiatement pour des opportunités en ingénierie embarquée, firmware, IA embarquée ou traitement du signal. N'hésitez pas à m'écrire directement.</p>
-        <div class="cavail"><div class="adot"></div><span class="atext" id="avail-text">Disponible immédiatement · Toulouse + mobilité</span></div>
-        <a href="mailto:Azamiali2706@gmail.com" class="clink">
-          <div class="cicon ci-email">✉</div>
-          <div><div class="clabel">Email</div><div class="cval">Azamiali2706@gmail.com</div></div>
-          <span style="color:var(--text3);margin-left:auto">→</span>
-        </a>
-        <a href="https://linkedin.com/in/ali-azami-27b8681b4" target="_blank" class="clink">
-          <div class="cicon ci-li">in</div>
-          <div><div class="clabel">LinkedIn</div><div class="cval">ali-azami-27b8681b4</div></div>
-          <span style="color:var(--text3);margin-left:auto">→</span>
-        </a>
-        <a href="tel:+33745558127" class="clink">
-          <div class="cicon ci-phone">☎</div>
-          <div><div class="clabel" id="phone-label">Téléphone</div><div class="cval">+33 7 45 55 81 27</div></div>
-          <span style="color:var(--text3);margin-left:auto">→</span>
-        </a>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1.5rem">
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem">
-          <div class="asec-title" id="msg-title" style="margin-bottom:1rem">Envoyer un message</div>
-          <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <div><label class="flabel" id="fl-name">Nom / Société</label><input class="finput" type="text" id="fi-name" placeholder="Votre nom ou entreprise"></div>
-            <div><label class="flabel" id="fl-email">Email</label><input class="finput" type="email" id="fi-email" placeholder="votre@email.com"></div>
-            <div><label class="flabel" id="fl-msg">Message</label><textarea class="finput" id="fi-msg" rows="4" placeholder="Décrivez votre projet ou opportunité..."></textarea></div>
-            <button class="fsubmit" id="form-submit">Envoyer le message</button>
-            <p class="fnote" id="form-note">Je réponds généralement sous 24h.</p>
+    <h3 class="sub-title" data-reveal>Formation</h3>
+    <ol class="edu" data-reveal-group>
+<li data-reveal style="--i:0">
+        <p class="edu-period">2023 – 2025</p>
+        <div>
+          <h4>Diplôme d’ingénieur — Électronique et IA pour systèmes embarqués <span class="badge badge--plain">Double diplôme</span></h4>
+          <p>ENSEEIHT (Toulouse INP), Toulouse</p>
+        </div>
+      </li>
+<li data-reveal style="--i:1">
+        <p class="edu-period">2021 – 2025</p>
+        <div>
+          <h4>Diplôme d’ingénieur — Génie électrique et électronique</h4>
+          <p>École Hassania des Travaux Publics (EHTP), Casablanca</p>
+        </div>
+      </li>
+<li data-reveal style="--i:2">
+        <p class="edu-period">2018 – 2020</p>
+        <div>
+          <h4>Classes préparatoires MPSI / MP</h4>
+          <p>CPGE Ibn Ghazi, Rabat</p>
+        </div>
+      </li>
+</ol>
+  </div>
+</section>
+
+<section class="section" id="engagement">
+  <div class="container">
+    <header class="section-head" data-reveal>
+  <p class="section-label"><span class="section-num">05</span><span data-scramble>Engagement</span></p>
+  <h2 class="section-title">Engagement associatif</h2>
+<p class="section-intro">En parallèle de mes études, je me suis toujours engagé dans des associations — pour transmettre, coordonner et faire avancer des projets collectifs.</p></header>
+    <ul class="vols" data-reveal-group>
+<li class="vol card" data-reveal data-spot style="--i:0">
+        <div class="vol-head">
+          <span class="vol-logo vol-logo--light"><img src="assets/img/logo-esn.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+          <div>
+            <h3>Erasmus Student Network</h3>
+            <p class="vol-role">Membre actif</p>
+            <p class="vol-meta">Toulouse · depuis 2023</p>
           </div>
         </div>
-      </div>
-    </div>
+        <ul class="vol-points"><li>Organisation et encadrement de soirées, de voyages et d’événements culturels pour les étudiants internationaux.</li><li>Accompagnement des étudiants dans leur intégration et leur découverte de la culture française.</li></ul>
+      </li>
+<li class="vol card" data-reveal data-spot style="--i:1">
+        <div class="vol-head">
+          <span class="vol-logo vol-logo--dark"><img src="assets/img/logo-electro-power.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+          <div>
+            <h3>EHTP Electro-Power</h3>
+            <p class="vol-role">Vice-président</p>
+            <p class="vol-meta">Casablanca · 2021 – 2023</p>
+          </div>
+        </div>
+        <ul class="vol-points"><li>Étude de faisabilité et suivi des projets électroniques proposés par les membres du club, coordination des équipes projet.</li><li>Gestion de la trésorerie et des partenariats industriels, organisation de formations techniques pour les élèves ingénieurs.</li></ul>
+      </li>
+<li class="vol card" data-reveal data-spot style="--i:2">
+        <div class="vol-head">
+          <span class="vol-logo vol-logo--light"><img src="assets/img/logo-enactus.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+          <div>
+            <h3>Enactus EHTP</h3>
+            <p class="vol-role">Chef d’équipe</p>
+            <p class="vol-meta">Casablanca · 2022 – 2023</p>
+          </div>
+        </div>
+        <ul class="vol-points"><li>Pilotage d’une équipe étudiante sur des projets d’entrepreneuriat social alignés sur les Objectifs de développement durable.</li><li>Animation de l’équipe, suivi de l’avancement et présentation des projets aux partenaires externes.</li></ul>
+      </li>
+</ul>
   </div>
-  <footer id="contact-footer">Ali Azami · Ingénieur Systèmes Embarqués & IA · Toulouse 2025</footer>
-</div>
+</section>
 
-<div class="modal-overlay" id="modal">
-  <div class="modal" id="modal-content"></div>
-</div>
+<section class="section section--contact" id="contact">
+  <div class="container">
+    <div class="contact" data-reveal>
+      <p class="section-label"><span class="section-num">06</span><span data-scramble>Contact</span></p>
+      <h2 class="contact-title">Parlons technique</h2>
+      <p class="contact-text">Je souhaite poursuivre ma carrière dans l’IA embarquée : Edge AI, TinyML, déploiement de modèles sur microcontrôleur, NPU ou DSP. Une opportunité dans ce domaine, une question sur une étude de cas ? Écrivez-moi : je réponds généralement sous 24 h.</p>
+<p class="contact-avail"><span class="pulse pulse--warm" aria-hidden="true"></span>Disponible à partir de janvier 2027 · Objectif : un poste en IA embarquée</p>      <div class="contact-mail">
+        <a class="mail-link" href="mailto:azamiali2706@gmail.com" data-track="contact_email">azamiali2706@gmail.com</a>
+        <button class="copy" type="button" data-copy="azamiali2706@gmail.com" data-copied="Copié"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copier</span></button>
+      </div>
+      <ul class="contact-list">
+        <li><a href="https://www.linkedin.com/in/ali-azami-27b8681b4/" target="_blank" rel="noopener me" data-track="contact_linkedin"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M12 17v-3.6a2.1 2.1 0 0 1 4.2 0V17M12 10.5V17"/></svg><span><small>LinkedIn</small>linkedin.com/in/ali-azami-27b8681b4</span></a></li>
+        <li><a href="tel:+33745558127" data-track="contact_phone"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 4h3.2l1.6 4-2 1.3a12 12 0 0 0 6.4 6.4l1.3-2 4 1.6v3.2a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 4 5.6 1.5 1.5 0 0 1 5.5 4z"/></svg><span><small>Téléphone</small>+33 7 45 55 81 27</span></a></li>
+        <li><span class="contact-static"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><small>Localisation</small>Lorient, Bretagne — mobilité nationale et internationale</span></span></li>
+      </ul>
+<div class="contact-cv" id="cv">
+        <h3 class="eyebrow">Télécharger mon CV</h3>
+        <ul class="contact-list">
+<li><a href="assets/cv/CV-Ali-Azami-FR.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span><small>PDF · 1 page</small>CV en français</span></a></li><li><a href="assets/cv/CV-Ali-Azami-EN.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span><small>PDF · 1 page</small>CV en anglais</span></a></li>        </ul>
+      </div>    </div>
+  </div>
+</section>
+</main>
 
-<script>
-var lang = 'fr';
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">Ali Azami</p>
+      <p class="footer-tag">Ingénieur systèmes embarqués · Lorient</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="mailto:azamiali2706@gmail.com" data-track="contact_email">E-mail</a></li>
+      <li><a href="https://www.linkedin.com/in/ali-azami-27b8681b4/" target="_blank" rel="noopener me" data-track="contact_linkedin">LinkedIn</a></li>
+      <li><a href="en/" hreflang="en" lang="en">English</a></li>
+    </ul>
+    <p class="footer-note">© 2026 Ali Azami · Site statique conçu sans framework : HTML, CSS et JavaScript.</p>
+  </div>
+</footer>
 
-var TR = {
-  fr:{
-    home:'Home',projects:'Projets',about:'À propos',contact:'Contact',
-    heroTag:'Disponible · Toulouse · Mobilité nationale & internationale',
-    heroTitle:'Ingénieur Systèmes Embarqués & IA embarquée',
-    heroDesc:"Peu d'ingénieurs couvrent à la fois le firmware bas-niveau, le traitement du signal et le déploiement de modèles IA sur silicium. C'est exactement là que je me situe: de l'implémentation FFT sur DSP embarqué jusqu'à l'inférence CNN en temps réel sur ARM Cortex-M33, avec des résultats validés en conditions industrielles chez Schaeffler et NXP.",
-    cta1:'Voir mes projets',cta2:'Me contacter',
-    mv1:'1.5 ans',ml1:"d'expérience industrielle",
-    mv2:'3 projets',ml2:'industriels livrés',
-    mv3:'Plateformes maîtrisées',ml3:'MCU · NPU · DSP · FPGA · SoC',
-    mv4:'Architectures & familles',ml4:'ARM · STM32 · NXP · RISC-V · Zynq',
-    mv5:'Outils IA & Deep Learning', ml5:'PyTorch · TF · TFLite · DL · ML',
-    mv6:'Double diplôme',ml6:'ENSEEIHT · EHTP Maroc',
-    heroSeek:"Curieux et rigoureux, je suis à la recherche d'une nouvelle opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.",
-    cvBtnTxt:'Télécharger CV', cvFile:'French_CV_-_AZAMI_Ali_-_Emb_Sys.pdf',
-    phoneLabel:'Téléphone',
-    seekingTitle:'Ce que je recherche',
-    seekingDesc:"Curieux et rigoureux, je suis à la recherche d'une opportunité en ingénierie embarquée — passionné par l'innovation technologique et motivé par des projets ambitieux alliant technique et créativité.",
-    sk1:'CDI · CDD', sk2:'Systèmes embarqués · IA embarquée · DSP · FPGA',
-    sk3:'Tous secteurs (automotive, aérospatial, médical, industrie…)', 
-    sk4:'Langues AR · FR · EN · ES',
-    availCardTitle:'Disponibilité',
-    av1Label:'Statut', av1Val:'Disponible immédiatement',
-    av2Label:'Localisation', av2Val:'France',
-    av3Label:'Mobilité', av3Val:'Nationale & internationale',
-    msgTitle:'Envoyer un message',
-    homeFooter:'ENSEEIHT Toulouse & EHTP Casablanca · Double Diplôme Ingénieur 2025',
-    projLabel:'Projets',projTitle:"Ce que j'ai conçu et livré",
-    projFooter:'3 projets industriels · 6 projets académiques · ENSEEIHT 2023–2025',
-    aboutTag:'À propos',
-    aboutRole:'Ingénieur Systèmes Embarqués & IA embarquée · ENSEEIHT Toulouse · EHTP Casablanca',
-    aboutBio:"Doublement diplômé ingénieur — ENSEEIHT Toulouse (systèmes embarqués & IA) et EHTP Casablanca (génie électrique). Passionné par le challenge de faire tourner de l'intelligence artificielle dans des environnements ultra-contraints, j'ai travaillé sur des systèmes réels en conditions industrielles pendant plus d'un an et demi. Ce qui me motive : prendre un problème dur, comprendre la physique du signal, et construire la chaîne complète jusqu'à ce que ça tourne en temps réel sur silicium. En parallèle de mes formations, j'ai développé des compétences en Rust et en DevOps (Docker, GitLab CI/CD) en autodidacte, par curiosité et par conviction que l'ingénierie embarquée moderne ne s'arrête pas au firmware.",
-    valuesTitle:'Valeurs & façon de travailler',
-    v1t:'Rigueur technique',v1d:'Je valide avec des métriques réelles. Chaque résultat est benchmarké, pas estimé.',
-    v2t:'Curiosité permanente',v2d:"Des specs hardware aux papiers de recherche, j'explore en profondeur.",
-    v3t:'Communication claire',v3d:'Expérience avec équipes France/Allemagne. Multilinguisme comme atout professionnel.',
-    v4t:'Polyvalence assumée',v4d:"Firmware C, Python ML, VHDL, Rust, CI/CD : je m'adapte à la stack du projet.",
-    skillsTitle:'Compétences techniques',langsTitle:'Langues',
-    timelineTitle:'Parcours',volTitle:'Bénévolat & engagement',volNav:'Bénévolat',
-    volPageLabel:'Bénévolat',volPageTitle:'Engagement & communauté',
-    volPageIntro:"Parallèlement à mes études et expériences professionnelles, j'ai toujours cherché à m'engager activement dans des structures associatives — pour transmettre, coordonner, ou créer de l'impact.",
-    volFooter:"3 engagements associatifs · Toulouse & Casablanca · 2021 – aujourd'hui",
-    interestsTitle:"Centres d'intérêt",
-    contactLabel:'Contact',contactTitle:'Travaillons ensemble',
-    contactDesc:"Je suis disponible immédiatement pour des opportunités en ingénierie embarquée, firmware, IA embarquée ou traitement du signal. N'hésitez pas à m'écrire directement.",
-    availText:'Disponible immédiatement · Toulouse + mobilité',
-    flName:'Nom / Société',flEmail:'Email',flMsg:'Message',
-    fsubmit:'Envoyer le message',fnote:'Je réponds généralement sous 24h.',
-    aboutFooter:'Disponible immédiatement · Mobilité nationale & internationale',
-    contactFooter:'Ali Azami · Ingénieur Systèmes Embarqués & IA · Toulouse 2025',
-    pipelineTitle:'Pipeline technique',techTitle:'Stack technique',
-    metricsTitle:'Résultats clés',challengesTitle:'Défis surmontés',contextTitle:'Contexte',
-    tasksTitle:'Tâches réalisées',
-    badgeInd:'Industriel',badgeAc:'Académique'
-  },
-  en:{
-    home:'Home',projects:'Projects',about:'About',contact:'Contact',
-    heroTag:'Available · Toulouse · Open to relocation',
-    heroTitle:'Embedded Systems & Embedded AI Engineer',
-    heroDesc:'Few engineers cover low-level firmware, signal processing, and AI model deployment on silicon all at once. That\'s exactly where I stand: from FFT implementation on embedded DSP to real-time CNN inference on ARM Cortex-M33, with results validated under industrial conditions at Schaeffler and NXP.',
-    cta1:'View my projects',cta2:'Get in touch',
-    mv1:'1.5 years',ml1:'of industrial experience',
-    mv2:'3 projects',ml2:'shipped industrially',
-    mv3:'Mastered platforms', ml3:'MCU · NPU · DSP · FPGA · SoC',
-    mv4:'Architectures & families', ml4:'ARM · STM32 · NXP · RISC-V · Zynq',
-    mv5:'AI & Deep Learning tools', ml5:'PyTorch · TF · TFLite · DL · ML',
-    mv6:'Dual degree', ml6:'ENSEEIHT · EHTP Morocco',
-    heroSeek:'Curious and rigorous, I am looking for a new opportunity in embedded engineering — passionate about technological innovation and motivated by ambitious projects combining technical expertise and creativity.',
-    cvBtnTxt:'Download CV', cvFile:'English_CV_-_AZAMI_Ali_-_Enhanced.pdf',
-    phoneLabel:'Phone',
-    seekingTitle:'What I am looking for',
-    seekingDesc:'Curious and rigorous, I am looking for an opportunity in embedded engineering — passionate about technological innovation and motivated by ambitious projects combining technical expertise and creativity.',
-    sk1:'Permanent · Fixed Term Contract', sk2:'Embedded Systems · Embedded AI · DSP · FPGA',
-    sk3:'All sectors (automotive, aerospace, medical, industrial…)', sk4:'Languages AR · FR · EN · ES',
-    availCardTitle:'Availability',
-    av1Label:'Status', av1Val:'Immediately available',
-    av2Label:'Location', av2Val:'France',
-    av3Label:'Mobility', av3Val:'National & international',
-    msgTitle:'Send a message',
-    homeFooter:'ENSEEIHT Toulouse & EHTP Casablanca · Dual Engineer Degree 2025',
-    projLabel:'Projects',projTitle:'What I built and shipped',
-    projFooter:'3 industrial projects · 6 academic projects · ENSEEIHT 2023–2025',
-    aboutTag:'About',
-    aboutRole:'Embedded Systems & Embedded AI Engineer · ENSEEIHT Toulouse · EHTP Casablanca',
-    aboutBio:"Dual-degree engineer — ENSEEIHT Toulouse (embedded systems & AI) and EHTP Casablanca (electrical engineering). I'm passionate about the challenge of running artificial intelligence in ultra-constrained environments, and I've worked on real systems under genuine industrial conditions for over a year and a half. What drives me: take a hard problem, understand the signal physics, and build the full chain until it runs in real time on silicon. Alongside my studies, I developed Rust and DevOps skills (Docker, GitLab CI/CD) self-taught — out of curiosity and the belief that modern embedded engineering doesn't stop at firmware.",
-    valuesTitle:'Values & working style',
-    v1t:'Technical rigor',v1d:'I validate with real metrics. Every result is benchmarked, not estimated.',
-    v2t:'Continuous curiosity',v2d:'From hardware specs to research papers, I explore deeply.',
-    v3t:'Clear communication',v3d:'Experience with France/Germany teams. Multilingualism as a professional asset.',
-    v4t:'Genuine versatility',v4d:"C firmware, Python ML, VHDL, Rust, CI/CD: I adapt to the project's stack.",
-    skillsTitle:'Technical skills',langsTitle:'Languages',
-    timelineTitle:'Timeline',volTitle:'Volunteering & community',volNav:'Volunteering',
-    volPageLabel:'Volunteering',volPageTitle:'Commitment & community',
-    volPageIntro:'Alongside my studies and professional experience, I have always sought to actively engage in associations — to share knowledge, coordinate, or create impact.',
-    volFooter:'3 community commitments · Toulouse & Casablanca · 2021 – present',
-    interestsTitle:'Interests',
-    contactLabel:'Contact',contactTitle:"Let's work together",
-    contactDesc:"I'm immediately available for opportunities in embedded engineering, firmware, embedded AI or signal processing. Feel free to write to me directly.",
-    availText:'Immediately available · Toulouse + open to relocation',
-    flName:'Name / Company',flEmail:'Email',flMsg:'Message',
-    fsubmit:'Send message',fnote:'I usually reply within 24 hours.',
-    aboutFooter:'Immediately available · Open to relocation',
-    contactFooter:'Ali Azami · Embedded Systems & AI Engineer · Toulouse 2025',
-    pipelineTitle:'Technical pipeline',techTitle:'Tech stack',
-    metricsTitle:'Key results',challengesTitle:'Challenges tackled',contextTitle:'Context',
-    tasksTitle:'Key tasks',
-    badgeInd:'Industrial',badgeAc:'Academic'
-  }
-};
+<a class="to-top" href="#main" aria-label="Retour en haut" data-to-top>
+  <svg viewBox="0 0 48 48" aria-hidden="true"><circle class="to-top-track" cx="24" cy="24" r="21"/><circle class="to-top-ring" cx="24" cy="24" r="21" pathLength="1"/></svg>
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</a>
 
-var SKILLS = [
-  {name:'C / C++ embarqué', pct:92, label:'Expert'},
-  {name:'DSP / FFT / Signal', pct:88, label:'Avancé'},
-  {name:'TFLite Micro / Edge AI', pct:90, label:'Expert'},
-  {name:'Python / ML', pct:85, label:'Avancé'},
-  {name:'VHDL / FPGA', pct:70, label:'Confirmé'},
-  {name:'ARM Cortex-M (NXP/STM)', pct:88, label:'Avancé'},
-  {name:'SPI / UART / CAN / I2C', pct:85, label:'Avancé'},
-  {name:'MATLAB / Simulink', pct:80, label:'Avancé'},
-  {name:'HLS Catapult / SystemC', pct:55, label:'Intermédiaire'},
-  {name:'Rust', pct:40, label:'Débutant'},
-  {name:'Docker / GitLab CI-CD', pct:40, label:'Débutant'},
-  {name:'Linux embarqué', pct:30, label:'Débutant'}
-];
-
-var SKILLS_EN = [
-  {name:'C / C++ embedded', pct:92, label:'Expert'},
-  {name:'DSP / FFT / Signal', pct:88, label:'Advanced'},
-  {name:'TFLite Micro / Edge AI', pct:90, label:'Expert'},
-  {name:'Python / ML', pct:85, label:'Advanced'},
-  {name:'VHDL / FPGA', pct:70, label:'Proficient'},
-  {name:'ARM Cortex-M (NXP/STM)', pct:88, label:'Advanced'},
-  {name:'SPI / UART / CAN / I2C', pct:85, label:'Advanced'},
-  {name:'MATLAB / Simulink', pct:80, label:'Advanced'},
-  {name:'HLS Catapult / SystemC', pct:55, label:'Intermediate'},
-  {name:'Rust', pct:40, label:'Beginner'},
-  {name:'Docker / GitLab CI-CD', pct:40, label:'Beginner'},
-  {name:'Embedded Linux', pct:30, label:'Débutant'}
-];
-
-var LANGS = [
-  {name:'Arabe', nameEn:'Arabic', pct:100, label:'Langue maternelle', labelEn:'Native'},
-  {name:'Français', nameEn:'French', pct:98, label:'Bilingue', labelEn:'Bilingual'},
-  {name:'Anglais', nameEn:'English', pct:82, label:'Avancé (professionnel)', labelEn:'Advanced (professional)'},
-  {name:'Espagnol', nameEn:'Spanish', pct:55, label:'Intermédiaire', labelEn:'Intermediate'},
-  {name:'Japonais', nameEn:'Japanese', pct:10, label:'Débutant (A1)', labelEn:'Beginner (A1)'}
-];
-
-var TIMELINE_FR = [
-  {date:'Sept. 2024 – Oct. 2025', title:'Ingénieur Systèmes/Logiciel IA embarquée radar', sub:'Vitesco Technologies / Schaeffler France · Alternance M2 · Toulouse'},
-  {date:'Mai 2024 – Sept. 2024', title:'Ingénieur Systèmes/Logiciel IA embarquée', sub:'NXP Semiconductors · Stage M1 · Toulouse'},
-  {date:'2023 – 2025', title:'Diplôme d\'Ingénieur – Électronique, Énergie électrique et Automatique', sub:'ENSEEIHT, Toulouse · Spécialité systèmes embarqués & IA · Double diplôme avec l\'EHTP'},
-  {date:'2021 – 2025', title:'Diplôme d\'Ingénieur – Génie Électrique & Électronique', sub:'Ecole Hassania des Travaux Publics, Casablanca'},
-  {date:'Avr. 2022 – Oct. 2022', title:'Ingénieur Électronique & IoT', sub:'Ecole Hassania des Travaux Publics Casablanca · Stage de recherche'},
-  {date:'2018 – 2020', title:'Classes Préparatoires MPSI/MP', sub:'Ibn Ghazi, Rabat'}
-];
-var TIMELINE_EN = [
-  {date:'Sept. 2024 – Oct. 2025', title:'Embedded AI Radar Systems/Software Engineer', sub:'Vitesco Technologies / Schaeffler France · M2 Apprenticeship · Toulouse'},
-  {date:'May 2024 – Sept. 2024', title:'Embedded AI Systems/Software Engineer', sub:'NXP Semiconductors · M1 Internship · Toulouse'},
-  {date:'2023 – 2025', title:"Engineer's Degree – Electronics, Electrical Energy & Automation", sub:'ENSEEIHT, Toulouse · Embedded Systems & AI specialization · Dual degree with EHTP'},
-  {date:'2021 – 2025', title:"Engineer's Degree – Electrical & Electronic Engineering", sub:'Hassania School for Public Works (EHTP), Casablanca'},
-  {date:'Apr. 2022 – Oct. 2022', title:'Electronics & IoT Engineer', sub:'Hassania School for Public Works Casablanca · Research Internship'},
-  {date:'2018 – 2020', title:'Preparatory Classes MPSI/MP', sub:'Ibn Ghazi, Rabat'}
-];
-
-var VOLUNTEERING_FR = [
-  {id:'esn', title:'Erasmus Student Network', role:'Membre actif', sub:'Toulouse · 2023 – aujourd\'hui', logoType:'esn',
-    points:[
-      'Organisation et encadrement de soirées, voyages et événements culturels pour étudiants internationaux.',
-      'Participation à la préparation, au suivi et au bon déroulement des activités.',
-      'Accompagnement des étudiants dans leur intégration et immersion dans la culture française.',
-      'Développement de compétences en gestion d\'événements, coordination et communication interculturelle.'
-    ]
-  },
-  {id:'ep', title:'EHTP Electro-Power', role:'Vice-président', sub:'Casablanca · 2021 – 2023', logoType:'ep',
-    points:[
-      'Analyse de faisabilité et suivi de projets électroniques proposés par les membres du club.',
-      'Coordination des équipes projet et accompagnement des étudiants dans le développement technique.',
-      'Supervision de plusieurs cellules du club (projets, formation, partenariats) en lien avec le président.',
-      'Gestion de la trésorerie et des partenariats industriels (sponsoring, relations entreprises).',
-      'Organisation de formations techniques pour les élèves ingénieurs du club.',
-      'Interface entre étudiants, administration et enseignants pour assurer le bon déroulement des activités.'
-    ]
-  },
-  {id:'enactus', title:'Enactus EHTP', role:'Chef d\'équipe', sub:'Casablanca · 2022 – 2023', logoType:'enactus',
-    points:[
-      'Pilotage d\'une équipe étudiante pour le développement de projets d\'entrepreneuriat social.',
-      'Coordination des activités, animation d\'équipe et suivi de l\'avancement des projets.',
-      'Conception et mise en œuvre de solutions à impact alignées avec les Objectifs de Développement Durable (ODD).',
-      'Participation à la structuration et à la valorisation des projets (présentation, communication, déploiement).',
-      'Interaction avec différentes parties prenantes (étudiants, encadrants, partenaires externes).'
-    ]
-  }
-];
-var VOLUNTEERING_EN = [
-  {id:'esn', title:'Erasmus Student Network', role:'Active member', sub:'Toulouse · 2023 – present', logoType:'esn',
-    points:[
-      'Organized and led evenings, trips and cultural events for international students.',
-      'Participated in preparation, follow-up and smooth running of activities.',
-      'Supported students in their integration and immersion in French culture.',
-      'Developed event management, coordination and intercultural communication skills.'
-    ]
-  },
-  {id:'ep', title:'EHTP Electro-Power', role:'Vice-president', sub:'Casablanca · 2021 – 2023', logoType:'ep',
-    points:[
-      'Feasibility analysis and follow-up of electronics projects proposed by club members.',
-      'Team coordination and technical support for student project development.',
-      'Supervision of multiple club divisions (projects, training, partnerships) alongside the president.',
-      'Treasury management and industrial partnerships (sponsoring, company relations).',
-      'Organized technical training sessions for engineering students.',
-      'Interface between students, administration and teachers to ensure smooth operations.'
-    ]
-  },
-  {id:'enactus', title:'Enactus EHTP', role:'Team leader', sub:'Casablanca · 2022 – 2023', logoType:'enactus',
-    points:[
-      'Led a student team developing social entrepreneurship projects.',
-      'Coordinated activities, animated the team and tracked project progress.',
-      'Designed and implemented impact solutions aligned with Sustainable Development Goals (SDGs).',
-      'Contributed to project structuring and promotion (presentation, communication, deployment).',
-      'Engaged with various stakeholders (students, supervisors, external partners).'
-    ]
-  }
-];
-
-
-var PROJECTS = [
-  {id:'schaeffler', featured:true,
-    fr:{title:'UWB Radar : Classification embarquée temps réel', sub:'Vitesco Technologies / Schaeffler France · Sept. 2024 – Oct. 2025', badge:'Industriel',
-      desc:"Pipeline embarqué complet pour système Hands-Free Access automotive : acquisition radar UWB, traitement temps-fréquence par FFT sur DSP, inférence CNN temps réel sur ARM Cortex-M33 (128 kB RAM, 768 kB Flash).",
-      tags:['ARM Cortex-M33','TFLite Micro','FFT/DSP','CNN Conv2D','C/C++','CAN','MATLAB','Optuna','Keil','Lauterbach'],
-      metrics:[{v:'99.3%',l:'Accuracy'},{v:'11.9 kB',l:'Modèle INT8'},{v:'0.1 ms',l:'Latence'}, {v:'Universel',l:'multi-véhicule, sans ré-entraînement'}],
-      pipeline:['Acquisition CIR UWB','FFT 32 pts + Hanning','Images temps-fréquence 20×23×6','CNN Conv2D compact','Inférence INT8 temps réel'],
-      tasks:[
-        "Simulation MATLAB du DSP embarqué via NXP DSP Toolbox pour répliquer le comportement du Ranger5 et générer ~1100 images temps-fréquence (CSV) depuis des enregistrements CIR multi-véhicules. Mise à jour de l'algorithme de trigger (segmentation IQ, fenêtre 384 points).",
-        "Prétraitement Python : normalisation par tap, clipping CIR (6×32 → 6×20), augmentation par modulation fréquence, suppression gestes faux par similarité cosinus inter-taps, adaptation données legacy (SNR 6.7→11.2) par alignement statistique tap par tap.",
-        "Conception CNN Conv2D avec optimisation automatique Optuna (400 trials, objectif multi-critères : loss, TPR, 1-FPR, taille, latence). Contraintes dures : <25k paramètres, <80 kB float, <30 kB après quantification. AdamW + ReduceLROnPlateau.",
-        "Optimisation modèle : pruning graduel (~49% sparsité/couche), weight clustering (ratio 95.62%), QAT 2 phases + PTQ INT8 — réduction taille de 50.94% (24.33→11.94 kB).",
-        "Implémentation C embarquée du pipeline FFT (autocoder MATLAB insuffisant) : BbCopy, Hanning, FFT 32 pts, ComplexToPolar, accumulation buffer. Intégration TFLite Micro : resolver opérateurs, tensor arena statique (~60 kB/128 kB RAM), quantification int8 entrée.",
-        "Tests terrain (clinic) : 3 participants, catalogue de kicks, lecture CAN via Arduino + buzzer. Pipeline end-to-end validé sur Ranger5 : 70% détection, 100% immunité faux positifs."
-      ],
-      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + DSP intégré)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras / ONNX','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','Bus CAN / Arduino','Optuna (400 trials)'],
-      metricsDetail:[{v:'99.33%',l:'Accuracy globale'},{v:'99.26%',l:'Taux détection (kicks)'},{v:'99.43%',l:'Immunité faux positifs'},{v:'11.94 kB',l:'Taille modèle INT8'},{v:'0.107 ms',l:'Latence inférence'},{v:'184→12 kB',l:'Compression ×16'}, {v:'Universel',l:'multi-véhicule, sans ré-entraînement'}],
-      challenges:["Réimplémentation manuelle complète du pipeline FFT en C (MATLAB autocoder incomplet sur fonctions DSP custom)","RAM 128 kB : tensor arena 60 kB, ajustement itératif par essais/erreurs pour éviter les OOM","Pruning/clustering sans gain réel sur TFLM Cortex-M33 (absence de sparse kernels natifs)","Adaptation données legacy (différences SNR hardware) par alignement statistique tap par tap et véhicule","Mismatch Python/C embarqué : preprocessing pas encore parfaitement aligné, baisse de détection en conditions réelles"],
-      context:"Le modèle précédent (CNN 1D temporel) devait être ré-entraîné pour chaque véhicule. L'objectif était de concevoir une approche universelle basée sur une représentation temps-fréquence, déployable en temps réel sur le MCU Ranger5 NXP sans compromis sur les performances."
-    },
-    en:{title:'UWB Radar: Real-time embedded classification', sub:'Vitesco Technologies / Schaeffler France · Sept. 2024 – Oct. 2025', badge:'Industrial',
-      desc:'Full embedded pipeline for an automotive Hands-Free Access system: UWB radar acquisition, time-frequency processing via FFT on DSP, real-time CNN inference on ARM Cortex-M33 (128 kB RAM, 768 kB Flash).',
-      tags:['ARM Cortex-M33','TFLite Micro','FFT/DSP','CNN Conv2D','C/C++','CAN','MATLAB','Optuna','Keil','Lauterbach'],
-      metrics:[{v:'99.3%',l:'Accuracy'},{v:'11.9 kB',l:'INT8 model'},{v:'0.1 ms',l:'Latency'}, {v:'Universal',l:'cross-vehicle, no retraining'}],
-      pipeline:['UWB CIR Acquisition','FFT 32pts + Hanning','Time-freq images 20×23×6','Compact Conv2D CNN','Real-time INT8 Inference'],
-      tasks:[
-        "MATLAB simulation of the embedded DSP via NXP DSP Toolbox to replicate Ranger5 behavior and generate ~1100 time-frequency images (CSV) from multi-vehicle CIR recordings. Updated trigger algorithm (IQ segmentation, 384-point window).",
-        "Python preprocessing: per-tap normalization, CIR clipping (6×32→6×20), frequency modulation augmentation, false gesture removal via inter-tap cosine similarity, legacy data adaptation (SNR 6.7→11.2) via tap-by-tap statistical alignment.",
-        "Conv2D CNN design with Optuna automatic optimization (400 trials, multi-criteria objective: loss, TPR, 1-FPR, size, latency). Hard constraints: <25k parameters, <80 kB float, <30 kB post-quantization. AdamW + ReduceLROnPlateau.",
-        "Model optimization: gradual pruning (~49% sparsity/layer), weight clustering (95.62% ratio), QAT 2 phases + PTQ INT8 — 50.94% size reduction (24.33→11.94 kB).",
-        "C embedded FFT pipeline implementation (MATLAB autocoder insufficient): BbCopy, Hanning, FFT 32pts, ComplexToPolar, buffer accumulation. TFLite Micro integration: operator resolver, static tensor arena (~60 kB/128 kB RAM), int8 input quantization.",
-        "Field clinic testing: 3 participants, kick catalog, CAN reading via Arduino + buzzer. End-to-end pipeline validated on Ranger5: 70% detection, 100% false positive immunity."
-      ],
-      tech:['NXP Ranger5 (ARM Cortex-M33 @120 MHz + integrated DSP)','UWB Radar (6 taps CIR)','TensorFlow Lite Micro','Python / TensorFlow / Keras / ONNX','MATLAB NXP DSP Toolbox','ARM Keil uVision5','Lauterbach Trace32','CAN bus / Arduino','Optuna (400 trials)'],
-      metricsDetail:[{v:'99.33%',l:'Global accuracy'},{v:'99.26%',l:'Detection rate (kicks)'},{v:'99.43%',l:'False positive immunity'},{v:'11.94 kB',l:'INT8 model size'},{v:'0.107 ms',l:'Inference latency'},{v:'184→12 kB',l:'Compression ×16'},{v:'Universal',l:'cross-vehicle, no retraining'}],
-      challenges:['Full manual FFT pipeline reimplementation in C (MATLAB autocoder incomplete on custom DSP functions)','128 kB RAM: 60 kB tensor arena, iterative trial-and-error adjustment to avoid OOM','Pruning/clustering without real gains on TFLM Cortex-M33 (no native sparse kernels)','Legacy data adaptation (hardware SNR differences) via per-tap and per-vehicle statistical alignment','Python/C mismatch: preprocessing not perfectly aligned, causing detection drop in real conditions'],
-      context:'The previous model (1D temporal CNN) had to be retrained per vehicle type. The goal was to design a universal approach based on time-frequency representation, deployable in real time on the NXP Ranger5 MCU without performance trade-offs.'
-    }
-  },
-  {id:'nxp', featured:true,
-    fr:{title:'Edge AI : Smart Sensor MCU/NPU', sub:'NXP Semiconductors · Mai – Sept. 2024', badge:'Industriel',
-      desc:"Pipeline Edge AI complet : acquisition accéléromètre via SPI, génération dataset, entraînement CNN Conv1D, quantification INT8, déploiement sur NPU Neutron NXP — accélération ×42 sur opérations Conv1D int8.",
-      tags:['NXP MCXN947','NPU Neutron','TFLite','eIQ Portal','SPI','C/C++','Python','MCUXpresso'],
-      metrics:[{v:'99.3%',l:'Accuracy'},{v:'×42',l:'Accél. NPU'},{v:'131 kB',l:'Peak RAM'}],
-      pipeline:['FXLS8974 via SPI','Machine à états C','Dataset CSV (UART)','CNN Conv1D GPU','PTQ INT8','NPU Neutron eIQ'],
-      tasks:[
-        "Configuration hardware sur MCXN947 : SPI master (LPSPI non-bloquant), GPIO, timer, UART via SDK NXP.",
-        "Machine à états C (INIT→ACQUIRE→SAVE→SEND) synchronisée sur INT1 de l'accéléromètre FXLS8974. Lecture complément à 2 via SPI non-bloquant, conversion décimal. Script Python UART→CSV avec parsing regex.",
-        "Collecte manuelle du dataset : gestes (chiffres 0–9), organisation par classe pour entraînement supervisé.",
-        "Conception et entraînement CNN Conv1D (3 couches conv, BatchNorm, Dropout, AveragePooling, Dense — 13 010 paramètres). Entraînement GPU avec EarlyStopping + ReduceLROnPlateau. Accuracy 99.3%.",
-        "Quantification PTQ int8 avec representative dataset, conversion float32→int8, évaluation post-quantification. Estimation mémoire via tflite-tools (peak : 131 440 bytes).",
-        "Déploiement NPU : conversion via eIQ Portal (Neutron Converter), suppression couche Softmax non supportée (tflite-extractor). Intégration C++ MCU : import .tflite en .rodata, MicroMutableOpResolver, ajustement scale/zero-point.",
-        "Rédaction du booklet technique complet (37 pages) — guide de référence pour les promotions suivantes."
-      ],
-      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + NPU eIQ Neutron)','Accéléromètre FXLS8974CF (12-bit, 3 axes, SPI)','TensorFlow / TensorFlow Lite / ONNX','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART parsing regex'],
-      metricsDetail:[{v:'99.3%',l:'Accuracy CNN'},{v:'×42',l:'Accél. NPU vs CPU'},{v:'131 kB',l:'Peak RAM estimé'},{v:'256 kB',l:'RAM allouée (marge)'},{v:'13 010',l:'Paramètres modèle'},{v:'10 classes',l:'Gestes classifiés'}],
-      challenges:["Compatibilité toolchain : GNU ARM Toolchain v12.3 requise (v13.2 incompatible avec le NPU)","NPU supporte uniquement int8 PCQ : suppression obligatoire de la couche Softmax via tflite-extractor","Peak RAM difficile à prédire empiriquement (131 kB estimé → 256 kB alloués avec marge de sécurité)","Débogage MCU : erreurs JSON probe, conflits port série, synchronisation sur INT1 accéléromètre"],
-      context:"Projet individuel M2 (3EA IATI TSE) en partenariat avec NXP Semiconductors, encadré par B. Mulliez. Objectif : démontrer un pipeline Edge AI complet sur un MCU avec NPU intégré, conçu pour devenir un TP académique pédagogique. Hardware cible : FRDM-MCXN947."
-    },
-    en:{title:'Edge AI: Smart Sensor MCU/NPU', sub:'NXP Semiconductors · May – Sept. 2024', badge:'Industrial',
-      desc:'Full Edge AI pipeline: SPI accelerometer acquisition, dataset generation, Conv1D CNN training, INT8 quantization, deployment on NXP Neutron NPU — ×42 speedup on int8 Conv1D operations.',
-      tags:['NXP MCXN947','NPU Neutron','TFLite','eIQ Portal','SPI','C/C++','Python','MCUXpresso'],
-      metrics:[{v:'99.3%',l:'Accuracy'},{v:'×42',l:'NPU speedup'},{v:'131 kB',l:'Peak RAM'}],
-      pipeline:['FXLS8974 via SPI','C state machine','CSV dataset (UART)','Conv1D CNN (GPU)','PTQ INT8','Neutron NPU eIQ'],
-      tasks:[
-        "Hardware configuration on MCXN947: SPI master (non-blocking LPSPI), GPIO, timer, UART via NXP SDK.",
-        "C state machine (INIT→ACQUIRE→SAVE→SEND) synchronized on FXLS8974 INT1. Two's complement reading via non-blocking SPI, decimal conversion. Python UART→CSV script with regex parsing.",
-        "Manual dataset collection: gestures (digits 0–9), organized by class for supervised training.",
-        "Conv1D CNN design and training (3 conv layers, BatchNorm, Dropout, AveragePooling, Dense — 13,010 parameters). GPU training with EarlyStopping + ReduceLROnPlateau. Accuracy 99.3%.",
-        "PTQ int8 quantization with representative dataset, float32→int8 conversion, post-quantization evaluation. Memory estimation via tflite-tools (peak: 131,440 bytes).",
-        "NPU deployment: conversion via eIQ Portal (Neutron Converter), mandatory Softmax layer removal (tflite-extractor). C++ MCU integration: .tflite as .rodata, MicroMutableOpResolver, scale/zero-point adjustment.",
-        "Authored a complete 37-page technical booklet as a reference guide for future student cohorts."
-      ],
-      tech:['NXP MCXN947 (dual Cortex-M33 @150 MHz + eIQ Neutron NPU)','FXLS8974CF accelerometer (12-bit, 3-axis, SPI)','TensorFlow / TensorFlow Lite / ONNX','eIQ Portal · Neutron Converter','tflite-tools · tflite-extractor','C/C++ MCUXpresso IDE','Python / UART regex parsing'],
-      metricsDetail:[{v:'99.3%',l:'CNN accuracy'},{v:'×42',l:'NPU vs CPU speedup'},{v:'131 kB',l:'Estimated peak RAM'},{v:'256 kB',l:'Allocated RAM (margin)'},{v:'13,010',l:'Model parameters'},{v:'10 classes',l:'Classified gestures'}],
-      challenges:['Toolchain compatibility: GNU ARM v12.3 required (v13.2 NPU-incompatible)','NPU supports int8 PCQ only: mandatory Softmax removal via tflite-extractor','Peak RAM empirically unpredictable (131 kB estimated → 256 kB allocated for safety)','MCU debugging: JSON probe errors, serial port conflicts, INT1 accelerometer sync'],
-      context:'Individual M2 project (3EA IATI TSE) in partnership with NXP Semiconductors, supervised by B. Mulliez. Goal: demonstrate a full Edge AI pipeline on an MCU with integrated NPU, designed to become an academic lab. Target hardware: FRDM-MCXN947.'
-    }
-  },
-  {id:'fpga', featured:true,
-    fr:{title:'Accélération CNN sur FPGA via HLS', sub:'ENSEEIHT · Trinôme M2 · Oct. 2024', badge:'Académique',
-      desc:"Flux complet d'accélération matérielle CNN sur SoC Zynq-7000 : C++ → SystemC → HLS Catapult → RTL VHDL → IP Vivado → Vitis. Accélération ×2.6 sur Conv2D.",
-      tags:['HLS Catapult','VHDL','Vivado','Vitis','SystemC','Zynq-7000','AXI-Stream','C++'],
-      metrics:[{v:'×2.6',l:'Accél. Conv2D'},{v:'455 µs',l:'Par filtre'},{v:'20 ns',l:'Adder pipé'}],
-      pipeline:['CNN C++ (toutes couches)','SystemC testbench','HLS Catapult (Unroll+Pipeline)','RTL VHDL généré','IP Vivado + AXI','Validation Vitis ARM'],
-      tasks:[
-        "Implémentation C++ de toutes les couches CNN : Conv2D (zero-padding, multi-filtres, multi-channels), MaxPool (fenêtre glissante), Flatten, ReLU, Softmax. Réécriture avec buffers (copyCenteredWindow) pour réduire l'empreinte mémoire.",
-        "Modélisation SystemC de Conv2D : SC_MODULE, ports sc_in/sc_out, processus conv2D.process(), compteur outFmapCpt, chargement poids/biais JSON. Temps mesuré ≈ 200 ms.",
-        "Exploration contraintes HLS Catapult sur Adder : sans contrainte (80 ns) → Pipeline=2 (40 ns) → Pipeline=1 (20 ns, surface optimale 1048 vs 1462).",
-        "Optimisation HLS Conv2D : sans contrainte (1178 µs/filtre) → 4 Unrolls (519 µs) → Pipelines=2 boucles internes (455 µs, ×2.6 vs baseline).",
-        "Vivado : IP packaging Adder et Conv2D, block design avec FIFO AXI-Stream + AXI Interconnect + Zynq-7000, PLL 100 MHz, génération bitstream.",
-        "Vitis : validation Adder sur Zybo (init FIFO, fill, send, receive, compare — additions correctes, UART OK). Intégration partielle Conv2D (passage malloc, conflits adressage non résolus dans les délais)."
-      ],
-      tech:['Xilinx Zynq-7000 Zybo Z7 (ARM Cortex-A9 + FPGA Artix-7)','Catapult HLS (Mentor)','Xilinx Vivado + Vitis','VHDL / SystemC / C++','AXI-Stream FIFO','Contraintes Unroll & Pipeline HLS'],
-      metricsDetail:[{v:'×2.6',l:'Accél. Conv2D'},{v:'455 µs',l:'Temps/filtre optimisé'},{v:'20 ns',l:'Adder Pipeline=1'},{v:'1048',l:'Ressources Adder opt.'},{v:'1178→455 µs',l:'Gain HLS total'},{v:'C++',l:'CNN validé référence'}],
-      challenges:["Optimisation HLS limitée par structure FIFO : boucles supérieures bloquées à Pipeline ≥ 10","Trade-off contre-intuitif : Pipeline=1 sur Adder est plus rapide ET plus compact (1048 vs 1462 sans contrainte)","Gestion mémoire partagée statique Vitis → passage malloc obligatoire, conflits d'adressage non résolus","Flot hétérogène : VSCode, Catapult, Vivado, Vitis, formats .xsa / bitstream / IP core"],
-      context:"Projet trinôme M2 ENSEEIHT (Charlotte Andreff, Ali Azami, Lilian Lamoure), encadré par M. Lebon, L. Gauthier et B. Mulliez. Exploration du flot complet de conception pour l'accélération matérielle CNN : de l'implémentation C++ jusqu'à la validation sur FPGA réel via ARM."
-    },
-    en:{title:'CNN hardware acceleration on FPGA via HLS', sub:'ENSEEIHT · M2 Trio project · Oct. 2024', badge:'Academic',
-      desc:'Full hardware acceleration flow for CNN on Zynq-7000 SoC: C++ → SystemC → Catapult HLS → VHDL RTL → Vivado IP → Vitis. ×2.6 speedup on Conv2D.',
-      tags:['HLS Catapult','VHDL','Vivado','Vitis','SystemC','Zynq-7000','AXI-Stream','C++'],
-      metrics:[{v:'×2.6',l:'Conv2D speedup'},{v:'455 µs',l:'Per filter'},{v:'20 ns',l:'Adder pipelined'}],
-      pipeline:['C++ CNN (all layers)','SystemC testbench','Catapult HLS (Unroll+Pipeline)','Generated VHDL RTL','Vivado IP + AXI','ARM Vitis validation'],
-      tasks:[
-        "C++ implementation of all CNN layers: Conv2D (zero-padding, multi-filter, multi-channel), MaxPool (sliding window), Flatten, ReLU, Softmax. Rewritten with buffers (copyCenteredWindow) to reduce memory footprint.",
-        "SystemC modeling of Conv2D: SC_MODULE, sc_in/sc_out ports, conv2D.process() process, outFmapCpt counter, JSON weight/bias loading. Measured time ≈ 200 ms.",
-        "HLS Catapult constraint exploration on Adder: unconstrained (80 ns) → Pipeline=2 (40 ns) → Pipeline=1 (20 ns, optimal area 1048 vs 1462).",
-        "HLS Conv2D optimization: unconstrained (1178 µs/filter) → 4 Unrolls (519 µs) → Pipeline=2 inner loops (455 µs, ×2.6 vs baseline).",
-        "Vivado: Adder and Conv2D IP packaging, block design with AXI-Stream FIFO + AXI Interconnect + Zynq-7000, 100 MHz PLL, bitstream generation.",
-        "Vitis: Adder validation on Zybo (FIFO init, fill, send, receive, compare — correct additions, UART OK). Partial Conv2D integration (malloc migration, unresolved addressing conflicts within deadline)."
-      ],
-      tech:['Xilinx Zynq-7000 Zybo Z7 (ARM Cortex-A9 + Artix-7 FPGA)','Catapult HLS (Mentor)','Xilinx Vivado + Vitis','VHDL / SystemC / C++','AXI-Stream FIFO','HLS Unroll & Pipeline constraints'],
-      metricsDetail:[{v:'×2.6',l:'Conv2D speedup'},{v:'455 µs',l:'Optimized time/filter'},{v:'20 ns',l:'Adder Pipeline=1'},{v:'1048',l:'Opt. Adder resources'},{v:'1178→455 µs',l:'Total HLS gain'},{v:'C++',l:'CNN validated vs ref'}],
-      challenges:['HLS optimization limited by FIFO structure: outer loops blocked at Pipeline ≥ 10','Counter-intuitive trade-off: Pipeline=1 on Adder is faster AND more compact (1048 vs 1462)','Static shared memory in Vitis → mandatory malloc migration, unresolved addressing conflicts','Heterogeneous flow: VSCode, Catapult, Vivado, Vitis, .xsa/bitstream/IP formats'],
-      context:'M2 trio project at ENSEEIHT (Charlotte Andreff, Ali Azami, Lilian Lamoure), supervised by M. Lebon, L. Gauthier and B. Mulliez. Exploration of the full design flow for hardware CNN acceleration: from C++ implementation to real FPGA board validation via ARM.'
-    }
-  },
-  {id:'vhdl', featured:false,
-    fr:{title:'Thermomètre VHDL 1-Wire DS18S20', sub:'ENSEEIHT · BE M1 · Mai 2023', badge:'Académique',
-      desc:'Système synchrone VHDL complet sur FPGA Nexys A7 (Artix-7). 6 FSM pour communication 1-Wire avec DS18S20. Affichage 7-segments, précision 0.5°C, validé sur oscilloscope.',
-      tags:['VHDL','Xilinx Artix-7','Vivado','1-Wire','FSM','Oscilloscope'],
-      metrics:[{v:'6',l:'FSM conçues'},{v:'0.5°C',l:'Précision'},{v:'480 µs',l:'Reset 1-Wire'}],
-      pipeline:['FSM Init (480 µs reset)','FSM Write0/Write1','FSM Write8b (ROM/RAM)','FSM Read (15 µs)','Master Protocol','Double Dabble → 7-seg'],
-      tasks:[
-        "Bloc de synchronisation sur front montant d'horloge (INPUT_SYNC, RST_SYNC) et gestion centralisée des timers système (start/end vectors, impulsion clk_1s).",
-        "FSM Init : séquence reset 1-Wire (pull-down 480 µs, détection présence DS18S20).",
-        "FSM Write0/Write1 : écriture 1 bit sur bus 1-Wire avec temporisations précises (1 µs / 60 µs).",
-        "FSM Write8b : envoi des commandes 8 bits (Skip ROM 0xCC, Convert T 0x44, Read Scratchpad 0xBE).",
-        "FSM Read : lecture 1 bit depuis DS18S20 (pull-down 1 µs, échantillonnage à 15 µs).",
-        "FSM Master Protocol : orchestration complète (Init → ROM → RAM → lecture 9 bits température).",
-        "Affichage : Double Dabble (BCD), gestion négatifs (complément à 2), multiplexage 7-segments.",
-        "Validation des temporisations et séquences 1-Wire sur oscilloscope Keysight."
-      ],
-      tech:['FPGA Nexys A7 (Xilinx Artix-7)','Vivado (simulation + synthèse)','VHDL synchrone','DS18S20 (1-Wire)','Oscilloscope Keysight'],
-      metricsDetail:[{v:'6',l:'FSM implémentées'},{v:'0.5°C',l:'Précision affichage'},{v:'480 µs',l:'Reset 1-Wire'},{v:'1 µs',l:'Timing write bit'},{v:'15 µs',l:'Échantillonnage lecture'}],
-      challenges:['Temporisations critiques 1-Wire (précision µs) sur FPGA Artix-7','Bug FSM Write8b : incrémentation index avant envoi du bit — diagnostiqué mais non corrigé dans les délais','Synchronisation reset asynchrone/synchrone : arrêt asynchrone, redémarrage sur front d\'horloge'],
-      context:'BE binôme M1 ENSEEIHT (Charlotte Andreff, Ali Azami), encadrés par B. Mulliez, J. Perchoux, A.P. Devarulrajah. Protocole série bas-niveau avec timing critique µs.'
-    },
-    en:{title:'VHDL 1-Wire DS18S20 thermometer', sub:'ENSEEIHT · M1 Lab · May 2023', badge:'Academic',
-      desc:'Complete VHDL synchronous system on Nexys A7 FPGA (Artix-7). 6 FSMs for 1-Wire communication with DS18S20. 7-segment display, 0.5°C precision, validated on oscilloscope.',
-      tags:['VHDL','Xilinx Artix-7','Vivado','1-Wire','FSM','Oscilloscope'],
-      metrics:[{v:'6',l:'FSMs designed'},{v:'0.5°C',l:'Precision'},{v:'480 µs',l:'1-Wire reset'}],
-      pipeline:['FSM Init (480 µs reset)','FSM Write0/Write1','FSM Write8b (ROM/RAM)','FSM Read (15 µs)','Master Protocol','Double Dabble → 7-seg'],
-      tasks:[
-        "Clock edge synchronization buffer (INPUT_SYNC, RST_SYNC) and centralized system timer management (start/end vectors, clk_1s pulse).",
-        "FSM Init: 1-Wire reset sequence (480 µs pull-down, DS18S20 presence detection).",
-        "FSM Write0/Write1: 1-bit write on 1-Wire bus with precise timings (1 µs / 60 µs).",
-        "FSM Write8b: 8-bit command transmission (Skip ROM 0xCC, Convert T 0x44, Read Scratchpad 0xBE).",
-        "FSM Read: 1-bit read from DS18S20 (1 µs pull-down, sampling at 15 µs).",
-        "FSM Master Protocol: full orchestration (Init → ROM → RAM → 9-bit temperature reading).",
-        "Display: Double Dabble (BCD), negative handling (two's complement), 7-segment multiplexing.",
-        "Timing and 1-Wire sequence validation on Keysight oscilloscope."
-      ],
-      tech:['FPGA Nexys A7 (Xilinx Artix-7)','Vivado (simulation + synthesis)','Synchronous VHDL','DS18S20 (1-Wire)','Keysight oscilloscope'],
-      metricsDetail:[{v:'6',l:'FSMs implemented'},{v:'0.5°C',l:'Display precision'},{v:'480 µs',l:'1-Wire reset'},{v:'1 µs',l:'Write bit timing'},{v:'15 µs',l:'Read sampling'}],
-      challenges:['Critical 1-Wire timings (µs precision) on Artix-7 FPGA','FSM Write8b bug: index increment before bit transmission — diagnosed but not fixed in time','Async/sync reset synchronization: async stop, restart on clock edge'],
-      context:'M1 pair lab at ENSEEIHT (Charlotte Andreff, Ali Azami), supervised by B. Mulliez, J. Perchoux, A.P. Devarulrajah. Low-level serial protocol with critical µs timing.'
-    }
-  },
-  {id:'ecg', featured:false,
-    fr:{title:'Classification ECG : ML supervisé & non supervisé', sub:'ENSEEIHT · M2 · Fév. 2023', badge:'Académique',
-      desc:'Classification arythmies MIT-BIH (5 classes, 156 features/signal). Comparaison KNN, RandomForest, KMeans, clustering agglomératif. Analyse SHAP, Boruta, ACP.',
-      tags:['Python','scikit-learn','RandomForest','SHAP','Boruta','PCA','DTW','KMeans'],
-      metrics:[{v:'92.5%',l:'Accuracy RF'},{v:'135',l:'Features Boruta'},{v:'5',l:'Classes'}],
-      pipeline:['MIT-BIH dataset','ACP 23 composantes (90%)','GridSearchCV','RandomForest 200 est.','SHAP + Boruta'],
-      tasks:[
-        "DTW (Dynamic Time Warping) : calcul du signal médian par classe (6 min vs >30 min brute), baseline 0.575.",
-        "KNN : GridSearch → metric Manhattan, k=1, accuracy 0.924.",
-        "RandomForest : 200 estimateurs, GridSearch → accuracy 0.925 (meilleur résultat).",
-        "KMeans : optimisation par analyse de silhouette → 39 clusters → accuracy 0.790.",
-        "Clustering agglomératif : 75 clusters → accuracy 0.823.",
-        "ACP + Boruta : 23 composantes (90% variance). Boruta : réduction 156→135 features, accuracy maintenue à 0.922."
-      ],
-      tech:['Python / scikit-learn','Dynamic Time Warping (DTW)','KNN / RandomForest / KMeans','ACP / PCA','SHAP · Boruta · GridSearchCV'],
-      metricsDetail:[{v:'92.5%',l:'RandomForest'},{v:'92.4%',l:'KNN Manhattan'},{v:'82.3%',l:'Agglomératif'},{v:'79%',l:'KMeans'},{v:'92.2%',l:'Boruta (135 feat.)'},{v:'57.5%',l:'DTW baseline'}],
-      challenges:['DTW très lent : réduction par médiane par classe nécessaire (6 min vs >30 min)','Confusion persistante classes 0/1 (battements normaux vs inconnus) sur toutes les méthodes','KMeans : clusters vides pour n_clusters > 39'],
-      context:'Binôme (Charlotte Andreff, Ali Azami), encadrés par S. Mouysset et T. Briquet. Comparaison exhaustive de méthodes supervisées et non supervisées sur données biomédicales réelles MIT-BIH Arrhythmia.'
-    },
-    en:{title:'ECG classification: supervised & unsupervised ML', sub:'ENSEEIHT · M2 · Feb. 2023', badge:'Academic',
-      desc:'MIT-BIH Arrhythmia classification (5 classes, 156 features/signal). KNN, RandomForest, KMeans, agglomerative clustering. SHAP, Boruta, PCA analysis.',
-      tags:['Python','scikit-learn','RandomForest','SHAP','Boruta','PCA','DTW','KMeans'],
-      metrics:[{v:'92.5%',l:'RF Accuracy'},{v:'135',l:'Boruta features'},{v:'5',l:'Classes'}],
-      pipeline:['MIT-BIH dataset','PCA 23 components (90%)','GridSearchCV','RandomForest 200 est.','SHAP + Boruta'],
-      tasks:[
-        "DTW (Dynamic Time Warping): per-class median signal computation (6 min vs >30 min brute), baseline 0.575.",
-        "KNN: GridSearch → Manhattan metric, k=1, accuracy 0.924.",
-        "RandomForest: 200 estimators, GridSearch → accuracy 0.925 (best result).",
-        "KMeans: silhouette analysis optimization → 39 clusters → accuracy 0.790.",
-        "Agglomerative clustering: 75 clusters → accuracy 0.823.",
-        "PCA + Boruta: 23 components (90% variance). Boruta: 156→135 feature reduction, accuracy maintained at 0.922."
-      ],
-      tech:['Python / scikit-learn','Dynamic Time Warping (DTW)','KNN / RandomForest / KMeans','PCA','SHAP · Boruta · GridSearchCV'],
-      metricsDetail:[{v:'92.5%',l:'RandomForest'},{v:'92.4%',l:'KNN Manhattan'},{v:'82.3%',l:'Agglomerative'},{v:'79%',l:'KMeans'},{v:'92.2%',l:'Boruta (135 feat.)'},{v:'57.5%',l:'DTW baseline'}],
-      challenges:['DTW very slow: per-class median reduction required (6 min vs >30 min)','Persistent class 0/1 confusion (normal vs unknown beats) across all methods','KMeans: empty clusters beyond n_clusters > 39'],
-      context:'Pair project (Charlotte Andreff, Ali Azami), supervised by S. Mouysset and T. Briquet. Exhaustive comparison of supervised and unsupervised methods on real MIT-BIH Arrhythmia biomedical data.'
-    }
-  },
-  {id:'iot', featured:false,
-    fr:{title:'Robot mobile autonome & station IoT', sub:'EHTP Casablanca · Avr. – Oct. 2022', badge:'Industriel',
-      desc:'Architecture embarquée distribuée (Raspberry Pi 4 + Arduino Mega) pour robot mobile sur chenilles avec bras 6 axes. Vision YOLOv5, supervision MQTT, station de recharge autonome.',
-      tags:['YOLOv5','MQTT','Raspberry Pi 4','Arduino Mega','IoT','Python','OpenCV'],
-      metrics:[{v:'YOLOv5',l:'Vision temps réel'},{v:'MQTT',l:'Supervision IoT'},{v:'6 axes',l:'Bras robot'}],
-      pipeline:['Caméra + YOLOv5','Décision embarquée','Contrôle moteurs (Arduino)','Station recharge','Supervision MQTT'],
-      tasks:[
-        "Conception de l'architecture embarquée distribuée : Raspberry Pi 4 (vision + décision) + Arduino Mega (contrôle moteurs + actionneurs).",
-        "Développement du système de vision par ordinateur avec YOLOv5 pour détection et reconnaissance d'objets en temps réel.",
-        "Implémentation de la logique de contrôle du bras 6 axes et du robot sur chenilles.",
-        "Conception de la station de recharge autonome avec gestion énergétique (production, stockage, régulation).",
-        "Développement du système de supervision IoT et communication inter-composants via MQTT.",
-        "Tests, intégration et validation du prototype complet en conditions expérimentales."
-      ],
-      tech:['Raspberry Pi 4 + Arduino Mega','YOLOv5 (détection objets)','MQTT (supervision distante)','Python / OpenCV','Station recharge autonome'],
-      metricsDetail:[{v:'YOLOv5',l:'Détection temps réel'},{v:'MQTT',l:'Supervision distante'},{v:'6',l:'Axes bras robot'},{v:'2',l:'Plateformes embarquées'}],
-      challenges:['Intégration perception + décision + action en temps réel sur architecture distribuée','Gestion énergie sur système mobile autonome','Synchronisation des deux plateformes embarquées (RPi + Arduino)'],
-      context:"Stage de recherche EHTP Casablanca. Projet visant la conception d'un système autonome intelligent combinant robotique mobile et station de recharge connectée pour véhicules agricoles intelligents. Prototype complet validé expérimentalement."
-    },
-    en:{title:'Autonomous mobile robot & IoT station', sub:'EHTP Casablanca · Apr. – Oct. 2022', badge:'Industrial',
-      desc:'Distributed embedded architecture (Raspberry Pi 4 + Arduino Mega) for tracked mobile robot with 6-axis arm. YOLOv5 vision, MQTT supervision, autonomous charging station.',
-      tags:['YOLOv5','MQTT','Raspberry Pi 4','Arduino Mega','IoT','Python','OpenCV'],
-      metrics:[{v:'YOLOv5',l:'Real-time vision'},{v:'MQTT',l:'IoT supervision'},{v:'6 axes',l:'Robot arm'}],
-      pipeline:['Camera + YOLOv5','Embedded decision','Motor control (Arduino)','Charging station','MQTT supervision'],
-      tasks:[
-        "Distributed embedded architecture design: Raspberry Pi 4 (vision + decision) + Arduino Mega (motor + actuator control).",
-        "Computer vision system with YOLOv5 for real-time object detection and recognition.",
-        "6-axis arm control logic and tracked robot locomotion implementation.",
-        "Autonomous charging station with energy management (production, storage, regulation).",
-        "IoT supervision system and inter-component communication via MQTT.",
-        "Testing, integration and validation of the complete prototype under experimental conditions."
-      ],
-      tech:['Raspberry Pi 4 + Arduino Mega','YOLOv5 (object detection)','MQTT (remote supervision)','Python / OpenCV','Autonomous charging station'],
-      metricsDetail:[{v:'YOLOv5',l:'Real-time detection'},{v:'MQTT',l:'Remote supervision'},{v:'6',l:'Robot arm axes'},{v:'2',l:'Embedded platforms'}],
-      challenges:['Real-time perception + decision + action integration on distributed architecture','Energy management on autonomous mobile system','Synchronization between two embedded platforms (RPi + Arduino)'],
-      context:"EHTP Casablanca research internship. Project targeting the design of an intelligent autonomous system combining mobile robotics and a connected charging station for smart agricultural vehicles. Complete prototype validated experimentally."
-    }
-  }
-];
-
-var LIGHTS = [
-  {top:'-120px',left:'-120px',w:'500px',color:'rgba(124,58,237,0.16)'},
-  {top:'30%',right:'-150px',w:'450px',color:'rgba(0,212,255,0.12)'},
-  {top:'60%',left:'20%',w:'350px',color:'rgba(124,58,237,0.09)'},
-  {bottom:'-100px',right:'10%',w:'400px',color:'rgba(0,212,255,0.10)'},
-  {top:'10%',left:'40%',w:'300px',color:'rgba(124,58,237,0.07)'},
-  {bottom:'20%',left:'-80px',w:'380px',color:'rgba(0,212,255,0.08)'},
-];
-
-function injectLights(pageEl) {
-  var existing = pageEl.querySelector('.page-bg');
-  if(existing) return;
-  var bg = document.createElement('div');
-  bg.className = 'page-bg';
-  LIGHTS.forEach(function(l){
-    var s = document.createElement('span');
-    s.style.cssText = 'width:'+l.w+';height:'+l.w+';background:radial-gradient(circle,'+l.color+' 0%,transparent 70%);';
-    if(l.top) s.style.top=l.top;
-    if(l.bottom) s.style.bottom=l.bottom;
-    if(l.left) s.style.left=l.left;
-    if(l.right) s.style.right=l.right;
-    bg.appendChild(s);
-  });
-  pageEl.insertBefore(bg, pageEl.firstChild);
-}
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.nav-link').forEach(function(b){b.classList.remove('active');});
-  var pageEl = document.getElementById('page-'+id);
-  pageEl.classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
-  injectLights(pageEl);
-  if(id==='projects') renderProjects();
-  if(id==='about') renderAbout();
-  if(id==='vol') renderVol();
-  window.scrollTo(0,0);
-}
-
-function setLang(l) {
-  lang=l;
-  var T=TR[lang];
-  document.getElementById('lang-btn').textContent=lang==='fr'?'EN':'FR';
-  var els = {
-    'nav-home':T.home,'nav-projects':T.projects,'nav-vol':T.volNav,'nav-about':T.about,'nav-contact':T.contact,
-    'hero-tag-txt':T.heroTag,'hero-title':T.heroTitle,'hero-desc':T.heroDesc,'hero-seek':T.heroSeek,
-    'cv-btn-txt':T.cvBtnTxt,
-    'cta-projects':T.cta1,'cta-contact':T.cta2,
-    'mv1':T.mv1,'ml1':T.ml1,'mv2':T.mv2,'ml2':T.ml2,
-    'mv3':T.mv3,'ml3':T.ml3,'mv4':T.mv4,'ml4':T.ml4,'mv5':T.mv5,'ml5':T.ml5,
-    'mv6':T.mv6,'ml6':T.ml6,
-    'home-footer':T.homeFooter,
-    'proj-label':T.projLabel,'proj-title':T.projTitle,'proj-footer':T.projFooter,
-    'about-tag':T.aboutTag,'about-role':T.aboutRole,'about-bio':T.aboutBio,
-    'values-title':T.valuesTitle,
-    'v1t':T.v1t,'v1d':T.v1d,'v2t':T.v2t,'v2d':T.v2d,
-    'v3t':T.v3t,'v3d':T.v3d,'v4t':T.v4t,'v4d':T.v4d,
-    'skills-title':T.skillsTitle,'langs-title':T.langsTitle,
-    'timeline-title':T.timelineTitle,'interests-title':T.interestsTitle,
-    'vol-title':T.volTitle,
-    'contact-label':T.contactLabel,'contact-title':T.contactTitle,
-    'contact-desc':T.contactDesc,'avail-text':T.availText,
-    'phone-label':T.phoneLabel,
-    'seeking-title':T.seekingTitle,'seeking-desc':T.seekingDesc,
-    'sk1':T.sk1,'sk2':T.sk2,'sk3':T.sk3,'sk4':T.sk4,
-    'seeking-title-home':T.seekingTitle,'seeking-desc-home':T.seekingDesc,
-    'sk1h':T.sk1,'sk2h':T.sk2,'sk3h':T.sk3,'sk4h':T.sk4,
-    'avail-card-title':T.availCardTitle,'avail-card-title-home':T.availCardTitle,
-    'av1-label':T.av1Label,'av1-val':T.av1Val,
-    'av2-label':T.av2Label,'av2-val':T.av2Val,
-    'av3-label':T.av3Label,'av3-val':T.av3Val,
-    'av1-label-home':T.av1Label,'av1-val-home':T.av1Val,
-    'av2-label-home':T.av2Label,'av2-val-home':T.av2Val,
-    'av3-label-home':T.av3Label,'av3-val-home':T.av3Val,
-    'msg-title':T.msgTitle,
-    'fl-name':T.flName,'fl-email':T.flEmail,'fl-msg':T.flMsg,
-    'form-submit':T.fsubmit,'form-note':T.fnote,
-    'about-footer':T.aboutFooter,'contact-footer':T.contactFooter
-  };
-  Object.keys(els).forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.textContent = els[id];
-  });
-  var cvDl = document.getElementById('cv-download');
-  if(cvDl) cvDl.href = T.cvFile;
-  var fiName = document.getElementById('fi-name');
-  var fiMsg = document.getElementById('fi-msg');
-  if(fiName) fiName.placeholder = lang==='fr'?'Votre nom ou entreprise':'Your name or company';
-  if(fiMsg) fiMsg.placeholder = lang==='fr'?'Décrivez votre projet ou opportunité...':'Describe your project or opportunity...';
-  renderProjects();
-  renderAbout();
-  renderVol();
-}
-
-function renderProjects() {
-  var grid=document.getElementById('projects-grid');
-  if(!grid) return;
-  var T=TR[lang];
-  var ordered=PROJECTS.filter(function(p){return p.featured;}).concat(PROJECTS.filter(function(p){return !p.featured;}));
-  grid.innerHTML='';
-  ordered.forEach(function(p){
-    var d=p[lang];
-    var isInd=d.badge===T.badgeInd;
-    var card=document.createElement('div');
-    card.className='pcard'+(p.featured?' featured':'');
-    card.innerHTML='<div class="pbadge '+(isInd?'bi':'ba')+'">'+d.badge+'</div>'+
-      '<h3 class="ptitle">'+d.title+'</h3>'+
-      '<p class="psub">'+d.sub+'</p>'+
-      '<p class="pdesc">'+d.desc+'</p>'+
-      '<div class="ptags">'+d.tags.map(function(t){return'<span class="ptag">'+t+'</span>';}).join('')+'</div>'+
-      '<div class="pmetrics">'+d.metrics.map(function(m){return'<div><span class="pm-val">'+m.v+'</span><span class="pm-label">'+m.l+'</span></div>';}).join('')+'</div>'+
-      '<span class="parrow">↗</span>';
-    card.addEventListener('click',function(){openModal(p.id);});
-    grid.appendChild(card);
-  });
-}
-
-function openModal(id) {
-  var p=PROJECTS.find(function(x){return x.id===id;});
-  if(!p) return;
-  var d=p[lang]; var T=TR[lang];
-  var isInd=d.badge===T.badgeInd;
-  var mc=document.getElementById('modal-content');
-  mc.innerHTML=
-    '<button class="modal-close" id="mcb">✕</button>'+
-    '<div class="pbadge '+(isInd?'bi':'ba')+'" style="margin-bottom:1rem">'+d.badge+'</div>'+
-    '<h2 class="modal-title">'+d.title+'</h2>'+
-    '<p class="modal-ctx">'+d.sub+'</p>'+
-    '<div class="msec"><div class="msec-title">'+T.contextTitle+'</div><p style="font-size:13px;color:var(--text2);line-height:1.7">'+d.context+'</p></div>'+
-    '<div class="msec"><div class="msec-title">'+T.pipelineTitle+'</div><div class="pipeline">'+
-      d.pipeline.map(function(s,i){return'<span class="pstep">'+s+'</span>'+(i<d.pipeline.length-1?'<span class="parr">→</span>':'');}).join('')+
-    '</div></div>'+
-    '<div class="msec"><div class="msec-title">'+T.tasksTitle+'</div><ul class="mul">'+
-      d.tasks.map(function(t){return'<li>'+t+'</li>';}).join('')+
-    '</ul></div>'+
-    '<div class="msec"><div class="msec-title">'+T.metricsTitle+'</div><div class="mmetrics">'+
-      d.metricsDetail.map(function(m){return'<div class="mmcard"><span class="mmval">'+m.v+'</span><span class="mmlabel">'+m.l+'</span></div>';}).join('')+
-    '</div></div>'+
-    '<div class="msec"><div class="msec-title">'+T.challengesTitle+'</div><ul class="mul">'+
-      d.challenges.map(function(c){return'<li>'+c+'</li>';}).join('')+
-    '</ul></div>'+
-    '<div class="msec"><div class="msec-title">'+T.techTitle+'</div><div class="mtech">'+
-      d.tech.map(function(t){return'<span class="mtag">'+t+'</span>';}).join('')+
-    '</div></div>';
-  document.getElementById('mcb').addEventListener('click',closeModal);
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-function renderAbout() {
-  var skills=lang==='fr'?SKILLS:SKILLS_EN;
-  var sg=document.getElementById('skills-grid');
-  if(sg){
-    sg.innerHTML=skills.map(function(s){
-      return'<div class="srow"><span class="sname">'+s.name+'</span><div class="sbg"><div class="sbar" style="width:'+s.pct+'%"></div></div><span class="slevel">'+s.label+'</span></div>';
-    }).join('');
-  }
-  var lg=document.getElementById('langs-grid');
-  if(lg){
-    lg.innerHTML=LANGS.map(function(l){
-      var nm=lang==='fr'?l.name:l.nameEn;
-      var lb=lang==='fr'?l.label:l.labelEn;
-      return'<div class="srow"><span class="sname">'+nm+'</span><div class="sbg"><div class="sbar" style="width:'+l.pct+'%"></div></div><span class="slevel">'+lb+'</span></div>';
-    }).join('');
-  }
-  var tl=document.getElementById('timeline');
-  if(tl){
-    var items=lang==='fr'?TIMELINE_FR:TIMELINE_EN;
-    tl.innerHTML=items.map(function(item){
-      return'<div class="titem"><div class="tdot"></div><div class="tcontent"><div class="tdate">'+item.date+'</div><div class="ttitle">'+item.title+'</div><div class="tsub">'+item.sub+'</div></div></div>';
-    }).join('');
-  }
-}
-
-function renderVol() {
-  var container = document.getElementById('vol-cards-big');
-  if(!container) return;
-  var vols = lang==='fr' ? VOLUNTEERING_FR : VOLUNTEERING_EN;
-  container.innerHTML = vols.map(function(v){
-    var logoHtml = '';
-    if(v.logoType === 'esn') {
-      logoHtml = '<div class="vol-logo-box" style="background:#fff;border-radius:12px;padding:6px"><img src="ESN_logo.png" alt="ESN" style="width:100%;height:100%;object-fit:contain"></div>';
-    } else if(v.logoType === 'ep') {
-      logoHtml = '<div class="vol-logo-box" style="background:#1a1a1a;border-radius:12px;padding:6px"><img src="EP_logo.png" alt="EHTP Electro-Power" style="width:100%;height:100%;object-fit:contain"></div>';
-    } else if(v.logoType === 'enactus') {
-      logoHtml = '<div class="vol-logo-box" style="background:#fff;border-radius:12px;padding:6px"><img src="Enactus_logo.png" alt="Enactus" style="width:100%;height:100%;object-fit:contain"></div>';
-    }
-    var pointsHtml = '<ul class="vol-big-points">'+v.points.map(function(p){return'<li>'+p+'</li>';}).join('')+'</ul>';
-    return '<div class="vol-big-card">'+logoHtml+'<div><div class="vol-big-title">'+v.title+'</div><span class="vol-big-role">'+v.role+'</span><div class="vol-big-sub">'+v.sub+'</div>'+pointsHtml+'</div></div>';
-  }).join('');
-  document.getElementById('vol-page-label').textContent = TR[lang].volPageLabel;
-  document.getElementById('vol-page-title').textContent = TR[lang].volPageTitle;
-  document.getElementById('vol-page-intro').textContent = TR[lang].volPageIntro;
-  document.getElementById('vol-footer').textContent = TR[lang].volFooter;
-}
-
-document.getElementById('nav-home').addEventListener('click',function(){showPage('home');});
-document.getElementById('nav-projects').addEventListener('click',function(){showPage('projects');});
-document.getElementById('nav-vol').addEventListener('click',function(){showPage('vol');});
-document.getElementById('nav-about').addEventListener('click',function(){showPage('about');});
-document.getElementById('nav-contact').addEventListener('click',function(){showPage('contact');});
-document.getElementById('lang-btn').addEventListener('click',function(){setLang(lang==='fr'?'en':'fr');});
-document.getElementById('cta-projects').addEventListener('click',function(){showPage('projects');});
-document.getElementById('cta-contact').addEventListener('click',function(){showPage('contact');});
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-document.getElementById('form-submit').addEventListener('click',function(){
-  var n = document.getElementById('fi-name').value;
-  var e = document.getElementById('fi-email').value;
-  var m = document.getElementById('fi-msg').value;
-  var btn = this;
-  if(!n||!e||!m){
-    btn.textContent = lang==='fr'?'Remplissez tous les champs':'Fill all fields';
-    setTimeout(function(){btn.textContent=TR[lang].fsubmit;},2000);
-    return;
-  }
-  var subject = encodeURIComponent(lang==='fr'?'Contact depuis portfolio — '+n:'Portfolio contact — '+n);
-  var body = encodeURIComponent((lang==='fr'?'De : ':'From: ')+n+'\n'+(lang==='fr'?'Email : ':'Email: ')+e+'\n\n'+m);
-  window.location.href = 'mailto:Azamiali2706@gmail.com?subject='+subject+'&body='+body;
-  btn.textContent = lang==='fr'?'Redirection vers votre messagerie ✓':'Opening your email client ✓';
-  btn.style.background = 'var(--accent3)';
-  setTimeout(function(){btn.textContent=TR[lang].fsubmit;btn.style.background='';},3000);
-});
-
-showPage('home');
-
-</script>
-
-<nav class="mobile-nav" id="mobile-nav">
-  <button class="mobile-nav-btn active" id="mnav-home">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span id="mlabel-home">Home</span>
-  </button>
-  <button class="mobile-nav-btn" id="mnav-projects">
-    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    <span id="mlabel-projects">Projets</span>
-  </button>
-  <button class="mobile-nav-btn" id="mnav-vol">
-    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    <span id="mlabel-vol">Bénévolat</span>
-  </button>
-  <button class="mobile-nav-btn" id="mnav-about">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    <span id="mlabel-about">À propos</span>
-  </button>
-  <button class="mobile-nav-btn" id="mnav-contact">
-    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    <span id="mlabel-contact">Contact</span>
-  </button>
-  <button class="mobile-lang" id="mlang-btn">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    <span id="mlang-txt">EN</span>
-  </button>
-</nav>
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  var mnavPages=['home','projects','vol','about','contact'];
-  mnavPages.forEach(function(id){
-    var btn=document.getElementById('mnav-'+id);
-    if(btn)btn.addEventListener('click',function(){showPage(id);updateMobileNav(id);});
-  });
-  var mlangBtn=document.getElementById('mlang-btn');
-  if(mlangBtn)mlangBtn.addEventListener('click',function(){
-    setLang(lang==='fr'?'en':'fr');
-    updateMobileLabels();
-  });
-});
-function updateMobileNav(id){
-  var pages=['home','projects','vol','about','contact'];
-  pages.forEach(function(p){
-    var b=document.getElementById('mnav-'+p);
-    if(b)b.classList.toggle('active',p===id);
-  });
-}
-function updateMobileLabels(){
-  var labels={home:'Home',projects:lang==='fr'?'Projets':'Projects',vol:lang==='fr'?'Bénévolat':'Volunteer',about:lang==='fr'?'À propos':'About',contact:'Contact'};
-  Object.keys(labels).forEach(function(k){var el=document.getElementById('mlabel-'+k);if(el)el.textContent=labels[k];});
-  var ml=document.getElementById('mlang-txt');if(ml)ml.textContent=lang==='fr'?'EN':'FR';
-}
-var _origSP=showPage;
-showPage=function(id){_origSP(id);updateMobileNav(id);};
-</script>
+<script src="assets/js/main.js?v=0c2243e2" defer></script>
 </body>
 </html>

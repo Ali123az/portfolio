@@ -1,0 +1,343 @@
+{
+  "lang": "fr",
+  "locale": "fr_FR",
+  "home_dir": "",
+  "projects_dir": "projets",
+  "meta": {
+    "title": "Ali Azami — Ingénieur IA embarquée & systèmes embarqués",
+    "description": "Ali Azami, ingénieur IA embarquée et systèmes embarqués. Edge AI sur microcontrôleur, radar, firmware temps réel, FPGA. En poste chez Ocean Data System, Lorient.",
+    "og_alt": "Ali Azami — Ingénieur IA embarquée et systèmes embarqués",
+    "job_title": "Ingénieur systèmes embarqués",
+    "knows_about": [
+      "Systèmes embarqués", "Firmware temps réel", "IA embarquée", "Edge AI", "TinyML",
+      "Traitement du signal", "Radar UWB", "Microcontrôleurs ARM Cortex-M", "TensorFlow Lite Micro",
+      "FPGA", "VHDL", "Électronique marine", "Bus CAN", "NMEA 2000", "Conception de cartes électroniques",
+      "C", "C++", "C#", "Python"
+    ]
+  },
+  "ui": {
+    "swipe": "Faire défiler",
+    "skip": "Aller au contenu",
+    "menu": "Menu",
+    "close": "Fermer",
+    "lang_switch": "EN",
+    "lang_switch_label": "Read this page in English",
+    "home": "Accueil",
+    "back_top": "Retour en haut",
+    "scroll": "Défiler",
+    "read_case": "Lire l'étude de cas",
+    "all_projects": "Tous les projets",
+    "copy": "Copier",
+    "copied": "Copié",
+    "cv_fr": "CV en français",
+    "cv_en": "CV en anglais",
+    "cv_title": "Télécharger mon CV",
+    "cv_note": "PDF · 1 page",
+    "cv_short": "CV",
+    "download_cv": "Télécharger le CV",
+    "kinds": {"industry": "Industrie", "research": "Recherche", "academic": "Académique"},
+    "case": {
+      "context": "Contexte",
+      "pipeline": "Chaîne technique",
+      "tasks": "Ce que j'ai réalisé",
+      "results": "Résultats mesurés",
+      "challenges": "Difficultés rencontrées",
+      "stack": "Environnement technique",
+      "facts": "Fiche projet",
+      "org": "Cadre",
+      "period": "Période",
+      "role": "Format",
+      "place": "Lieu",
+      "next": "Projet suivant",
+      "prev": "Projet précédent",
+      "cta_title": "Envie d'en discuter ?",
+      "cta_text": "Je détaille volontiers les choix techniques, les mesures et ce que je referais autrement.",
+      "cta_button": "Me contacter"
+    },
+    "notfound": {
+      "title": "Signal perdu",
+      "text": "La page demandée n'existe pas ou a été déplacée.",
+      "button": "Revenir à l'accueil"
+    }
+  },
+  "nav": [
+    {"id": "experience", "label": "Expérience"},
+    {"id": "projets", "label": "Projets"},
+    {"id": "competences", "label": "Compétences"},
+    {"id": "a-propos", "label": "À propos"},
+    {"id": "engagement", "label": "Engagement"},
+    {"id": "contact", "label": "Contact"}
+  ],
+  "hero": {
+    "status": "En poste · Ocean Data System, Lorient",
+    "role": "Ingénieur IA embarquée & systèmes embarqués",
+    "typed": [
+      "IA embarquée sur microcontrôleur",
+      "Edge AI et TinyML",
+      "traitement du signal radar",
+      "firmware temps réel",
+      "électronique marine",
+      "conception de cartes",
+      "FPGA et VHDL"
+    ],
+    "lead": "Ma spécialité : l'IA embarquée. J'entraîne, je quantifie et je déploie des réseaux de neurones qui tournent en temps réel sur microcontrôleur, et je maîtrise toute la chaîne autour, du schéma de la carte au firmware. Aujourd'hui chez Ocean Data System, je développe l'électronique et les systèmes de sécurité de bord utilisés en course au large.",
+    "cta_primary": "Voir mon expérience",
+    "cta_secondary": "Études de cas",
+    "stats": [
+      {"value": 99.3, "decimals": 1, "prefix": "", "suffix": " %", "label": "d'accuracy pour un CNN radar quantifié INT8, déployé sur ARM Cortex-M33"},
+      {"value": 11.9, "decimals": 1, "prefix": "", "suffix": " kB", "label": "le modèle embarqué complet, seize fois plus compact que son prédécesseur"},
+      {"value": 42, "decimals": 0, "prefix": "×", "suffix": "", "label": "d'accélération de l'inférence sur NPU face au cœur CPU"},
+      {"value": 2, "decimals": 0, "prefix": "", "suffix": "", "label": "diplômes d'ingénieur : ENSEEIHT Toulouse et EHTP Casablanca"}
+    ],
+    "panel": {
+      "title": "Poste actuel",
+      "rows": [
+        {"k": "Fonction", "v": "Ingénieur systèmes embarqués"},
+        {"k": "Société", "v": "Ocean Data System"},
+        {"k": "Domaine", "v": "Électronique marine, course au large"},
+        {"k": "Lieu", "v": "Lorient, Bretagne"},
+        {"k": "Depuis", "v": "Septembre 2026"}
+      ],
+      "stack": ["C#", "C / C++", "Python", "ARM9", "CAN / J1939", "NMEA 2000", "KiCad"]
+    },
+    "availability": "Disponible à partir de janvier 2027 · Objectif : un poste en IA embarquée",
+    "marquee": [
+      "C", "C++", "C#", "Python", "ARM Cortex-M", "ARM9", "TinyCLR", "TensorFlow Lite Micro", "NPU",
+      "FFT / DSP", "Radar UWB", "CAN / J1939", "NMEA 2000", "BLE", "VHDL", "FPGA", "HLS", "KiCad", "Git", "Docker"
+    ]
+  },
+  "experience": {
+    "label": "Expérience",
+    "title": "Expérience professionnelle",
+    "intro": "Trois environnements industriels, un même fil conducteur : faire fonctionner de l'électronique et du logiciel là où les contraintes sont bien réelles — mémoire comptée, temps réel, terrain.",
+    "current": {
+      "badge": "Poste actuel",
+      "role": "Ingénieur systèmes embarqués",
+      "org": "Ocean Data System (ODS)",
+      "meta": ["CDI", "Lorient, Bretagne", "Depuis septembre 2026"],
+      "lead": "ODS conçoit depuis 1991 l'électronique et l'informatique marines issues de la course au large : systèmes anti-chavirage, automates de gestion de quille, enregistreurs de données de bord, mesure d'effort sans fil, IHM embarquées. Des équipements que l'on retrouve sur des bateaux de course, des maxis et des superyachts.",
+      "constraints_title": "Le cahier des charges du large",
+      "constraints": [
+        "Humidité, sel, vibrations",
+        "Alimentation 12/24 V perturbée",
+        "Aucune intervention possible en mer",
+        "Fiabilité et modes dégradés avant la performance"
+      ],
+      "cycle": {
+        "title": "Un produit, du premier schéma au retour terrain",
+        "text": "Dans une structure à taille humaine, le poste couvre tout le cycle de vie du produit, sans relais entre bureau d'études, production et support. Je vois la panne chez le client, et c'est moi qui corrige la carte ou le firmware.",
+        "steps": [
+          {"name": "Conception", "text": "Architecture, choix des composants, budget d'alimentation, interfaces de bus."},
+          {"name": "Schéma", "text": "Saisie de schéma sous KiCad et Eagle."},
+          {"name": "Routage PCB", "text": "Placement-routage des cartes et fichiers de fabrication."},
+          {"name": "Firmware", "text": "C# sous .NET Micro Framework et TinyCLR, sur cible ARM9."},
+          {"name": "Mise en service", "text": "Intégration à bord, configuration et validation en conditions réelles."},
+          {"name": "Production", "text": "Assemblage, soudure manuelle, tests avant expédition."},
+          {"name": "Support", "text": "Diagnostic à distance avec les équipages, skippers et chantiers."},
+          {"name": "Retour terrain", "text": "Chaque incident est tracé, puis réinjecté dans la conception."}
+        ]
+      },
+      "missions_title": "Mes missions",
+      "missions": [
+        {
+          "title": "Firmware embarqué",
+          "text": "Développement et maintenance du firmware des systèmes de bord, en C# sur .NET Micro Framework et TinyCLR (cible ARM9 à 400 MHz). Un runtime managé très contraint : concurrence par threads, timers et verrous, ramasse-miettes non déterministe. D'où des tampons circulaires producteur/consommateur et des allocations réduites au minimum dans les boucles d'acquisition."
+        },
+        {
+          "title": "Systèmes de sécurité",
+          "text": "Détection d'assiette et anti-chavirage, alarmes, homme à la mer, chien de garde. Chaque modification est évaluée sous l'angle du mode dégradé : une optimisation qui affaiblit une alarme ou une détection de panne est un défaut."
+        },
+        {
+          "title": "Acquisition multicapteurs",
+          "text": "Centrale d'attitude inertielle (AHRS), capteurs sans fil, claviers CAN : intégration sur bus CAN/J1939, NMEA 0183 et NMEA 2000, liaisons série RS-232/422/485, Modbus et BLE. Drivers, horodatage, enregistrement et supervision."
+        },
+        {
+          "title": "Conception électronique",
+          "text": "Schéma et routage sous KiCad et Eagle : évolution de cartes de production et refonte complète d'une carte de commande (alimentation 12/24/48 V, second port CAN indépendant). Un produit pris en charge de la carte au firmware : serveurs HTTP et FTP embarqués, point d'accès Wi-Fi, tableau de bord de configuration."
+        },
+        {
+          "title": "Débogage matériel et logiciel",
+          "text": "Les défauts les plus coûteux se cachent à l'interface des deux. Oscilloscope et analyseur logique, intégrité des bus, alimentation perturbée, confrontation des datasheets aux conditions réelles (temps de commutation contre temps bit) — puis correction du firmware ou de la carte."
+        },
+        {
+          "title": "Production, mise en service, support",
+          "text": "Assemblage, soudure et tests avant expédition ; intégration et validation à bord ; diagnostic à distance avec les équipages, les skippers et les chantiers. La même rigueur au téléphone qu'au laboratoire."
+        }
+      ],
+      "side": "En parallèle : outils internes d'IA locale — un agent d'indexation et de recherche documentaire appuyé sur un LLM local (Ollama), et une étude de faisabilité pour une IA générative hébergée sur site.",
+      "stack": ["C#", "C", "C++", "Python", ".NET Micro Framework", "TinyCLR", "ARM9", "CAN / J1939", "NMEA 0183 / 2000", "RS-232 / 422 / 485", "Modbus", "BLE", "KiCad", "Eagle", "Oscilloscope", "Analyseur logique", "LLM local"]
+    },
+    "past_title": "Avant ODS",
+    "past": [
+      {
+        "period": "Sept. 2024 – Oct. 2025",
+        "role": "Ingénieur IA embarquée et radar",
+        "org": "Vitesco Technologies / Schaeffler France",
+        "meta": "Alternance (M2) · Toulouse",
+        "points": [
+          "Conception d'une chaîne radar UWB embarquée complète, de l'acquisition du signal brut à la décision : prétraitement, FFT, extraction de caractéristiques et classification par CNN en temps réel sur ARM Cortex-M33.",
+          "Portage en C de la chaîne de traitement prototypée sous Python, pour tenir les contraintes temps réel et mémoire de la cible et supprimer la dépendance à un PC hôte.",
+          "Entraînement, quantification INT8 et déploiement des modèles sur cible, avec arbitrage entre latence d'inférence, empreinte mémoire et qualité de détection.",
+          "Campagnes de mesure sur le terrain, analyse de l'écart entre laboratoire et conditions réelles, documentation technique en anglais avec des équipes internationales."
+        ],
+        "tags": ["ARM Cortex-M33", "TensorFlow Lite Micro", "FFT / DSP", "C", "Python", "CAN"],
+        "project": "schaeffler"
+      },
+      {
+        "period": "Mai – Sept. 2024",
+        "role": "Ingénieur IA embarquée",
+        "org": "NXP Semiconductors",
+        "meta": "Stage (M1) · Toulouse",
+        "points": [
+          "Chaîne Edge AI de bout en bout : acquisition capteurs, entraînement du modèle, quantification et déploiement sur NPU eIQ Neutron.",
+          "Optimisation de l'inférence sur cible contrainte, comparaison de l'exécution sur NPU et sur cœur CPU, rédaction du guide technique de déploiement utilisé en interne."
+        ],
+        "tags": ["NXP MCX N947", "NPU eIQ Neutron", "TensorFlow Lite", "SPI", "C / C++"],
+        "project": "nxp"
+      },
+      {
+        "period": "Avr. – Oct. 2022",
+        "role": "Ingénieur électronique et IoT",
+        "org": "EHTP",
+        "meta": "Stage de recherche · Casablanca",
+        "points": [
+          "Architecture embarquée distribuée (Arduino Mega et Raspberry Pi 4) pour un robot mobile sur chenilles à bras 6 axes, vision YOLOv5 pour la détection d'objets et recharge autonome supervisée via MQTT."
+        ],
+        "tags": ["Raspberry Pi 4", "Arduino Mega", "YOLOv5", "MQTT", "Python"],
+        "project": "iot"
+      }
+    ]
+  },
+  "projects": {
+    "label": "Projets",
+    "title": "Études de cas",
+    "intro": "Six projets détaillés : le contexte, la chaîne technique, ce que j'ai réalisé, les résultats mesurés et les difficultés rencontrées.",
+    "filter_label": "Filtrer les projets",
+    "filters": [
+      {"key": "all", "label": "Tous"},
+      {"key": "industry", "label": "Industrie"},
+      {"key": "research", "label": "Recherche"},
+      {"key": "academic", "label": "Académique"}
+    ]
+  },
+  "skills": {
+    "label": "Compétences",
+    "title": "Compétences techniques",
+    "intro": "Pas de jauges ni de pourcentages : ce que j'ai réellement mis en œuvre, et dans quel contexte.",
+    "groups": [
+      {
+        "title": "IA embarquée",
+        "context": "De l'entraînement au déploiement sur MCU, NPU et DSP, avec arbitrage latence / mémoire.",
+        "items": ["CNN sur MCU, NPU, DSP", "Quantification INT8 (QAT, PTQ)", "TensorFlow Lite Micro", "PyTorch", "TensorFlow", "Vision (YOLO, OpenCV)"]
+      },
+      {
+        "title": "Traitement du signal",
+        "context": "Chaîne radar complète portée de Python vers le C embarqué.",
+        "items": ["Radar UWB", "FFT", "Filtrage numérique", "Extraction de caractéristiques", "Virgule fixe", "MATLAB"]
+      },
+      {
+        "title": "Systèmes embarqués",
+        "context": "En production chez ODS, sur cible automobile chez Schaeffler, sur cartes d'évaluation chez NXP.",
+        "items": ["Temps réel", "ARM Cortex-M", "ARM9", "Bare-metal", "RTOS", "Drivers capteurs", "SPI", "I²C", "UART", "CAN / J1939", "NMEA 0183 / 2000", "BLE"]
+      },
+      {
+        "title": "Programmation",
+        "context": "C et C++ sur microcontrôleur, C# sur runtime embarqué, Python pour l'outillage et l'apprentissage automatique. Pratiqués chez ODS, Schaeffler et NXP.",
+        "items": ["C", "C++", "Python", "C#"]
+      },
+      {
+        "title": "Design numérique",
+        "context": "Flot complet du C++ au bitstream, machines à états et protocoles en VHDL.",
+        "items": ["VHDL", "Verilog", "FPGA / SoC", "HLS", "SystemC", "Simulink"]
+      },
+      {
+        "title": "Conception électronique",
+        "context": "Cartes de production chez ODS, du schéma aux fichiers de fabrication.",
+        "items": ["KiCad", "Eagle", "Schéma et routage PCB", "PSPICE", "Oscilloscope", "Analyseur logique"]
+      },
+      {
+        "title": "Outils",
+        "context": "L'environnement de travail au quotidien.",
+        "items": ["Git", "GitLab CI/CD", "Docker", "Linux", "CMake", "Keil", "MCUXpresso", "Lauterbach Trace32"]
+      }
+    ]
+  },
+  "about": {
+    "label": "À propos",
+    "title": "Du signal à la décision, du schéma au terrain",
+    "photo_alt": "Portrait d'Ali Azami, enveloppe de l'ENSEEIHT à la main",
+    "bio": [
+      "Ingénieur doublement diplômé — ENSEEIHT à Toulouse (électronique et IA pour systèmes embarqués) et EHTP à Casablanca (génie électrique) — je travaille là où le logiciel rencontre la physique : un signal à acquérir, une mémoire comptée en kilo-octets, une échéance temps réel à tenir.",
+      "Chez Schaeffler et NXP, j'ai mené des chaînes complètes d'IA embarquée, de l'acquisition radar à l'inférence sur microcontrôleur. Chez Ocean Data System, j'ai élargi le périmètre à l'ensemble du produit : la carte, le firmware, la mise en service et le support, pour des équipements qui doivent tenir en mer sans intervention possible.",
+      "Ce qui me motive : prendre un problème difficile, comprendre ce que dit vraiment la mesure, et construire la chaîne complète jusqu'à ce qu'elle fonctionne sur le terrain. La suite que je vise : l'IA embarquée, précisément — concevoir, optimiser et déployer des modèles sur cible contrainte."
+    ],
+    "method_title": "Ma façon de travailler",
+    "method": [
+      {"title": "Le fait avant l'interprétation", "text": "Je reformule le symptôme avant de chercher une solution, et je ne conclus que sur une cause démontrée."},
+      {"title": "Mesurer plutôt qu'estimer", "text": "Latence, mémoire, taux de détection : chaque résultat est mesuré sur la cible, pas supposé."},
+      {"title": "Penser mode dégradé", "text": "Ce qui part en mer ne se corrige pas à distance. Chaque modification s'accompagne de ce qu'il faut retester."},
+      {"title": "Du laboratoire au terrain", "text": "Un modèle à 99 % en validation n'est qu'un début : je vais mesurer l'écart en conditions réelles et j'en cherche la cause."}
+    ],
+    "education_title": "Formation",
+    "education": [
+      {"period": "2023 – 2025", "title": "Diplôme d'ingénieur — Électronique et IA pour systèmes embarqués", "org": "ENSEEIHT (Toulouse INP), Toulouse", "note": "Double diplôme"},
+      {"period": "2021 – 2025", "title": "Diplôme d'ingénieur — Génie électrique et électronique", "org": "École Hassania des Travaux Publics (EHTP), Casablanca", "note": ""},
+      {"period": "2018 – 2020", "title": "Classes préparatoires MPSI / MP", "org": "CPGE Ibn Ghazi, Rabat", "note": ""}
+    ],
+    "languages_title": "Langues",
+    "languages": [
+      {"name": "Arabe", "level": "Langue maternelle"},
+      {"name": "Français", "level": "Bilingue"},
+      {"name": "Anglais", "level": "Avancé, usage professionnel"},
+      {"name": "Espagnol", "level": "Intermédiaire"}
+    ],
+    "interests_title": "Centres d'intérêt",
+    "interests": ["Robotique mobile et vision par ordinateur", "Électronique DIY", "Voyages et rencontres interculturelles"]
+  },
+  "volunteering": {
+    "label": "Engagement",
+    "title": "Engagement associatif",
+    "intro": "En parallèle de mes études, je me suis toujours engagé dans des associations — pour transmettre, coordonner et faire avancer des projets collectifs.",
+    "items": [
+      {
+        "id": "esn", "logo": "assets/img/logo-esn.png", "logo_bg": "light",
+        "title": "Erasmus Student Network", "role": "Membre actif", "meta": "Toulouse · depuis 2023",
+        "points": [
+          "Organisation et encadrement de soirées, de voyages et d'événements culturels pour les étudiants internationaux.",
+          "Accompagnement des étudiants dans leur intégration et leur découverte de la culture française."
+        ]
+      },
+      {
+        "id": "ep", "logo": "assets/img/logo-electro-power.png", "logo_bg": "dark",
+        "title": "EHTP Electro-Power", "role": "Vice-président", "meta": "Casablanca · 2021 – 2023",
+        "points": [
+          "Étude de faisabilité et suivi des projets électroniques proposés par les membres du club, coordination des équipes projet.",
+          "Gestion de la trésorerie et des partenariats industriels, organisation de formations techniques pour les élèves ingénieurs."
+        ]
+      },
+      {
+        "id": "enactus", "logo": "assets/img/logo-enactus.png", "logo_bg": "light",
+        "title": "Enactus EHTP", "role": "Chef d'équipe", "meta": "Casablanca · 2022 – 2023",
+        "points": [
+          "Pilotage d'une équipe étudiante sur des projets d'entrepreneuriat social alignés sur les Objectifs de développement durable.",
+          "Animation de l'équipe, suivi de l'avancement et présentation des projets aux partenaires externes."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Parlons technique",
+    "text": "Je souhaite poursuivre ma carrière dans l'IA embarquée : Edge AI, TinyML, déploiement de modèles sur microcontrôleur, NPU ou DSP. Une opportunité dans ce domaine, une question sur une étude de cas ? Écrivez-moi : je réponds généralement sous 24 h.",
+    "email_label": "E-mail",
+    "linkedin_label": "LinkedIn",
+    "phone_label": "Téléphone",
+    "location_label": "Localisation",
+    "location": "Lorient, Bretagne — mobilité nationale et internationale",
+    "write": "M'écrire"
+  },
+  "footer": {
+    "tagline": "Ingénieur systèmes embarqués · Lorient",
+    "built": "Site statique conçu sans framework : HTML, CSS et JavaScript."
+  }
+}

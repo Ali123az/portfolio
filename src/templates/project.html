@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% from "macros.html" import icon, visual, tags %}
+{% block main %}
+{% set d = p[c.lang] %}
+{% set t = c.ui.case %}
+<article class="case">
+  <header class="case-hero">
+    <div class="container case-hero-grid">
+      <div>
+        <nav class="crumbs hero-in" style="--i:0" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="{{ page.home }}">{{ c.ui.home }}</a></li>
+            <li><a href="{{ page.section_base }}#{{ c.nav[1].id }}">{{ c.projects.label }}</a></li>
+            <li aria-current="page">{{ d.org }}</li>
+          </ol>
+        </nav>
+        <p class="badge badge--{{ p.kind }} hero-in" style="--i:1">{{ c.ui.kinds[p.kind] }}</p>
+        <h1 class="case-title hero-in" style="--i:2">{{ d.title }}</h1>
+        <p class="case-meta hero-in" style="--i:3">{{ d.org }} · {{ d.role }} · {{ d.period }}</p>
+        <p class="case-summary hero-in" style="--i:4">{{ d.summary }}</p>
+      </div>
+      <div class="case-visual hero-in" style="--i:5" data-tilt>{{ visual(p.visual) }}</div>
+    </div>
+    <div class="container">
+      <dl class="case-metrics" data-reveal-group>
+        {% for m in d.metrics -%}
+        <div class="stat" data-reveal style="--i:{{ loop.index0 }}"><dt class="stat-value">{{ m.v }}</dt><dd class="stat-label">{{ m.l }}</dd></div>
+        {% endfor -%}
+      </dl>
+    </div>
+  </header>
+
+  <div class="container case-layout">
+    <div class="case-body">
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">01</span>{{ t.context }}</h2>
+        <p class="case-lead">{{ d.context }}</p>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">02</span>{{ t.pipeline }}</h2>
+        <ol class="flow" style="--n:{{ d.pipeline | length }}">
+          {% for s in d.pipeline -%}
+          <li style="--i:{{ loop.index0 }}"><span class="flow-num" aria-hidden="true">{{ loop.index }}</span>{{ s }}</li>
+          {% endfor -%}
+        </ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">03</span>{{ t.tasks }}</h2>
+        <ol class="steps" data-reveal-group>
+          {% for x in d.tasks -%}
+          <li data-reveal style="--i:{{ loop.index0 }}"><span class="steps-num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span><p>{{ x }}</p></li>
+          {% endfor -%}
+        </ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">04</span>{{ t.results }}</h2>
+        <dl class="results" data-reveal-group>
+          {% for m in d.results -%}
+          <div class="card" data-reveal data-spot style="--i:{{ loop.index0 }}"><dt>{{ m.v }}</dt><dd>{{ m.l }}</dd></div>
+          {% endfor -%}
+        </dl>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">05</span>{{ t.challenges }}</h2>
+        <ul class="challenges">
+          {% for x in d.challenges %}<li>{{ x }}</li>{% endfor %}
+        </ul>
+      </section>
+    </div>
+
+    <aside class="case-aside" data-reveal>
+      <div class="card facts">
+        <h2 class="eyebrow">{{ t.facts }}</h2>
+        <dl>
+          <div><dt>{{ t.org }}</dt><dd>{{ d.org }}</dd></div>
+          <div><dt>{{ t.role }}</dt><dd>{{ d.role }}</dd></div>
+          <div><dt>{{ t.period }}</dt><dd>{{ d.period }}</dd></div>
+          <div><dt>{{ t.place }}</dt><dd>{{ d.place }}</dd></div>
+        </dl>
+        <h2 class="eyebrow">{{ t.stack }}</h2>
+        {{ tags(d.stack, "tags--mono tags--stack") }}
+      </div>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div class="case-cta card" data-reveal data-spot>
+      <div>
+        <h2>{{ t.cta_title }}</h2>
+        <p>{{ t.cta_text }}</p>
+      </div>
+      <a class="btn btn--primary" href="{{ page.section_base }}#{{ c.nav[5].id }}" data-magnetic><span>{{ t.cta_button }}</span>{{ icon("arrow") }}</a>
+    </div>
+
+    <nav class="case-nav" aria-label="{{ c.ui.all_projects }}">
+      <a class="case-nav-link card" href="{{ root }}{{ c.projects_dir }}/{{ prev[c.lang].slug }}/" rel="prev" data-spot>
+        <span class="eyebrow">{{ icon("arrow") }}{{ t.prev }}</span>
+        <strong>{{ prev[c.lang].title }}</strong>
+      </a>
+      <a class="case-nav-link case-nav-link--next card" href="{{ root }}{{ c.projects_dir }}/{{ next[c.lang].slug }}/" rel="next" data-spot>
+        <span class="eyebrow">{{ t.next }}{{ icon("arrow") }}</span>
+        <strong>{{ next[c.lang].title }}</strong>
+      </a>
+    </nav>
+  </div>
+</article>
+{% endblock %}

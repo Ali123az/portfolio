@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1-Wire thermometer in VHDL on Artix-7 FPGA — Ali Azami</title>
+<meta name="description" content="Case study: synchronous VHDL design on a Nexys A7, six state machines driving a DS18S20 over 1-Wire, microsecond timings validated on the oscilloscope.">
+<meta name="author" content="Ali Azami">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/">
+<link rel="alternate" hreflang="fr" href="https://ali123az.github.io/portfolio/projets/thermometre-vhdl-1-wire-fpga/">
+<link rel="alternate" hreflang="en" href="https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/">
+<link rel="alternate" hreflang="x-default" href="https://ali123az.github.io/portfolio/projets/thermometre-vhdl-1-wire-fpga/">
+<meta name="theme-color" content="#050912">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Ali Azami">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1-Wire thermometer in VHDL on Artix-7 FPGA — Ali Azami">
+<meta property="og:description" content="Case study: synchronous VHDL design on a Nexys A7, six state machines driving a DS18S20 over 1-Wire, microsecond timings validated on the oscilloscope.">
+<meta property="og:url" content="https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Azami — Embedded AI and embedded systems engineer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1-Wire thermometer in VHDL on Artix-7 FPGA — Ali Azami">
+<meta name="twitter:description" content="Case study: synchronous VHDL design on a Nexys A7, six state machines driving a DS18S20 over 1-Wire, microsecond timings validated on the oscilloscope.">
+<meta name="twitter:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=96fb4bc6">
+<script>document.documentElement.className = "js";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/#article","headline":"1-Wire digital thermometer in VHDL on FPGA","description":"Case study: synchronous VHDL design on a Nexys A7, six state machines driving a DS18S20 over 1-Wire, microsecond timings validated on the oscilloscope.","url":"https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/","inLanguage":"en","image":"https://ali123az.github.io/portfolio/assets/img/og-cover-en.png","keywords":"VHDL, Xilinx Artix-7, Vivado, 1-Wire, FSM, Oscilloscope","author":{"@id":"https://ali123az.github.io/portfolio/#person"},"isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"dateModified":"2026-11-11"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ali123az.github.io/portfolio/en/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://ali123az.github.io/portfolio/en/#projects"},{"@type":"ListItem","position":3,"name":"1-Wire digital thermometer in VHDL on FPGA","item":"https://ali123az.github.io/portfolio/en/projects/vhdl-1-wire-thermometer-fpga/"}]},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","url":"https://ali123az.github.io/portfolio/","jobTitle":"Embedded Systems Engineer"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0J439TZPLC');
+</script>
+</head>
+<body class="page-project">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="../../../en/" aria-label="Ali Azami — Home">
+      <span class="brand-mark" aria-hidden="true">AA</span>
+      <span class="brand-name">Ali Azami</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Menu" data-nav>
+      <ul class="nav-list">
+        <li class="nav-indicator" aria-hidden="true" data-nav-indicator></li>
+<li style="--i:0"><a class="nav-link" href="../../../en/#experience" data-section="experience"><span class="nav-num" aria-hidden="true">01</span>Experience</a></li>
+<li style="--i:1"><a class="nav-link" href="../../../en/#projects" data-section="projects"><span class="nav-num" aria-hidden="true">02</span>Projects</a></li>
+<li style="--i:2"><a class="nav-link" href="../../../en/#skills" data-section="skills"><span class="nav-num" aria-hidden="true">03</span>Skills</a></li>
+<li style="--i:3"><a class="nav-link" href="../../../en/#about" data-section="about"><span class="nav-num" aria-hidden="true">04</span>About</a></li>
+<li style="--i:4"><a class="nav-link" href="../../../en/#volunteering" data-section="volunteering"><span class="nav-num" aria-hidden="true">05</span>Volunteering</a></li>
+<li style="--i:5"><a class="nav-link" href="../../../en/#contact" data-section="contact"><span class="nav-num" aria-hidden="true">06</span>Contact</a></li>
+</ul>
+      <div class="nav-actions">
+<a class="nav-cv" href="../../../assets/cv/CV-Ali-Azami-EN.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>CV</span></a>
+<a class="nav-lang" href="../../../projets/thermometre-vhdl-1-wire-fpga/" hreflang="fr" lang="fr" aria-label="Lire cette page en français">FR</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="case">
+  <header class="case-hero">
+    <div class="container case-hero-grid">
+      <div>
+        <nav class="crumbs hero-in" style="--i:0" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../../../en/">Home</a></li>
+            <li><a href="../../../en/#projects">Projects</a></li>
+            <li aria-current="page">ENSEEIHT</li>
+          </ol>
+        </nav>
+        <p class="badge badge--academic hero-in" style="--i:1">Academic</p>
+        <h1 class="case-title hero-in" style="--i:2">1-Wire digital thermometer in VHDL on FPGA</h1>
+        <p class="case-meta hero-in" style="--i:3">ENSEEIHT · Two-person lab project · M1 · 2023 – 2024</p>
+        <p class="case-summary hero-in" style="--i:4">Complete VHDL synchronous system on Nexys A7 FPGA (Artix-7). 6 FSMs for 1-Wire communication with DS18S20. 7-segment display, 0.5°C precision, validated on oscilloscope.</p>
+      </div>
+      <div class="case-visual hero-in" style="--i:5" data-tilt><svg class="viz viz-wire" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+  <g class="viz-line viz-line--dim"><path d="M20 28h280M20 68h280M20 122h280" stroke-dasharray="2 6"/></g>
+  <path class="viz-line" d="M20 52h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20h14v-20h14v20"/>
+  <path class="viz-line viz-line--hot wire-data" pathLength="1" d="M20 84h26v34h84v-34h22v34h10v-34h30v34h34v-34h22v34h10v-34h42"/>
+  <path class="wire-scan" d="M20 20v110"/>
+</svg></div>
+    </div>
+    <div class="container">
+      <dl class="case-metrics" data-reveal-group>
+<div class="stat" data-reveal style="--i:0"><dt class="stat-value">6</dt><dd class="stat-label">FSMs designed</dd></div>
+<div class="stat" data-reveal style="--i:1"><dt class="stat-value">0.5°C</dt><dd class="stat-label">Precision</dd></div>
+<div class="stat" data-reveal style="--i:2"><dt class="stat-value">480 µs</dt><dd class="stat-label">1-Wire reset</dd></div>
+</dl>
+    </div>
+  </header>
+
+  <div class="container case-layout">
+    <div class="case-body">
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">01</span>Context</h2>
+        <p class="case-lead">Two-person lab project at ENSEEIHT: a low-level serial protocol where every timing is a matter of microseconds.</p>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">02</span>Technical pipeline</h2>
+        <ol class="flow" style="--n:6">
+<li style="--i:0"><span class="flow-num" aria-hidden="true">1</span>FSM Init (480 µs reset)</li>
+<li style="--i:1"><span class="flow-num" aria-hidden="true">2</span>FSM Write0/Write1</li>
+<li style="--i:2"><span class="flow-num" aria-hidden="true">3</span>FSM Write8b (ROM/RAM)</li>
+<li style="--i:3"><span class="flow-num" aria-hidden="true">4</span>FSM Read (15 µs)</li>
+<li style="--i:4"><span class="flow-num" aria-hidden="true">5</span>Master Protocol</li>
+<li style="--i:5"><span class="flow-num" aria-hidden="true">6</span>Double Dabble → 7-seg</li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">03</span>What I did</h2>
+        <ol class="steps" data-reveal-group>
+<li data-reveal style="--i:0"><span class="steps-num" aria-hidden="true">01</span><p>Clock edge synchronization buffer (INPUT_SYNC, RST_SYNC) and centralized system timer management (start/end vectors, clk_1s pulse).</p></li>
+<li data-reveal style="--i:1"><span class="steps-num" aria-hidden="true">02</span><p>FSM Init: 1-Wire reset sequence (480 µs pull-down, DS18S20 presence detection).</p></li>
+<li data-reveal style="--i:2"><span class="steps-num" aria-hidden="true">03</span><p>FSM Write0/Write1: 1-bit write on 1-Wire bus with precise timings (1 µs / 60 µs).</p></li>
+<li data-reveal style="--i:3"><span class="steps-num" aria-hidden="true">04</span><p>FSM Write8b: 8-bit command transmission (Skip ROM 0xCC, Convert T 0x44, Read Scratchpad 0xBE).</p></li>
+<li data-reveal style="--i:4"><span class="steps-num" aria-hidden="true">05</span><p>FSM Read: 1-bit read from DS18S20 (1 µs pull-down, sampling at 15 µs).</p></li>
+<li data-reveal style="--i:5"><span class="steps-num" aria-hidden="true">06</span><p>FSM Master Protocol: full orchestration (Init → ROM → RAM → 9-bit temperature reading).</p></li>
+<li data-reveal style="--i:6"><span class="steps-num" aria-hidden="true">07</span><p>Display: Double Dabble (BCD), negative handling (two’s complement), 7-segment multiplexing.</p></li>
+<li data-reveal style="--i:7"><span class="steps-num" aria-hidden="true">08</span><p>Timing and 1-Wire sequence validation on Keysight oscilloscope.</p></li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">04</span>Measured results</h2>
+        <dl class="results" data-reveal-group>
+<div class="card" data-reveal data-spot style="--i:0"><dt>6</dt><dd>FSMs implemented</dd></div>
+<div class="card" data-reveal data-spot style="--i:1"><dt>0.5°C</dt><dd>Display precision</dd></div>
+<div class="card" data-reveal data-spot style="--i:2"><dt>480 µs</dt><dd>1-Wire reset</dd></div>
+<div class="card" data-reveal data-spot style="--i:3"><dt>1 µs</dt><dd>Write bit timing</dd></div>
+<div class="card" data-reveal data-spot style="--i:4"><dt>15 µs</dt><dd>Read sampling</dd></div>
+</dl>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">05</span>Challenges</h2>
+        <ul class="challenges">
+<li>Critical 1-Wire timings (µs precision) on Artix-7 FPGA</li><li>Indexing bug in the Write8b FSM (index incremented before the bit is sent), identified while validating the master protocol</li><li>Async/sync reset synchronization: async stop, restart on clock edge</li>        </ul>
+      </section>
+    </div>
+
+    <aside class="case-aside" data-reveal>
+      <div class="card facts">
+        <h2 class="eyebrow">Project sheet</h2>
+        <dl>
+          <div><dt>Setting</dt><dd>ENSEEIHT</dd></div>
+          <div><dt>Format</dt><dd>Two-person lab project · M1</dd></div>
+          <div><dt>Period</dt><dd>2023 – 2024</dd></div>
+          <div><dt>Location</dt><dd>Toulouse</dd></div>
+        </dl>
+        <h2 class="eyebrow">Technical environment</h2>
+        <ul class="tags tags--mono tags--stack"><li>FPGA Nexys A7 (Xilinx Artix-7)</li><li>Vivado (simulation + synthesis)</li><li>Synchronous VHDL</li><li>DS18S20 (1-Wire)</li><li>Keysight oscilloscope</li></ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div class="case-cta card" data-reveal data-spot>
+      <div>
+        <h2>Want to talk it through?</h2>
+        <p>Happy to go into the technical choices, the measurements and what I would do differently.</p>
+      </div>
+      <a class="btn btn--primary" href="../../../en/#contact" data-magnetic><span>Get in touch</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <nav class="case-nav" aria-label="All projects">
+      <a class="case-nav-link card" href="../../../en/projects/cnn-acceleration-fpga-hls/" rel="prev" data-spot>
+        <span class="eyebrow"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Previous project</span>
+        <strong>Hardware acceleration of a CNN on FPGA with high-level synthesis</strong>
+      </a>
+      <a class="case-nav-link case-nav-link--next card" href="../../../en/projects/mobile-robot-yolo-vision-iot/" rel="next" data-spot>
+        <span class="eyebrow">Next project<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <strong>Autonomous mobile robot and connected charging station</strong>
+      </a>
+    </nav>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">Ali Azami</p>
+      <p class="footer-tag">Embedded systems engineer · Lorient, France</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="mailto:azamiali2706@gmail.com" data-track="contact_email">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/ali-azami-27b8681b4/" target="_blank" rel="noopener me" data-track="contact_linkedin">LinkedIn</a></li>
+      <li><a href="../../../projets/thermometre-vhdl-1-wire-fpga/" hreflang="fr" lang="fr">Français</a></li>
+    </ul>
+    <p class="footer-note">© 2026 Ali Azami · Static site built without a framework: HTML, CSS and JavaScript.</p>
+  </div>
+</footer>
+
+<a class="to-top" href="#main" aria-label="Back to top" data-to-top>
+  <svg viewBox="0 0 48 48" aria-hidden="true"><circle class="to-top-track" cx="24" cy="24" r="21"/><circle class="to-top-ring" cx="24" cy="24" r="21" pathLength="1"/></svg>
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</a>
+
+<script src="../../../assets/js/main.js?v=0c2243e2" defer></script>
+</body>
+</html>

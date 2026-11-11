@@ -1,0 +1,33 @@
+{
+  "site_url": "https://ali123az.github.io/portfolio/",
+  "name": "Ali Azami",
+  "given_name": "Ali",
+  "family_name": "Azami",
+  "email": "azamiali2706@gmail.com",
+  "phone": "+33745558127",
+  "phone_display": "+33 7 45 55 81 27",
+  "linkedin": "https://www.linkedin.com/in/ali-azami-27b8681b4/",
+  "linkedin_display": "linkedin.com/in/ali-azami-27b8681b4",
+  "ga_id": "G-0J439TZPLC",
+  "google_site_verification": "",
+  "bing_site_verification": "",
+  "cv": {
+    "fr": "assets/cv/CV-Ali-Azami-FR.pdf",
+    "en": "assets/cv/CV-Ali-Azami-EN.pdf"
+  },
+  "show_availability": true,
+  "og_image": {
+    "fr": "assets/img/og-cover-fr.png",
+    "en": "assets/img/og-cover-en.png"
+  },
+  "og_image_width": 1200,
+  "og_image_height": 630,
+  "portrait": "assets/img/portrait-700.webp",
+  "employer": {
+    "name": "Ocean Data System",
+    "url": "https://www.oceandatasystem.com/"
+  },
+  "locality": "Lorient",
+  "region": "Bretagne",
+  "country": "FR"
+}

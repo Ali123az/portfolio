@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+{% from "macros.html" import icon, section_head, visual, tags %}
+{% block main %}
+{% set ids = c.nav | map(attribute="id") | list %}
+
+<section class="hero" id="top" data-hero>
+  <canvas class="hero-canvas" aria-hidden="true" data-signal></canvas>
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <p class="status-chip hero-in" style="--i:0"><span class="pulse" aria-hidden="true"></span>{{ c.hero.status }}</p>
+      <h1 class="hero-title">
+        <span class="hero-name" data-split>{{ site.name }}</span>
+        <span class="hero-role hero-in" style="--i:5">{{ c.hero.role }}</span>
+      </h1>
+      <p class="hero-typed hero-in" style="--i:6" aria-hidden="true"><span class="prompt">&gt;</span><span class="typed" data-typed='{{ c.hero.typed | tojson }}'>{{ c.hero.typed[0] }}</span><span class="caret"></span></p>
+      <p class="hero-lead hero-in" style="--i:7">{{ c.hero.lead }}</p>
+      <div class="hero-cta hero-in" style="--i:8">
+        <a class="btn btn--primary" href="#{{ ids[0] }}" data-magnetic><span>{{ c.hero.cta_primary }}</span>{{ icon("arrow") }}</a>
+        <a class="btn btn--ghost" href="#{{ ids[1] }}" data-magnetic><span>{{ c.hero.cta_secondary }}</span></a>
+        {% if cv[c.lang] -%}
+        <a class="btn btn--link" href="{{ root }}{{ cv[c.lang] }}" download data-track="cv_download">{{ icon("download") }}<span>{{ c.ui.download_cv }}</span></a>
+        {%- endif %}
+      </div>
+    </div>
+
+    <aside class="hero-panel hero-in" style="--i:9" aria-label="{{ c.hero.panel.title }}" data-tilt>
+      <div class="panel-head">
+        <span class="panel-title">{{ c.hero.panel.title }}</span>
+        <span class="panel-scope" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <dl class="panel-rows">
+        {% for r in c.hero.panel.rows -%}
+        <div><dt>{{ r.k }}</dt><dd>{{ r.v }}</dd></div>
+        {% endfor -%}
+      </dl>
+      {{ tags(c.hero.panel.stack, "tags--mono") }}
+      {% if site.show_availability %}<p class="panel-avail"><span class="pulse pulse--warm" aria-hidden="true"></span>{{ c.hero.availability }}</p>{% endif %}
+    </aside>
+  </div>
+
+  <div class="container">
+    <dl class="hero-stats" data-reveal-group>
+      {% for s in c.hero.stats -%}
+      <div class="stat" data-reveal style="--i:{{ loop.index0 }}">
+        <dt class="stat-value">{{ s.prefix }}<span data-count="{{ s.value }}" data-decimals="{{ s.decimals }}">{{ s.value | num(s.decimals, c.lang) }}</span>{{ s.suffix }}</dt>
+        <dd class="stat-label">{{ s.label }}</dd>
+      </div>
+      {% endfor -%}
+    </dl>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {% for _ in range(2) %}<ul>{% for m in c.hero.marquee %}<li>{{ m }}</li>{% endfor %}</ul>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="{{ ids[0] }}">
+  <div class="container">
+    {{ section_head("01", c.experience.label, c.experience.title, c.experience.intro) }}
+
+    {% set now = c.experience.current %}
+    <article class="now" data-reveal>
+      <div class="now-border" aria-hidden="true"></div>
+      <div class="now-inner">
+        <header class="now-head">
+          <p class="badge badge--live"><span class="pulse" aria-hidden="true"></span>{{ now.badge }}</p>
+          <h3 class="now-role">{{ now.role }}</h3>
+          <p class="now-org"><a href="{{ site.employer.url }}" target="_blank" rel="noopener">{{ now.org }}</a></p>
+          <ul class="now-meta">{% for m in now.meta %}<li>{{ m }}</li>{% endfor %}</ul>
+        </header>
+        <div class="now-intro">
+          <p class="now-lead">{{ now.lead }}</p>
+          <div class="constraints">
+            <p class="eyebrow">{{ now.constraints_title }}</p>
+            <ul>{% for x in now.constraints %}<li>{{ x }}</li>{% endfor %}</ul>
+          </div>
+        </div>
+
+        <div class="cycle" data-cycle>
+          <div class="cycle-copy">
+            <h4 class="now-h4">{{ now.cycle.title }}</h4>
+            <p>{{ now.cycle.text }}</p>
+          </div>
+          <div class="cycle-body">
+            <div class="cycle-figure" aria-hidden="true">
+              <svg class="cycle-svg" viewBox="0 0 520 300" focusable="false">
+                <path class="cycle-track" d="M150 30H370A120 120 0 0 1 370 270H150A120 120 0 0 1 150 30Z"/>
+                <path class="cycle-flow" pathLength="1" d="M150 30H370A120 120 0 0 1 370 270H150A120 120 0 0 1 150 30Z" data-cycle-path/>
+                <g data-cycle-nodes></g>
+                <circle class="cycle-pulse" r="7" cx="150" cy="30" data-cycle-pulse/>
+              </svg>
+              <div class="cycle-center">
+                <span class="cycle-num" data-cycle-num>01</span>
+                <strong data-cycle-name>{{ now.cycle.steps[0].name }}</strong>
+              </div>
+              <p class="cycle-caption" data-cycle-text>{{ now.cycle.steps[0].text }}</p>
+            </div>
+            <ol class="cycle-steps">
+              {% for s in now.cycle.steps -%}
+              <li class="cycle-step{% if loop.first %} is-active{% endif %}" data-cycle-step tabindex="0">
+                <span class="cycle-step-num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>
+                <span class="cycle-step-body"><strong>{{ s.name }}</strong><span>{{ s.text }}</span></span>
+              </li>
+              {% endfor -%}
+            </ol>
+          </div>
+        </div>
+
+        <h4 class="now-h4">{{ now.missions_title }}</h4>
+        <ul class="missions" data-reveal-group>
+          {% for m in now.missions -%}
+          <li class="mission card" data-reveal data-spot style="--i:{{ loop.index0 }}">
+            <span class="mission-num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>
+            <h5>{{ m.title }}</h5>
+            <p>{{ m.text }}</p>
+          </li>
+          {% endfor -%}
+        </ul>
+        <p class="swipe-hint" aria-hidden="true">{{ c.ui.swipe }}</p>
+        <p class="now-side">{{ now.side }}</p>
+        {{ tags(now.stack, "tags--mono") }}
+      </div>
+    </article>
+
+    <h3 class="sub-title" data-reveal>{{ c.experience.past_title }}</h3>
+    <ol class="timeline" data-timeline>
+      {% for x in c.experience.past -%}
+      {% set p = projects_by_id[x.project] %}
+      <li class="tl-item" data-reveal>
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period">{{ x.period }}</p>
+        <div class="tl-card card" data-spot>
+          <h4 class="tl-role">{{ x.role }}</h4>
+          <p class="tl-org">{{ x.org }}<span>{{ x.meta }}</span></p>
+          <ul class="tl-points">{% for pt in x.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+          {{ tags(x.tags) }}
+          <a class="more" href="{{ root }}{{ c.projects_dir }}/{{ p[c.lang].slug }}/">{{ c.ui.read_case }}{{ icon("arrow") }}</a>
+        </div>
+      </li>
+      {% endfor -%}
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="{{ ids[1] }}">
+  <div class="container">
+    {{ section_head("02", c.projects.label, c.projects.title, c.projects.intro) }}
+    <div class="filters" role="group" aria-label="{{ c.projects.filter_label }}" data-reveal>
+      {% for f in c.projects.filters -%}
+      <button class="filter{% if loop.first %} is-active{% endif %}" type="button" data-filter="{{ f.key }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ f.label }}</button>
+      {% endfor -%}
+    </div>
+    <ul class="pgrid" data-reveal-group data-pgrid>
+      {% for p in projects -%}
+      {% set d = p[c.lang] %}
+      <li class="pcard card" data-kind="{{ p.kind }}" data-reveal data-spot data-tilt style="--i:{{ loop.index0 }}">
+        <div class="pcard-visual">{{ visual(p.visual) }}</div>
+        <div class="pcard-body">
+          <p class="badge badge--{{ p.kind }}">{{ c.ui.kinds[p.kind] }}</p>
+          <h3 class="pcard-title"><a class="stretched" href="{{ root }}{{ c.projects_dir }}/{{ d.slug }}/">{{ d.title }}</a></h3>
+          <p class="pcard-org">{{ d.org }} · {{ d.period }}</p>
+          <p class="pcard-desc">{{ d.summary }}</p>
+          <dl class="pcard-metrics">
+            {% for m in d.metrics %}<div><dt>{{ m.v }}</dt><dd>{{ m.l }}</dd></div>{% endfor %}
+          </dl>
+          {{ tags(d.tags[:5]) }}
+        </div>
+        <span class="pcard-arrow" aria-hidden="true">{{ icon("arrow-ur") }}</span>
+      </li>
+      {% endfor -%}
+    </ul>
+    <p class="swipe-hint" aria-hidden="true">{{ c.ui.swipe }}</p>
+  </div>
+</section>
+
+<section class="section" id="{{ ids[2] }}">
+  <div class="container">
+    {{ section_head("03", c.skills.label, c.skills.title, c.skills.intro) }}
+    <ul class="skills" data-reveal-group>
+      {% for g in c.skills.groups -%}
+      <li class="skill card" data-reveal data-spot style="--i:{{ loop.index0 }}">
+        <h3>{{ g.title }}</h3>
+        <p>{{ g.context }}</p>
+        {{ tags(g["items"], "tags--mono") }}
+      </li>
+      {% endfor -%}
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="{{ ids[3] }}">
+  <div class="container">
+    {{ section_head("04", c.about.label, c.about.title) }}
+    <div class="about">
+      <figure class="about-photo" data-reveal="clip" data-tilt>
+        <img src="{{ root }}assets/img/portrait-700.webp" srcset="{{ root }}assets/img/portrait-420.webp 420w, {{ root }}assets/img/portrait-700.webp 700w" sizes="(max-width: 860px) 70vw, 380px" width="700" height="875" alt="{{ c.about.photo_alt }}" loading="lazy" decoding="async">
+        <span class="about-photo-frame" aria-hidden="true"></span>
+      </figure>
+      <div class="about-text">
+        {% for b in c.about.bio %}<p data-reveal style="--i:{{ loop.index0 }}">{{ b }}</p>{% endfor %}
+        <div class="about-facts" data-reveal>
+          <div>
+            <h3 class="eyebrow">{{ c.about.languages_title }}</h3>
+            <ul class="langs">{% for l in c.about.languages %}<li><strong>{{ l.name }}</strong><span>{{ l.level }}</span></li>{% endfor %}</ul>
+          </div>
+          <div>
+            <h3 class="eyebrow">{{ c.about.interests_title }}</h3>
+            <ul class="tags">{% for x in c.about.interests %}<li>{{ x }}</li>{% endfor %}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-title" data-reveal>{{ c.about.method_title }}</h3>
+    <ol class="method" data-reveal-group>
+      {% for m in c.about.method -%}
+      <li class="card" data-reveal data-spot style="--i:{{ loop.index0 }}">
+        <span class="method-num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>
+        <h4>{{ m.title }}</h4>
+        <p>{{ m.text }}</p>
+      </li>
+      {% endfor -%}
+    </ol>
+
+    <h3 class="sub-title" data-reveal>{{ c.about.education_title }}</h3>
+    <ol class="edu" data-reveal-group>
+      {% for e in c.about.education -%}
+      <li data-reveal style="--i:{{ loop.index0 }}">
+        <p class="edu-period">{{ e.period }}</p>
+        <div>
+          <h4>{{ e.title }}{% if e.note %} <span class="badge badge--plain">{{ e.note }}</span>{% endif %}</h4>
+          <p>{{ e.org }}</p>
+        </div>
+      </li>
+      {% endfor -%}
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="{{ ids[4] }}">
+  <div class="container">
+    {{ section_head("05", c.volunteering.label, c.volunteering.title, c.volunteering.intro) }}
+    <ul class="vols" data-reveal-group>
+      {% for v in c.volunteering["items"] -%}
+      <li class="vol card" data-reveal data-spot style="--i:{{ loop.index0 }}">
+        <div class="vol-head">
+          <span class="vol-logo vol-logo--{{ v.logo_bg }}"><img src="{{ root }}{{ v.logo }}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+          <div>
+            <h3>{{ v.title }}</h3>
+            <p class="vol-role">{{ v.role }}</p>
+            <p class="vol-meta">{{ v.meta }}</p>
+          </div>
+        </div>
+        <ul class="vol-points">{% for pt in v.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+      </li>
+      {% endfor -%}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--contact" id="{{ ids[5] }}">
+  <div class="container">
+    <div class="contact" data-reveal>
+      <p class="section-label"><span class="section-num">06</span><span data-scramble>{{ c.contact.label }}</span></p>
+      <h2 class="contact-title">{{ c.contact.title }}</h2>
+      <p class="contact-text">{{ c.contact.text }}</p>
+      {% if site.show_availability %}<p class="contact-avail"><span class="pulse pulse--warm" aria-hidden="true"></span>{{ c.hero.availability }}</p>{% endif %}
+      <div class="contact-mail">
+        <a class="mail-link" href="mailto:{{ site.email }}" data-track="contact_email">{{ site.email }}</a>
+        <button class="copy" type="button" data-copy="{{ site.email }}" data-copied="{{ c.ui.copied }}">{{ icon("copy") }}<span>{{ c.ui["copy"] }}</span></button>
+      </div>
+      <ul class="contact-list">
+        <li><a href="{{ site.linkedin }}" target="_blank" rel="noopener me" data-track="contact_linkedin">{{ icon("linkedin") }}<span><small>{{ c.contact.linkedin_label }}</small>{{ site.linkedin_display }}</span></a></li>
+        <li><a href="tel:{{ site.phone }}" data-track="contact_phone">{{ icon("phone") }}<span><small>{{ c.contact.phone_label }}</small>{{ site.phone_display }}</span></a></li>
+        <li><span class="contact-static">{{ icon("pin") }}<span><small>{{ c.contact.location_label }}</small>{{ c.contact.location }}</span></span></li>
+      </ul>
+      {% if cv.fr or cv.en -%}
+      <div class="contact-cv" id="cv">
+        <h3 class="eyebrow">{{ c.ui.cv_title }}</h3>
+        <ul class="contact-list">
+          {% if cv.fr %}<li><a href="{{ root }}{{ cv.fr }}" download data-track="cv_download">{{ icon("download") }}<span><small>{{ c.ui.cv_note }}</small>{{ c.ui.cv_fr }}</span></a></li>{% endif %}
+          {% if cv.en %}<li><a href="{{ root }}{{ cv.en }}" download data-track="cv_download">{{ icon("download") }}<span><small>{{ c.ui.cv_note }}</small>{{ c.ui.cv_en }}</span></a></li>{% endif %}
+        </ul>
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

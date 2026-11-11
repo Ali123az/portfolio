@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNN acceleration on Zynq FPGA with HLS — Ali Azami</title>
+<meta name="description" content="Case study: from C++ to bitstream, accelerating a Conv2D layer on a Zynq-7000 SoC with Catapult HLS, Vivado and Vitis. ×2.6 speedup after optimisation.">
+<meta name="author" content="Ali Azami">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/">
+<link rel="alternate" hreflang="fr" href="https://ali123az.github.io/portfolio/projets/acceleration-cnn-fpga-hls/">
+<link rel="alternate" hreflang="en" href="https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/">
+<link rel="alternate" hreflang="x-default" href="https://ali123az.github.io/portfolio/projets/acceleration-cnn-fpga-hls/">
+<meta name="theme-color" content="#050912">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Ali Azami">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CNN acceleration on Zynq FPGA with HLS — Ali Azami">
+<meta property="og:description" content="Case study: from C++ to bitstream, accelerating a Conv2D layer on a Zynq-7000 SoC with Catapult HLS, Vivado and Vitis. ×2.6 speedup after optimisation.">
+<meta property="og:url" content="https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Azami — Embedded AI and embedded systems engineer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CNN acceleration on Zynq FPGA with HLS — Ali Azami">
+<meta name="twitter:description" content="Case study: from C++ to bitstream, accelerating a Conv2D layer on a Zynq-7000 SoC with Catapult HLS, Vivado and Vitis. ×2.6 speedup after optimisation.">
+<meta name="twitter:image" content="https://ali123az.github.io/portfolio/assets/img/og-cover-en.png">
+
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=96fb4bc6">
+<script>document.documentElement.className = "js";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/#article","headline":"Hardware acceleration of a CNN on FPGA with high-level synthesis","description":"Case study: from C++ to bitstream, accelerating a Conv2D layer on a Zynq-7000 SoC with Catapult HLS, Vivado and Vitis. ×2.6 speedup after optimisation.","url":"https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/","inLanguage":"en","image":"https://ali123az.github.io/portfolio/assets/img/og-cover-en.png","keywords":"HLS Catapult, VHDL, Vivado, Vitis, SystemC, Zynq-7000, AXI-Stream, C++","author":{"@id":"https://ali123az.github.io/portfolio/#person"},"isPartOf":{"@id":"https://ali123az.github.io/portfolio/#website"},"dateModified":"2026-11-11"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ali123az.github.io/portfolio/en/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://ali123az.github.io/portfolio/en/#projects"},{"@type":"ListItem","position":3,"name":"Hardware acceleration of a CNN on FPGA with high-level synthesis","item":"https://ali123az.github.io/portfolio/en/projects/cnn-acceleration-fpga-hls/"}]},{"@type":"Person","@id":"https://ali123az.github.io/portfolio/#person","name":"Ali Azami","url":"https://ali123az.github.io/portfolio/","jobTitle":"Embedded Systems Engineer"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0J439TZPLC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0J439TZPLC');
+</script>
+</head>
+<body class="page-project">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb bg-orb--a"></div><div class="bg-orb bg-orb--b"></div><div class="bg-glow"></div></div>
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="../../../en/" aria-label="Ali Azami — Home">
+      <span class="brand-mark" aria-hidden="true">AA</span>
+      <span class="brand-name">Ali Azami</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Menu" data-nav>
+      <ul class="nav-list">
+        <li class="nav-indicator" aria-hidden="true" data-nav-indicator></li>
+<li style="--i:0"><a class="nav-link" href="../../../en/#experience" data-section="experience"><span class="nav-num" aria-hidden="true">01</span>Experience</a></li>
+<li style="--i:1"><a class="nav-link" href="../../../en/#projects" data-section="projects"><span class="nav-num" aria-hidden="true">02</span>Projects</a></li>
+<li style="--i:2"><a class="nav-link" href="../../../en/#skills" data-section="skills"><span class="nav-num" aria-hidden="true">03</span>Skills</a></li>
+<li style="--i:3"><a class="nav-link" href="../../../en/#about" data-section="about"><span class="nav-num" aria-hidden="true">04</span>About</a></li>
+<li style="--i:4"><a class="nav-link" href="../../../en/#volunteering" data-section="volunteering"><span class="nav-num" aria-hidden="true">05</span>Volunteering</a></li>
+<li style="--i:5"><a class="nav-link" href="../../../en/#contact" data-section="contact"><span class="nav-num" aria-hidden="true">06</span>Contact</a></li>
+</ul>
+      <div class="nav-actions">
+<a class="nav-cv" href="../../../assets/cv/CV-Ali-Azami-EN.pdf" download data-track="cv_download"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>CV</span></a>
+<a class="nav-lang" href="../../../projets/acceleration-cnn-fpga-hls/" hreflang="fr" lang="fr" aria-label="Lire cette page en français">FR</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<article class="case">
+  <header class="case-hero">
+    <div class="container case-hero-grid">
+      <div>
+        <nav class="crumbs hero-in" style="--i:0" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../../../en/">Home</a></li>
+            <li><a href="../../../en/#projects">Projects</a></li>
+            <li aria-current="page">ENSEEIHT</li>
+          </ol>
+        </nav>
+        <p class="badge badge--academic hero-in" style="--i:1">Academic</p>
+        <h1 class="case-title hero-in" style="--i:2">Hardware acceleration of a CNN on FPGA with high-level synthesis</h1>
+        <p class="case-meta hero-in" style="--i:3">ENSEEIHT · Three-person project · M2 · 2024 – 2025</p>
+        <p class="case-summary hero-in" style="--i:4">Full hardware acceleration flow for CNN on Zynq-7000 SoC: C++ → SystemC → Catapult HLS → VHDL RTL → Vivado IP → Vitis. ×2.6 speedup on Conv2D.</p>
+      </div>
+      <div class="case-visual hero-in" style="--i:5" data-tilt><svg class="viz viz-fpga" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+<rect class="cell cell--hot" style="--d:0.0s" x="43" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="63" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="83" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="103" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="123" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="143" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="163" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="183" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="203" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.75s" x="223" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="243" y="28" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:1.75s" x="263" y="28" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="43" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="63" y="48" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:4.0s" x="83" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="103" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="123" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="143" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="163" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="183" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="203" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="223" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="243" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="263" y="48" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.5s" x="43" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="63" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="83" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="103" y="68" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.75s" x="123" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="143" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="163" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="183" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:4.0s" x="203" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="223" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="243" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="263" y="68" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="43" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="63" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.25s" x="83" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="103" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="123" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="143" y="88" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.5s" x="163" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.5s" x="183" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.5s" x="203" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.5s" x="223" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.75s" x="243" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="263" y="88" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.75s" x="43" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.75s" x="63" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.75s" x="83" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:4.0s" x="103" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:3.0s" x="123" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.0s" x="143" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.0s" x="163" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.0s" x="183" y="108" width="14" height="14" rx="3"/><rect class="cell cell--hot" style="--d:3.25s" x="203" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:2.25s" x="223" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:1.25s" x="243" y="108" width="14" height="14" rx="3"/><rect class="cell" style="--d:0.25s" x="263" y="108" width="14" height="14" rx="3"/></svg></div>
+    </div>
+    <div class="container">
+      <dl class="case-metrics" data-reveal-group>
+<div class="stat" data-reveal style="--i:0"><dt class="stat-value">×2.6</dt><dd class="stat-label">Conv2D speedup</dd></div>
+<div class="stat" data-reveal style="--i:1"><dt class="stat-value">455 µs</dt><dd class="stat-label">Per filter</dd></div>
+<div class="stat" data-reveal style="--i:2"><dt class="stat-value">20 ns</dt><dd class="stat-label">Adder pipelined</dd></div>
+</dl>
+    </div>
+  </header>
+
+  <div class="container case-layout">
+    <div class="case-body">
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">01</span>Context</h2>
+        <p class="case-lead">Three-person project in my final year at ENSEEIHT. Exploration of the full design flow for hardware CNN acceleration: from the C++ implementation to validation on an FPGA board driven by the ARM core.</p>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">02</span>Technical pipeline</h2>
+        <ol class="flow" style="--n:6">
+<li style="--i:0"><span class="flow-num" aria-hidden="true">1</span>C++ CNN (all layers)</li>
+<li style="--i:1"><span class="flow-num" aria-hidden="true">2</span>SystemC testbench</li>
+<li style="--i:2"><span class="flow-num" aria-hidden="true">3</span>Catapult HLS (Unroll+Pipeline)</li>
+<li style="--i:3"><span class="flow-num" aria-hidden="true">4</span>Generated VHDL RTL</li>
+<li style="--i:4"><span class="flow-num" aria-hidden="true">5</span>Vivado IP + AXI</li>
+<li style="--i:5"><span class="flow-num" aria-hidden="true">6</span>ARM Vitis validation</li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">03</span>What I did</h2>
+        <ol class="steps" data-reveal-group>
+<li data-reveal style="--i:0"><span class="steps-num" aria-hidden="true">01</span><p>C++ implementation of all CNN layers: Conv2D (zero-padding, multi-filter, multi-channel), MaxPool (sliding window), Flatten, ReLU, Softmax. Rewritten with buffers (copyCenteredWindow) to reduce memory footprint.</p></li>
+<li data-reveal style="--i:1"><span class="steps-num" aria-hidden="true">02</span><p>SystemC modeling of Conv2D: SC_MODULE, sc_in/sc_out ports, conv2D.process() process, outFmapCpt counter, JSON weight/bias loading. Measured time ≈ 200 ms.</p></li>
+<li data-reveal style="--i:2"><span class="steps-num" aria-hidden="true">03</span><p>HLS Catapult constraint exploration on Adder: unconstrained (80 ns) → Pipeline=2 (40 ns) → Pipeline=1 (20 ns, optimal area 1048 vs 1462).</p></li>
+<li data-reveal style="--i:3"><span class="steps-num" aria-hidden="true">04</span><p>HLS Conv2D optimization: unconstrained (1178 µs/filter) → 4 Unrolls (519 µs) → Pipeline=2 inner loops (455 µs, ×2.6 vs baseline).</p></li>
+<li data-reveal style="--i:4"><span class="steps-num" aria-hidden="true">05</span><p>Vivado: Adder and Conv2D IP packaging, block design with AXI-Stream FIFO + AXI Interconnect + Zynq-7000, 100 MHz PLL, bitstream generation.</p></li>
+<li data-reveal style="--i:5"><span class="steps-num" aria-hidden="true">06</span><p>Vitis: adder validated on the Zybo (FIFO init, fill, send, receive, compare — correct sums, UART OK). Conv2D: IP integrated in the block design, on-board validation left partial (memory addressing on the Vitis side).</p></li>
+</ol>
+      </section>
+
+      <section class="case-section">
+        <h2 data-reveal><span class="section-num">04</span>Measured results</h2>
+        <dl class="results" data-reveal-group>
+<div class="card" data-reveal data-spot style="--i:0"><dt>×2.6</dt><dd>Conv2D speedup</dd></div>
+<div class="card" data-reveal data-spot style="--i:1"><dt>455 µs</dt><dd>Optimized time/filter</dd></div>
+<div class="card" data-reveal data-spot style="--i:2"><dt>20 ns</dt><dd>Adder Pipeline=1</dd></div>
+<div class="card" data-reveal data-spot style="--i:3"><dt>1048</dt><dd>Opt. Adder resources</dd></div>
+<div class="card" data-reveal data-spot style="--i:4"><dt>1178→455 µs</dt><dd>Total HLS gain</dd></div>
+</dl>
+      </section>
+
+      <section class="case-section" data-reveal>
+        <h2><span class="section-num">05</span>Challenges</h2>
+        <ul class="challenges">
+<li>HLS optimization limited by FIFO structure: outer loops blocked at Pipeline ≥ 10</li><li>Counter-intuitive trade-off: Pipeline=1 on Adder is faster AND more compact (1048 vs 1462)</li><li>Static shared memory in Vitis: move to dynamic allocation; full on-board validation of Conv2D remained open</li><li>Heterogeneous flow: VSCode, Catapult, Vivado, Vitis, .xsa/bitstream/IP formats</li>        </ul>
+      </section>
+    </div>
+
+    <aside class="case-aside" data-reveal>
+      <div class="card facts">
+        <h2 class="eyebrow">Project sheet</h2>
+        <dl>
+          <div><dt>Setting</dt><dd>ENSEEIHT</dd></div>
+          <div><dt>Format</dt><dd>Three-person project · M2</dd></div>
+          <div><dt>Period</dt><dd>2024 – 2025</dd></div>
+          <div><dt>Location</dt><dd>Toulouse</dd></div>
+        </dl>
+        <h2 class="eyebrow">Technical environment</h2>
+        <ul class="tags tags--mono tags--stack"><li>Xilinx Zynq-7000 Zybo Z7 (ARM Cortex-A9 + Artix-7 FPGA)</li><li>Catapult HLS (Mentor)</li><li>Xilinx Vivado + Vitis</li><li>VHDL / SystemC / C++</li><li>AXI-Stream FIFO</li><li>HLS Unroll &amp; Pipeline constraints</li></ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div class="case-cta card" data-reveal data-spot>
+      <div>
+        <h2>Want to talk it through?</h2>
+        <p>Happy to go into the technical choices, the measurements and what I would do differently.</p>
+      </div>
+      <a class="btn btn--primary" href="../../../en/#contact" data-magnetic><span>Get in touch</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <nav class="case-nav" aria-label="All projects">
+      <a class="case-nav-link card" href="../../../en/projects/edge-ai-smart-sensor-nxp-npu/" rel="prev" data-spot>
+        <span class="eyebrow"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Previous project</span>
+        <strong>Edge AI: smart sensor on a microcontroller with integrated NPU</strong>
+      </a>
+      <a class="case-nav-link case-nav-link--next card" href="../../../en/projects/vhdl-1-wire-thermometer-fpga/" rel="next" data-spot>
+        <span class="eyebrow">Next project<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <strong>1-Wire digital thermometer in VHDL on FPGA</strong>
+      </a>
+    </nav>
+  </div>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">Ali Azami</p>
+      <p class="footer-tag">Embedded systems engineer · Lorient, France</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="mailto:azamiali2706@gmail.com" data-track="contact_email">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/ali-azami-27b8681b4/" target="_blank" rel="noopener me" data-track="contact_linkedin">LinkedIn</a></li>
+      <li><a href="../../../projets/acceleration-cnn-fpga-hls/" hreflang="fr" lang="fr">Français</a></li>
+    </ul>
+    <p class="footer-note">© 2026 Ali Azami · Static site built without a framework: HTML, CSS and JavaScript.</p>
+  </div>
+</footer>
+
+<a class="to-top" href="#main" aria-label="Back to top" data-to-top>
+  <svg viewBox="0 0 48 48" aria-hidden="true"><circle class="to-top-track" cx="24" cy="24" r="21"/><circle class="to-top-ring" cx="24" cy="24" r="21" pathLength="1"/></svg>
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</a>
+
+<script src="../../../assets/js/main.js?v=0c2243e2" defer></script>
+</body>
+</html>
