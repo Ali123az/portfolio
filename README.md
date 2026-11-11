@@ -41,12 +41,21 @@ Puis ouvrir `http://localhost:4173`.
 
 ## Mise en ligne (GitHub Pages)
 
-Le site est servi depuis la racine du dépôt `portfolio`. À envoyer :
-`index.html`, `404.html`, `sitemap.xml`, `.nojekyll`, et les dossiers `assets/`, `en/`, `projets/`
-(`src/` peut suivre, il ne contient rien de sensible).
+Ce dossier est un dépôt git relié à `github.com/Ali123az/portfolio` (branche `main`, servie par
+GitHub Pages depuis la racine). Après une modification :
 
-**Ne jamais envoyer `temp/`** : il contient des documents internes. Il est exclu par `.gitignore`,
-mais un glisser-déposer dans l'interface web de GitHub ne tient pas compte de ce fichier.
+```bash
+python src/build.py
+git add -A
+git commit -m "Décrire le changement"
+git push
+```
+
+Le site est à jour environ une minute plus tard.
+
+**`temp/` n'est jamais envoyé** : il contient des documents internes et il est exclu par `.gitignore`,
+tout comme les CV déposés à la racine (les versions publiées sont celles de `assets/cv/`).
+Ne pas passer par un glisser-déposer dans l'interface web de GitHub, qui ignore ces exclusions.
 
 ## Référencement : à faire une fois le site en ligne
 
