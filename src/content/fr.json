@@ -265,7 +265,7 @@
   "about": {
     "label": "À propos",
     "title": "Du signal à la décision, du schéma au terrain",
-    "photo_alt": "Portrait d'Ali Azami, enveloppe de l'ENSEEIHT à la main",
+    "photo_alt": "Portrait d'Ali Azami en costume",
     "bio": [
       "Ingénieur doublement diplômé — ENSEEIHT à Toulouse (électronique et IA pour systèmes embarqués) et EHTP à Casablanca (génie électrique) — je travaille là où le logiciel rencontre la physique : un signal à acquérir, une mémoire comptée en kilo-octets, une échéance temps réel à tenir.",
       "Chez Schaeffler et NXP, j'ai mené des chaînes complètes d'IA embarquée, de l'acquisition radar à l'inférence sur microcontrôleur. Chez Ocean Data System, j'ai élargi le périmètre à l'ensemble du produit : la carte, le firmware, la mise en service et le support, pour des équipements qui doivent tenir en mer sans intervention possible.",

@@ -33,7 +33,7 @@ def font(name, size):
 
 def portrait():
     im = Image.open(ROOT / "ali_photo.jpg").convert("RGB")
-    crop = im.crop((240, 60, 960, 960))  # cadrage buste, ratio 4:5
+    crop = im.crop((5, 0, 1131, 1408))  # photo studio 1136x1408 : pleine hauteur, ratio 4:5
     for width in (700, 420):
         crop.resize((width, width * 5 // 4), Image.LANCZOS).save(OUT / f"portrait-{width}.webp", "WEBP", quality=82, method=6)
 

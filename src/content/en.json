@@ -265,7 +265,7 @@
   "about": {
     "label": "About",
     "title": "From signal to decision, from schematic to the field",
-    "photo_alt": "Portrait of Ali Azami holding an ENSEEIHT envelope",
+    "photo_alt": "Portrait of Ali Azami in a suit",
     "bio": [
       "An engineer with two degrees — ENSEEIHT in Toulouse (electronics and AI for embedded systems) and EHTP in Casablanca (electrical engineering) — I work where software meets physics: a signal to acquire, memory counted in kilobytes, a real-time deadline to meet.",
       "At Schaeffler and NXP, I carried complete embedded AI chains, from radar acquisition to inference on a microcontroller. At Ocean Data System, the scope widened to the whole product: the board, the firmware, commissioning and support, for equipment that has to hold at sea with no possible intervention.",
