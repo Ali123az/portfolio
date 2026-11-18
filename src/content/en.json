@@ -269,7 +269,7 @@
     "bio": [
       "An engineer with two degrees — ENSEEIHT in Toulouse (electronics and AI for embedded systems) and EHTP in Casablanca (electrical engineering) — I work where software meets physics: a signal to acquire, memory counted in kilobytes, a real-time deadline to meet.",
       "At Schaeffler and NXP, I carried complete embedded AI chains, from radar acquisition to inference on a microcontroller. At Ocean Data System, the scope widened to the whole product: the board, the firmware, commissioning and support, for equipment that has to hold at sea with no possible intervention.",
-      "What drives me: taking a hard problem, understanding what the measurement really says, and building the whole chain until it works in the field. Where I am heading: embedded AI, specifically — designing, optimising and deploying models on constrained targets."
+      "What drives me: taking a hard problem, understanding what the measurement really says, and building the whole chain until it works in the field."
     ],
     "method_title": "How I work",
     "method": [
@@ -328,7 +328,7 @@
   "contact": {
     "label": "Contact",
     "title": "Let's talk engineering",
-    "text": "I want to pursue my career in embedded AI: Edge AI, TinyML, deploying models on microcontrollers, NPUs or DSPs. An opportunity in that field, a question about a case study? Write to me: I usually reply within 24 hours.",
+    "text": "A question about a project or a case study? Write to me directly: I usually reply within 24 hours.",
     "email_label": "Email",
     "linkedin_label": "LinkedIn",
     "phone_label": "Phone",

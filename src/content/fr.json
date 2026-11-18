@@ -269,7 +269,7 @@
     "bio": [
       "Ingénieur doublement diplômé — ENSEEIHT à Toulouse (électronique et IA pour systèmes embarqués) et EHTP à Casablanca (génie électrique) — je travaille là où le logiciel rencontre la physique : un signal à acquérir, une mémoire comptée en kilo-octets, une échéance temps réel à tenir.",
       "Chez Schaeffler et NXP, j'ai mené des chaînes complètes d'IA embarquée, de l'acquisition radar à l'inférence sur microcontrôleur. Chez Ocean Data System, j'ai élargi le périmètre à l'ensemble du produit : la carte, le firmware, la mise en service et le support, pour des équipements qui doivent tenir en mer sans intervention possible.",
-      "Ce qui me motive : prendre un problème difficile, comprendre ce que dit vraiment la mesure, et construire la chaîne complète jusqu'à ce qu'elle fonctionne sur le terrain. La suite que je vise : l'IA embarquée, précisément — concevoir, optimiser et déployer des modèles sur cible contrainte."
+      "Ce qui me motive : prendre un problème difficile, comprendre ce que dit vraiment la mesure, et construire la chaîne complète jusqu'à ce qu'elle fonctionne sur le terrain."
     ],
     "method_title": "Ma façon de travailler",
     "method": [
@@ -328,7 +328,7 @@
   "contact": {
     "label": "Contact",
     "title": "Parlons technique",
-    "text": "Je souhaite poursuivre ma carrière dans l'IA embarquée : Edge AI, TinyML, déploiement de modèles sur microcontrôleur, NPU ou DSP. Une opportunité dans ce domaine, une question sur une étude de cas ? Écrivez-moi : je réponds généralement sous 24 h.",
+    "text": "Une question sur un projet ou une étude de cas ? Écrivez-moi directement : je réponds généralement sous 24 h.",
     "email_label": "E-mail",
     "linkedin_label": "LinkedIn",
     "phone_label": "Téléphone",
